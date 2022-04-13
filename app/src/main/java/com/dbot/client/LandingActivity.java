@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowInsets;
 
 import com.dbot.client.databinding.ActivityLandingBinding;
+import com.dbot.client.login.LoginActivity;
 import com.dbot.client.main.MainActivity;
 
 /**
@@ -83,7 +84,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //toggle();
-                startActivity(new Intent(LandingActivity.this, MainActivity.class));
+                startActivity(new Intent(LandingActivity.this, LoginActivity.class));
             }
         });
 
@@ -100,11 +101,11 @@ public class LandingActivity extends AppCompatActivity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(3000);
+        delayedHide(1000);
     }
 
     private void checkLoginStatus() {
-        startActivity(new Intent(LandingActivity.this,MainActivity.class));
+        startActivity(new Intent(LandingActivity.this,LoginActivity.class));
     }
 
     private void hide() {
