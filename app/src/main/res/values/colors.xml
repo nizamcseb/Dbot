@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#f2f2f2</color>
+    <color name="primary">#E4E4E4</color>
     <color name="primary_varient">#fe9900</color>
+
+    <color name="status_bar_color">#286bb5</color>
+    <color name="navigation_bar_color">#286bb5</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="red">#FF0101</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
-    <color name="light_blue_A200">#FF40C4FF</color>
-    <color name="light_blue_A400">#FF00B0FF</color>
-    <color name="black_overlay">#66000000</color>
+    <color name="blue">#311B92</color>
+    <color name="fb_color">#3b5998</color>
+    <color name="google_color">#db4a39</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="navy">#021430</color>
+    <color name="cool_grey">#9fa6b0</color>
+    <color name="fui_transparent">#AA000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="windows_blue">#3495af</color>
+    <color name="qus_slant">#334272B9</color>
+    <color name="target_slant">#FFBF00</color>
+    <color name="qustion_button_background">#296BB5</color>
+    <color name="chapter_ratingbar_bg">#1D60AA</color>
+    <color name="nav_drawer_bg">#286bb5</color>
+    <color name="chapter_completed_border">#6d6d6d</color>
+    <color name="home_bottom_nav_bg">#F7D049</color>
+    <color name="chapter_disabled_bg">#3b3b3b</color>
+    <color name="target_button_text_disabled">#3b3b3b</color>
+
+    <color name="app_gradient_center_colour">#47A891</color>
+    <color name="app_gradient_start_colour">#19ac9c</color>
+    <color name="app_gradient_end_colour">#286bb5</color>
+
+    <color name="today">#4b82ff</color>
+    <color name="greyed_out">#c7c7c7</color>
+    <color name="summer">#44eebd82</color>
+    <color name="fall">#44d8d27e</color>
+    <color name="winter">#44a1c1da</color>
+    <color name="spring">#448da64b</color>
+    <color name="language_item_left_color">#DCDBDB</color>
+
+    <color name="target_completed">#938389</color>
+    <color name="target_ongoing">#286bb5</color>
+    <color name="target_upcoming">#FF9800</color>
+    <color name="nav_drawer_selected_color">#115095</color>
 </resources>
