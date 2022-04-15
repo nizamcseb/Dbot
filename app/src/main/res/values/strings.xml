@@ -108,9 +108,16 @@
     <string name="get_your_site_documented_with_100_accuracy_in_just_1_day">Get your site documented with 100% accuracy, in just 1 day</string>
     <string name="by_continuing_you_agree_to_our_nterms_amp_conditions"><![CDATA[By continuing, You agree to our\nTerms & Conditions]]></string>
 
-    <string name="tag_otp">otp</string>
-    <string name="tag_client_phone">client_phone</string>
-    <string name="tag_login_stauts">login_status</string>
+    <string name="TAG_NOTIFICATION_TOKEN">notify_token</string>
+    <string name="TAG_OTP">otp</string>
+    <string name="TAG_LOGIN_STATUS">login_status</string>
+    <string name="TAG_CLIENT_DATA">data</string>
+    <string name="TAG_CLIENT_ID">client_id</string>
+    <string name="TAG_CLIENT_FULLNAME">fullname</string>
+    <string name="TAG_CLIENT_PHONE">client_phone</string>
+    <string name="TAG_CLIENT_EMAIL">client_email</string>
+    <string name="TAG_CLIENT_COMPANY_NAME">company_name</string>
+    <string name="TAG_CLIENT_CITY">client_city</string>
 
     <string-array name="city_array">
         <item>Chennai</item>

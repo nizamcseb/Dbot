@@ -1,7 +1,10 @@
 package com.dbot.client.main;
 
 import android.os.Bundle;
+import android.util.Log;
+
 import com.dbot.client.R;
+import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sessionManager = new SessionManager(this);
+        Log.d("session user",sessionManager.getClientId());
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

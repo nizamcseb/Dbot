@@ -3,7 +3,9 @@ package com.dbot.client.login.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginData {
+import java.io.Serializable;
+
+public class LoginData implements Serializable {
     @SerializedName("client_id")
     @Expose
     private String clientId;

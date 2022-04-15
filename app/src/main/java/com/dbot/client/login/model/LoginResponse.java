@@ -4,7 +4,7 @@ import com.dbot.client.retrofit.Status;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Login {
+public class LoginResponse {
     @SerializedName("otp")
     @Expose
     private Integer otp;

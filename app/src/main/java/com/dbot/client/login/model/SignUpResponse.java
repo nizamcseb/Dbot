@@ -4,19 +4,19 @@ import com.dbot.client.retrofit.Status;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SignUp {
+public class SignUpResponse {
     @SerializedName("data")
     @Expose
-    private Client data;
+    private LoginData data;
     @SerializedName("status")
     @Expose
     private Status status;
 
-    public Client getClientData() {
+    public LoginData getClientData() {
         return data;
     }
 
-    public void setClientData(Client data) {
+    public void setClientData(LoginData data) {
         this.data = data;
     }
 

@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 
+import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivityLandingBinding;
 import com.dbot.client.login.LoginActivity;
 import com.dbot.client.main.MainActivity;
@@ -26,6 +27,7 @@ public class LandingActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    SessionManager sessionManager;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -62,7 +64,7 @@ public class LandingActivity extends AppCompatActivity {
     private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
-            checkLoginStatus();
+            sessionManager.checkLogin("dddd");
         }
     };
 
@@ -76,6 +78,7 @@ public class LandingActivity extends AppCompatActivity {
         binding = ActivityLandingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         hide();
+        sessionManager = new SessionManager(this);
         mVisible = true;
         mContentView = binding.fullscreenContent;
 
@@ -104,9 +107,10 @@ public class LandingActivity extends AppCompatActivity {
         delayedHide(1000);
     }
 
-    private void checkLoginStatus() {
-        startActivity(new Intent(LandingActivity.this,LoginActivity.class));
-    }
+   // private void checkLoginStatus() {
+
+        //startActivity(new Intent(LandingActivity.this,LoginActivity.class));
+    //}
 
     private void hide() {
         // Hide UI first

@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
 import com.dbot.client.R;
 import com.dbot.client.databinding.ActivityLoginBinding;
-import com.dbot.client.login.model.Login;
-import com.dbot.client.main.MainActivity;
+import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.retrofit.ApiClient;
 import com.google.gson.GsonBuilder;
 
@@ -30,17 +30,19 @@ public class LoginActivity extends AppCompatActivity {
         if (ApiClient.isTest)
             binding.etMobileNumber.setText("9994471706");
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        loginViewModel.getLoginResult().observe(this, new Observer<Login>() {
+        loginViewModel.getLoginResult().observe(this, new Observer<LoginResponse>() {
             @Override
-            public void onChanged(Login login) {
-                Log.d("getOtpResponse", new GsonBuilder().setPrettyPrinting().create().toJson(login));
-                if (login != null) {
+            public void onChanged(LoginResponse loginResponse) {
+                Log.d("getOtpResponse", new GsonBuilder().setPrettyPrinting().create().toJson(loginResponse));
+                if (loginResponse != null) {
 
-                    Log.d("loginStatus", String.valueOf(login.getLoginStatus()));
+                    Log.d("loginStatus", String.valueOf(loginResponse.getLoginStatus()));
                     Intent otpIntent = new Intent(LoginActivity.this, OtpActivity.class);
-                    otpIntent.putExtra(getString(R.string.tag_client_phone), mobileNumber);
-                    otpIntent.putExtra(getString(R.string.tag_otp), login.getOtp());
-                    otpIntent.putExtra(getString(R.string.tag_login_stauts), login.getLoginStatus());
+                    otpIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), mobileNumber);
+                    otpIntent.putExtra(getString(R.string.TAG_OTP), loginResponse.getOtp());
+                    otpIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginResponse.getLoginStatus());
+                    if(loginResponse.getLoginStatus())
+                        otpIntent.putExtra(getString(R.string.TAG_CLIENT_DATA),loginResponse.getLoginData());
                     startActivity(otpIntent);
 
                 }
