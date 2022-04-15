@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.services;
+package com.dbot.client.main.profile;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.dbot.client.R;
 
-public class ServicesFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private ServicesViewModel mViewModel;
+    private ProfileViewModel mViewModel;
 
-    public static ServicesFragment newInstance() {
-        return new ServicesFragment();
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_services, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ServicesViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
     }
 

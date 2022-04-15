@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_otp"
+    android:background="@drawable/bg_login"
     tools:context=".login.LoginActivity">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_100sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -67,11 +66,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_mobile_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:background="@null"
+                    android:inputType="number"
+                    android:ems="10"
                     android:hint="Enter your Mobile Number" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 

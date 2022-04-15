@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.requests;
+package com.dbot.client.main.services;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.dbot.client.R;
 
-public class RequestsFragment extends Fragment {
+public class ServicesFragment extends Fragment {
 
-    private RequestsViewModel mViewModel;
+    private ServicesViewModel mViewModel;
 
-    public static RequestsFragment newInstance() {
-        return new RequestsFragment();
+    public static ServicesFragment newInstance() {
+        return new ServicesFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_requests, container, false);
+        return inflater.inflate(R.layout.fragment_services, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(RequestsViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ServicesViewModel.class);
         // TODO: Use the ViewModel
     }
 

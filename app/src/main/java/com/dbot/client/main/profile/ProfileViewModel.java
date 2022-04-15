@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.profile;
+package com.dbot.client.main.profile;
 
 import androidx.lifecycle.ViewModel;
 

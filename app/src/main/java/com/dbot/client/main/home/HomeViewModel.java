@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.home;
+package com.dbot.client.main.home;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.requests;
+package com.dbot.client.main.requests;
 
 import androidx.lifecycle.ViewModel;
 

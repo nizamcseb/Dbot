@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">Dbot</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_requests">Requests</string>
-    <string name="title_services">Services</string>
+    <string name="title_home">>> Home</string>
+    <string name="title_profile">>> Profile</string>
+    <string name="title_requests">>> Requests</string>
+    <string name="title_services">>> Services</string>
     <string name="title_activity_landing">LandingActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -109,4 +107,16 @@
     <string name="save">Save</string>
     <string name="get_your_site_documented_with_100_accuracy_in_just_1_day">Get your site documented with 100% accuracy, in just 1 day</string>
     <string name="by_continuing_you_agree_to_our_nterms_amp_conditions"><![CDATA[By continuing, You agree to our\nTerms & Conditions]]></string>
+
+    <string name="tag_otp">otp</string>
+    <string name="tag_client_phone">client_phone</string>
+    <string name="tag_login_stauts">login_status</string>
+
+    <string-array name="city_array">
+        <item>Chennai</item>
+        <item>Trichy</item>
+        <item>Madurai</item>
+        <item>Selam</item>
+    </string-array>
+
 </resources>

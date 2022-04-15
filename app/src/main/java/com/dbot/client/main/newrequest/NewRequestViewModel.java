@@ -1,4 +1,4 @@
-package com.dbot.client.main.ui.newrequest;
+package com.dbot.client.main.newrequest;
 
 import androidx.lifecycle.ViewModel;
 
