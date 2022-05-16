@@ -6,12 +6,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.dbot.client.login.model.CityData;
+import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +24,7 @@ import retrofit2.Response;
 public class LoginViewModel extends ViewModel {
     private MutableLiveData<LoginResponse> loginMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<SignUpResponse> signUpMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<CityData>> cityMutableLiveData = new MutableLiveData<>();
 
 
     public void loginGetOtp(String mobileNumber) {
@@ -63,10 +68,32 @@ public class LoginViewModel extends ViewModel {
         });
     }
 
+    public void getCityData(){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<CityResponse> call = apiInterface.getCities();
+        call.enqueue(new Callback<CityResponse>() {
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                if(response.isSuccessful()) {
+                    Log.d("getCityResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    cityMutableLiveData.setValue(response.body().getCityListData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
     public LiveData<LoginResponse> getLoginResult() {
         return loginMutableLiveData;
     }
     public LiveData<SignUpResponse> getSignUpResult() {
         return signUpMutableLiveData;
+    }
+    public LiveData<List<CityData>> getCityResult() {
+        return cityMutableLiveData;
     }
 }

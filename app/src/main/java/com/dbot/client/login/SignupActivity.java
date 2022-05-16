@@ -7,14 +7,20 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivitySignupBinding;
+import com.dbot.client.login.model.CityData;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
+
+import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -22,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
     LoginViewModel loginViewModel;
     String deiveId, phoneNumber, name, email, companyName, city;
     SessionManager sessionManager;
+    List<CityData> cityDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,15 @@ public class SignupActivity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra(getString(R.string.TAG_CLIENT_PHONE));
         sessionManager = new SessionManager(this);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        loginViewModel.getCityData();
+        loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
+            @Override
+            public void onChanged(List<CityData> cityData) {
+                cityDataList = cityData;
+                CityAdapter cityAdapter = new CityAdapter(SignupActivity.this, cityDataList);
+                binding.spCity.setAdapter(cityAdapter);
+            }
+        });
         loginViewModel.getSignUpResult().observe(this, new Observer<SignUpResponse>() {
             @Override
             public void onChanged(SignUpResponse signUpResponse) {
@@ -56,17 +72,6 @@ public class SignupActivity extends AppCompatActivity {
                 companyName = binding.etCompanyName.getText().toString();
                 city = "Chennai";
                 User user = new User(name, phoneNumber, email, companyName, city, 0, deiveId, "ssss", 1, Build.MODEL);
-               /* Client client = new Client();
-                client.setClientPhone(phoneNumber);
-                client.setFullname(name);
-                client.setClientEmail(email);
-                client.setFreelancer(0);
-                client.setCompanyName(companyName);
-                client.setCity(city);
-                client.setDeviceid(deiveId);
-                client.setDevice_model(Build.MODEL);
-                client.setOs_type(1);
-                client.setNotify_token("asdfasdfsdafsdfsd");*/
                 loginViewModel.signUp(user);
             }
         });

@@ -8,6 +8,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_create_new_request">Create New Request</string>
+    <string name="ad_signout_msg">Are you sure you want to sign out ?</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

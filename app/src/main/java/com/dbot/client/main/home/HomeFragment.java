@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +34,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        viewPager = root.findViewById(R.id.vp_home_banner);
-        bannerViewPagerAdapter = new BannerViewPagerAdapter(getContext(), images);
-        viewPager.setAdapter(bannerViewPagerAdapter);
+        //viewPager = root.findViewById(R.id.vp_home_banner);
+        //bannerViewPagerAdapter = new BannerViewPagerAdapter(getContext(), images);
+        //viewPager.setAdapter(bannerViewPagerAdapter);
         return root;
     }
 

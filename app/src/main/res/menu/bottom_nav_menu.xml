@@ -2,26 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_24"
-        android:title="@string/title_home" />
-    <item
-        android:id="@+id/navigation_services"
-        android:icon="@drawable/ic_services_24"
-        android:title="@string/title_services" />
-    <item
-        android:id="@+id/navigation_new_request"
-        android:icon="@drawable/ic_create_request_24"
-        android:title="@string/title_create_new_request"/>
-    <item
         android:id="@+id/navigation_requests"
         android:icon="@drawable/ic_requests_24"
-        android:title="@string/title_requests" />
-
+        android:title="" />
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_24"
+        android:title="" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile_24"
-        android:title="@string/title_profile" />
+        android:title="" />
+    <item
+        android:id="@+id/navigation_new_request"
+        android:icon="@drawable/ic_create_request_24"
+        android:visible="false"
+        android:title="@string/title_create_new_request"/>
+    <item
+        android:id="@+id/navigation_services"
+        android:icon="@drawable/ic_services_24"
+        android:visible="false"
+        android:title="@string/title_services" />
+
 
 
 </menu>

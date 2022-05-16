@@ -1,9 +1,12 @@
 package com.dbot.client.retrofit;
 
 
+import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -23,4 +26,7 @@ public interface ApiInterface {
     @POST("client/registerclient")
     Call<SignUpResponse> registerClient(@Body User user);
 
+    //City List
+    @GET("reference/getcities")
+    Call<CityResponse> getCities();
 }
