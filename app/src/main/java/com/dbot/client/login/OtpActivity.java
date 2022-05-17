@@ -29,28 +29,32 @@ public class OtpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         sessionManager = new SessionManager(this);
         loginStatus = getIntent().getBooleanExtra(getString(R.string.TAG_LOGIN_STATUS), false);
-        Otp = getIntent().getIntExtra(getString(R.string.TAG_OTP),0);
+        Otp = getIntent().getIntExtra(getString(R.string.TAG_OTP), 0);
         strClientPhone = getIntent().getStringExtra(getString(R.string.TAG_CLIENT_PHONE));
         if (ApiClient.isTest)
             binding.etOtp.setText(String.valueOf(Otp));
         binding.btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.etOtp.getText().toString().equals(String.valueOf(Otp)))
-                    //Log.d("loginStatus", String.valueOf(loginStatus));
+                if (binding.etOtp.getText().toString().equals(String.valueOf(Otp))) {
+
                     if (loginStatus) {
                         LoginData loginData = (LoginData) getIntent().getSerializableExtra(getString(R.string.TAG_CLIENT_DATA));
                         sessionManager.setLogedInClient(loginData.getClientId(),
                                 loginData.getFullname(),
                                 loginData.getClientPhone(),
                                 loginData.getClientEmail(),
-                                loginData.getCompanyName());
-                        startActivity(new Intent(OtpActivity.this, MainActivity.class));
-                    } else {
-                        Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
-                        signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
-                        startActivity(signupIntent);
-                    }
+                                loginData.getCompanyName(),loginData.getCity());
+                        //startActivity(new Intent(OtpActivity.this, MainActivity.class));
+
+                    } /*else {
+
+                    }*/
+                    Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
+                    signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
+                    signupIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginStatus);
+                    startActivity(signupIntent);
+                }
             }
         });
     }

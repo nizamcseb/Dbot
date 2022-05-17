@@ -27,6 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     LoginViewModel loginViewModel;
     String deiveId, phoneNumber, name, email, companyName, city;
+    boolean loginStatus;
     SessionManager sessionManager;
     List<CityData> cityDataList;
 
@@ -37,7 +38,14 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         deiveId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         phoneNumber = getIntent().getStringExtra(getString(R.string.TAG_CLIENT_PHONE));
+        loginStatus = getIntent().getBooleanExtra(getString(R.string.TAG_LOGIN_STATUS), false);
         sessionManager = new SessionManager(this);
+        if(loginStatus){
+            binding.etFullName.setText(sessionManager.getClientFullName());
+            binding.etEmail.setText(sessionManager.getClientEmailId());
+            binding.etCompanyName.setText(sessionManager.getClientCompanyName());
+
+        }
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
         loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
@@ -58,11 +66,13 @@ public class SignupActivity extends AppCompatActivity {
                                 signUpResponse.getClientData().getFullname(),
                                 signUpResponse.getClientData().getClientPhone(),
                                 signUpResponse.getClientData().getClientEmail(),
-                                signUpResponse.getClientData().getCompanyName());
+                                signUpResponse.getClientData().getCompanyName(),
+                                signUpResponse.getClientData().getCity());
                 }
 
             }
         });
+
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +80,7 @@ public class SignupActivity extends AppCompatActivity {
                 name = binding.etFullName.getText().toString();
                 email = binding.etEmail.getText().toString();
                 companyName = binding.etCompanyName.getText().toString();
-                city = "Chennai";
+                city = "";
                 User user = new User(name, phoneNumber, email, companyName, city, 0, deiveId, "ssss", 1, Build.MODEL);
                 loginViewModel.signUp(user);
             }

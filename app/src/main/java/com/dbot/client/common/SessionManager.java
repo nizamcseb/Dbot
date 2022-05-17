@@ -37,13 +37,14 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName) {
+    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String city) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
         setClientPhone(phone);
         setClientEmailId(emailId);
         setClientCompanyName(companyName);
+        setCity(city);
         _context.startActivity(new Intent(_context,MainActivity.class));
     }
     /**
@@ -114,6 +115,18 @@ public class SessionManager {
     public String getClientCompanyName() {
 
         return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_NAME), null);
+    }
+
+ public void setCity(String city) {
+
+        editor.putString(_context.getString(R.string.TAG_CLIENT_CITY), city);
+
+        editor.commit();
+    }
+
+    public String getCity() {
+
+        return pref.getString(_context.getString(R.string.TAG_CLIENT_CITY), null);
     }
 
 

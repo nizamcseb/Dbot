@@ -18,9 +18,21 @@ public class LoginData implements Serializable {
     @SerializedName("client_email")
     @Expose
     private String clientEmail;
+    @SerializedName("city")
+    @Expose
+    private String city;
+    @SerializedName("freelancer")
+    @Expose
+    private String freelancer;
     @SerializedName("company_name")
     @Expose
     private String companyName;
+    @SerializedName("company_phone")
+    @Expose
+    private Object companyPhone;
+    @SerializedName("company_email")
+    @Expose
+    private Object companyEmail;
 
     public String getClientId() {
         return clientId;
@@ -54,12 +66,44 @@ public class LoginData implements Serializable {
         this.clientEmail = clientEmail;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getFreelancer() {
+        return freelancer;
+    }
+
+    public void setFreelancer(String freelancer) {
+        this.freelancer = freelancer;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public Object getCompanyPhone() {
+        return companyPhone;
+    }
+
+    public void setCompanyPhone(Object companyPhone) {
+        this.companyPhone = companyPhone;
+    }
+
+    public Object getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(Object companyEmail) {
+        this.companyEmail = companyEmail;
     }
 
 }
