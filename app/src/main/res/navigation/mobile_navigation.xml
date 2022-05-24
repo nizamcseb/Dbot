@@ -6,7 +6,7 @@
     app:startDestination="@+id/navigation_home">
     <fragment
         android:id="@+id/navigation_requests"
-        android:name="com.dbot.client.main.requests.RequestsFragment"
+        android:name="com.dbot.client.main.newrequest.NewRequestFragment"
         android:label="@string/title_requests"
         tools:layout="@layout/fragment_requests" />
     <fragment
@@ -29,4 +29,25 @@
         android:name="com.dbot.client.main.newrequest.NewRequestFragment"
         android:label="@string/title_create_new_request"
         tools:layout="@layout/fragment_new_request" />
+    <fragment
+        android:id="@+id/navigation_new_request1"
+        android:name="com.dbot.client.main.newrequest.Request1Fragment"
+        android:label="@string/title_create_new_request"
+        tools:layout="@layout/layout_request1" />
+    <fragment
+        android:id="@+id/navigation_new_request2"
+        android:name="com.dbot.client.main.newrequest.Request2Fragment"
+        android:label="@string/title_create_new_request"
+        tools:layout="@layout/layout_request2" />
+    <fragment
+        android:id="@+id/navigation_new_request3"
+        android:name="com.dbot.client.main.newrequest.Request3Fragment"
+        android:label="@string/title_create_new_request"
+        tools:layout="@layout/layout_request3" />
+    <fragment
+        android:id="@+id/navigation_new_request_completed"
+        android:name="com.dbot.client.main.newrequest.RequestCompletedFragment"
+        android:label="@string/title_create_new_request"
+        tools:layout="@layout/layout_request_completed" />
+
 </navigation>

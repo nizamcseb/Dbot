@@ -6,20 +6,28 @@ import android.util.Log;
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivityMainBinding;
+import com.dbot.client.login.CityAdapter;
+import com.dbot.client.login.LoginViewModel;
+import com.dbot.client.login.SignupActivity;
+import com.dbot.client.login.model.CityData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     SessionManager sessionManager;
-
+    List<CityData> cityDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sessionManager = new SessionManager(this);
+
         Log.d("session user",sessionManager.getClientId());
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

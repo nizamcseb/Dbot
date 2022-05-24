@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +8,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:background="@color/primary_varient"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="-40dp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -30,9 +34,12 @@
                 android:textSize="@dimen/_15ssp" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/sp_city"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:gravity="center"
+                android:layout_gravity="center"/>
 
             <CalendarView
                 android:id="@+id/calendarView"
@@ -64,6 +71,18 @@
                     android:textColor="@color/grey"
                     app:backgroundTint="@null" />
             </LinearLayout>
+            <Button
+                android:id="@+id/btn_continue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Continue"
+                android:paddingEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp"/>
 
         </LinearLayout>
 
@@ -108,60 +127,65 @@ services for residential interior projects."
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp"
+                android:layout_margin="@dimen/_10sdp"
                 android:orientation="vertical"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:background="@drawable/hexagon"/>
+                    android:layout_height="@dimen/_70sdp"
+                    android:background="@drawable/ic_2d_drawing_light"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:text="2D"/>
+                    android:textSize="@dimen/_12ssp"
+                    android:text="2D Drawing"/>
             </LinearLayout>
            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
                 android:orientation="vertical"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:background="@drawable/hexagon"/>
+                    android:layout_height="@dimen/_70sdp"
+                    android:background="@drawable/ic_360_photos_light"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:text="2D"/>
+                    android:textSize="@dimen/_12ssp"
+                    android:text="360 Photos"/>
             </LinearLayout>
            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
                 android:orientation="vertical"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:background="@drawable/hexagon"/>
+                    android:layout_height="@dimen/_70sdp"
+                    android:background="@drawable/ic_3d_drawing_light"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:text="2D"/>
+                    android:textSize="@dimen/_12ssp"
+                    android:text="3D Drawing"/>
             </LinearLayout>
+
 
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -3,6 +3,7 @@ package com.dbot.client.main.profile;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel mViewModel;
     FragmentProfileBinding binding;
+    SessionManager sessionManager;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -37,17 +39,21 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         return view;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        sessionManager = new SessionManager(getContext());
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
-        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+        binding.tvUserName.setText("Hi "+sessionManager.getClientFullName());
+        binding.llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Uncomment the below code to Set the message and title from the strings.xml file
@@ -65,7 +71,7 @@ public class ProfileFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), LandingActivity.class);
                                 startActivity(intent);
-                                getActivity().finish();
+                                getActivity().finishAffinity();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

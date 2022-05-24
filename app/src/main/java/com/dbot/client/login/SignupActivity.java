@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dbot.client.R;
@@ -22,7 +23,7 @@ import com.dbot.client.login.model.User;
 
 import java.util.List;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ActivitySignupBinding binding;
     LoginViewModel loginViewModel;
@@ -40,12 +41,16 @@ public class SignupActivity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra(getString(R.string.TAG_CLIENT_PHONE));
         loginStatus = getIntent().getBooleanExtra(getString(R.string.TAG_LOGIN_STATUS), false);
         sessionManager = new SessionManager(this);
-        if(loginStatus){
+        if (loginStatus) {
             binding.etFullName.setText(sessionManager.getClientFullName());
             binding.etEmail.setText(sessionManager.getClientEmailId());
             binding.etCompanyName.setText(sessionManager.getClientCompanyName());
+            if (sessionManager.getFreeLancer() == 1)
+                binding.rgFreelancer.check(binding.rbFreelancerYes.getId());
+            else binding.rgFreelancer.check(binding.rbFreelancerNo.getId());
 
         }
+
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
         loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
@@ -54,6 +59,11 @@ public class SignupActivity extends AppCompatActivity {
                 cityDataList = cityData;
                 CityAdapter cityAdapter = new CityAdapter(SignupActivity.this, cityDataList);
                 binding.spCity.setAdapter(cityAdapter);
+                if (loginStatus) {
+                    int position = findCityPosition(sessionManager.getCity());
+                    binding.spCity.setSelection(position);
+                }
+                binding.spCity.setOnItemSelectedListener(SignupActivity.this);
             }
         });
         loginViewModel.getSignUpResult().observe(this, new Observer<SignUpResponse>() {
@@ -61,13 +71,14 @@ public class SignupActivity extends AppCompatActivity {
             public void onChanged(SignUpResponse signUpResponse) {
                 if (signUpResponse != null) {
                     Toast.makeText(SignupActivity.this, signUpResponse.getStatus().getMessage(), Toast.LENGTH_LONG).show();
-                    if (signUpResponse.getStatus().getCode() == 1012)
+                    if (signUpResponse.getStatus().getCode() == 1012 || signUpResponse.getStatus().getCode() == 1027)
                         sessionManager.setLogedInClient(signUpResponse.getClientData().getClientId(),
                                 signUpResponse.getClientData().getFullname(),
                                 signUpResponse.getClientData().getClientPhone(),
                                 signUpResponse.getClientData().getClientEmail(),
                                 signUpResponse.getClientData().getCompanyName(),
-                                signUpResponse.getClientData().getCity());
+                                signUpResponse.getClientData().getCity(),
+                                signUpResponse.getClientData().getFreelancer());
                 }
 
             }
@@ -80,10 +91,42 @@ public class SignupActivity extends AppCompatActivity {
                 name = binding.etFullName.getText().toString();
                 email = binding.etEmail.getText().toString();
                 companyName = binding.etCompanyName.getText().toString();
-                city = "";
-                User user = new User(name, phoneNumber, email, companyName, city, 0, deiveId, "ssss", 1, Build.MODEL);
-                loginViewModel.signUp(user);
+                int selectedId = binding.rgFreelancer.getCheckedRadioButtonId();
+                RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
+                User user;
+                if (loginStatus) {
+                    user = new User(sessionManager.getClientId(),name, phoneNumber, email, companyName,"99999","test@test.com", city, Integer.parseInt(radioSexButton.getTag().toString()), null, null, 0, null);
+                    loginViewModel.updateClientProfile(user);
+                } else {
+                    user = new User(null,name, phoneNumber, email, companyName,"","", city, Integer.parseInt(radioSexButton.getTag().toString()), deiveId, "ssss", 1, Build.MODEL);
+                    loginViewModel.signUp(user);
+                }
+
+
             }
         });
+
+    }
+
+    private int findCityPosition(String city) {
+        for (int i = 0; i < cityDataList.size(); i++) {
+            if (cityDataList.get(i).getId().equals(city))
+                return i;
+        }
+        return 0;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        //Toast.makeText(SignupActivity.this,cityDataList.get(i).getId(),Toast.LENGTH_SHORT).show();
+        if (cityDataList.get(i).getWorkingCity().equals("1"))
+            city = String.valueOf(cityDataList.get(i).getId());
+        else {
+            city = String.valueOf(cityDataList.get(i).getId());
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
     }
 }

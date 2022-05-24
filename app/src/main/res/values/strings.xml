@@ -119,6 +119,7 @@
     <string name="TAG_CLIENT_EMAIL">client_email</string>
     <string name="TAG_CLIENT_COMPANY_NAME">company_name</string>
     <string name="TAG_CLIENT_CITY">client_city</string>
+    <string name="TAG_FREELANCER">freelancer</string>
 
     <string-array name="city_array">
         <item>Chennai</item>
@@ -126,5 +127,5 @@
         <item>Madurai</item>
         <item>Selam</item>
     </string-array>
-
+<string name="GOOGLE_MAP_API_KEY">AIzaSyBLN8m3OinLcUfOZVmptVwTJ0h7T834lx0</string>
 </resources>

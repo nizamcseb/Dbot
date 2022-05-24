@@ -44,7 +44,7 @@ public class OtpActivity extends AppCompatActivity {
                                 loginData.getFullname(),
                                 loginData.getClientPhone(),
                                 loginData.getClientEmail(),
-                                loginData.getCompanyName(),loginData.getCity());
+                                loginData.getCompanyName(),loginData.getCity(),loginData.getFreelancer());
                         //startActivity(new Intent(OtpActivity.this, MainActivity.class));
 
                     } /*else {

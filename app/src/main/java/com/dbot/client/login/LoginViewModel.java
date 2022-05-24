@@ -67,7 +67,25 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+    public void updateClientProfile(User user){
+        Log.d("SignupInputdata",new GsonBuilder().setPrettyPrinting().create().toJson(user));
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpResponse> call = apiInterface.updateClient(user);
+        call.enqueue(new Callback<SignUpResponse>() {
+            @Override
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                //Log.d("getSignupResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                signUpMutableLiveData.setValue(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+    }
     public void getCityData(){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<CityResponse> call = apiInterface.getCities();
@@ -75,7 +93,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
                 if(response.isSuccessful()) {
-                    Log.d("getCityResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    //Log.d("getCityResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                     cityMutableLiveData.setValue(response.body().getCityListData());
                 }
             }

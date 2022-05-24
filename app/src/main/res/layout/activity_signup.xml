@@ -169,6 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:tag="1"
                         android:text="YES" />
 
                     <RadioButton
@@ -176,7 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_20sdp"
-                        android:checked="true"
+                        android:tag="0"
                         android:text="NO" />
 
 

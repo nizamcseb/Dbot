@@ -25,6 +25,10 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     @POST("client/registerclient")
     Call<SignUpResponse> registerClient(@Body User user);
+ //Update Client Profile
+    @Headers("Content-Type: application/json")
+    @POST("client/updateprofile")
+    Call<SignUpResponse> updateClient(@Body User user);
 
     //City List
     @GET("reference/getcities")

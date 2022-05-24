@@ -37,7 +37,7 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String city) {
+    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String city, String freelancer) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
@@ -45,8 +45,11 @@ public class SessionManager {
         setClientEmailId(emailId);
         setClientCompanyName(companyName);
         setCity(city);
+        setFreeLancer(freelancer);
         _context.startActivity(new Intent(_context,MainActivity.class));
     }
+
+
     /**
      * Create login session
      * @param b
@@ -129,7 +132,15 @@ public class SessionManager {
         return pref.getString(_context.getString(R.string.TAG_CLIENT_CITY), null);
     }
 
+    private void setFreeLancer(String freelancer) {
+        editor.putString(_context.getString(R.string.TAG_FREELANCER), freelancer);
 
+        editor.commit();
+    }
+    public int getFreeLancer() {
+
+        return Integer.parseInt(pref.getString(_context.getString(R.string.TAG_FREELANCER),"0"));
+    }
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page
