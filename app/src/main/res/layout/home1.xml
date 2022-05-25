@@ -44,9 +44,11 @@
             <CalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
             <LinearLayout
+                android:id="@+id/ll_available_slots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -54,21 +56,25 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btn_slot_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:background="@drawable/bg_preferred_slot_button"
+                    android:background="@drawable/bg_preferred_slot_not_available_button"
                     android:text="9 AM - 12 PM"
                     android:textColor="@color/grey"
+                    android:visibility="gone"
                     app:backgroundTint="@null" />
 
                 <Button
+                    android:id="@+id/btn_slot_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:background="@drawable/bg_preferred_slot_button"
+                    android:background="@drawable/bg_preferred_slot_not_available_button"
                     android:text="1 AM - 2 PM"
                     android:textColor="@color/grey"
+                    android:visibility="gone"
                     app:backgroundTint="@null" />
             </LinearLayout>
             <Button

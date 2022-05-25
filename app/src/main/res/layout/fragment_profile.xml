@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="#48304D"
+    android:background="@color/purple_profile"
     tools:context=".main.profile.ProfileFragment">
 <ImageView
     android:layout_width="@dimen/_100sdp"

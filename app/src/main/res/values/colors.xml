@@ -52,4 +52,5 @@
     <color name="nav_drawer_selected_color">#115095</color>
 
     <color name="title_bg">#c7c7c7</color>
+    <color name="purple_profile">#48304D</color>
 </resources>

@@ -5,6 +5,7 @@ import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
+import com.dbot.client.main.home.model.AvailableSlotsResponse;
 
 import java.util.List;
 
@@ -25,7 +26,8 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     @POST("client/registerclient")
     Call<SignUpResponse> registerClient(@Body User user);
- //Update Client Profile
+
+    //Update Client Profile
     @Headers("Content-Type: application/json")
     @POST("client/updateprofile")
     Call<SignUpResponse> updateClient(@Body User user);
@@ -33,4 +35,8 @@ public interface ApiInterface {
     //City List
     @GET("reference/getcities")
     Call<CityResponse> getCities();
+
+    //Get Available Slots
+    @GET("slotbooking/availableslots/{book_date}")
+    Call<AvailableSlotsResponse> getAvailableSlots(@Path("book_date") String book_date);
 }
