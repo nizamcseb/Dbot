@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_send_quick_msg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_20sdp"
+    android:background="@drawable/bg_quick_message"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_close_quick_msg"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="end"
+        android:src="@drawable/close_icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Send us a quick message"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/bg_edit_text"
+        android:gravity="top"
+        android:hint="Enter your message here" />
+
+    <Button
+        android:id="@+id/btn_quick_msg_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_20sdp"
+        android:backgroundTint="@color/primary_varient"
+        android:gravity="center"
+        android:text="SEND"
+        android:textSize="@dimen/_15ssp" />
+</LinearLayout>

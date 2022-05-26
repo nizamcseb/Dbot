@@ -121,6 +121,10 @@
     <string name="TAG_CLIENT_CITY">client_city</string>
     <string name="TAG_FREELANCER">freelancer</string>
 
+    <string name="rs_rupee">\u20A8</string>
+    <string name="sample_rupee">\u20B9 2500</string>
+    <string name="symbol_rupee">\u20B9</string>
+
     <string-array name="city_array">
         <item>Chennai</item>
         <item>Trichy</item>
@@ -128,4 +132,13 @@
         <item>Selam</item>
     </string-array>
 <string name="GOOGLE_MAP_API_KEY">AIzaSyBLN8m3OinLcUfOZVmptVwTJ0h7T834lx0</string>
+    <string name="please_choose_a_serviceable_city_to_book">*Please choose a serviceable city to book.</string>
+    <string name="btn_txt_continue">CONTINUE</string>
+    <string name="btn_txt_notify_me">NOTIFY ME</string>
+    <string name="two_d_drawing_product__msg"><![CDATA[Floor plan and interior wall elevation drawing, delivered in CAD & PDF formats.]]></string>
+    <string name="threesixty_product_msg">360 Photographs of all areas at site, delivered in JPEG/PNG formats.</string>
+    <string name="three_d_model_product_msg">3D Model of the site. delivered in Sketchup &amp; Revit formats.</string>
+    <string name="hello_dbot_co_in"><u>hello@dbot.co.in</u></string>
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+    <string name="terms_and_conditions_title"><![CDATA[Terms & Conditions]]></string>
 </resources>

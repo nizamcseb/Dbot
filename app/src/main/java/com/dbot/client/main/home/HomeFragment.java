@@ -1,5 +1,7 @@
 package com.dbot.client.main.home;
 
+import static com.dbot.client.common.CommonFunctions.findCityPosition;
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,9 +13,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
 
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
@@ -37,7 +39,7 @@ import com.google.gson.GsonBuilder;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, CalendarView.OnDateChangeListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener {
     SessionManager sessionManager;
     private HomeViewModel mViewModel;
     private LoginViewModel loginViewModel;
@@ -45,8 +47,11 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     List<CityData> cityDataList;
     Spinner spCity;
     CalendarView cView;
-    LinearLayout llAvailableSlots;
-    Button btn_continue,btn_slot_1, btn_slot_2;
+    LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
+    Button btn_continue, btn_slot_1, btn_slot_2;
+    TextView tv_available_message, tv_support_mail, tv_tc;
+    ImageView iv_close_quick_msg, iv_close_terms_condition;
+    boolean btn1Status = false, btn2Status = false;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -58,8 +63,17 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         sessionManager = new SessionManager(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         spCity = root.findViewById(R.id.sp_city);
+        tv_available_message = root.findViewById(R.id.tv_available_message);
+        tv_available_message.setVisibility(View.INVISIBLE);
         cView = root.findViewById(R.id.calendarView);
         llAvailableSlots = root.findViewById(R.id.ll_available_slots);
+        ll_vision_mission = root.findViewById(R.id.ll_vision_mission);
+        ll_send_quick_msg = root.findViewById(R.id.ll_send_quick_msg);
+        ll_terms_and_conditions = root.findViewById(R.id.ll_terms_and_conditions);
+        iv_close_quick_msg = root.findViewById(R.id.iv_close_quick_msg);
+        iv_close_terms_condition = root.findViewById(R.id.iv_close_terms_condition);
+        tv_support_mail = root.findViewById(R.id.tv_support_mail);
+        tv_tc = root.findViewById(R.id.tv_tc);
         btn_continue = root.findViewById(R.id.btn_continue);
         btn_continue.setEnabled(false);
         btn_slot_1 = root.findViewById(R.id.btn_slot_1);
@@ -85,13 +99,31 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
                 cityDataList = cityData;
                 CityAdapter cityAdapter = new CityAdapter(getContext(), cityDataList);
                 spCity.setAdapter(cityAdapter);
-                int position = findCityPosition(sessionManager.getCity());
+                int position = findCityPosition(cityDataList, sessionManager.getCity());
                 spCity.setSelection(position);
-                //spCity.setOnItemSelectedListener(this);
+                spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        Log.d("selected city", cityDataList.get(i).getWorkingCity());
+                        if (cityDataList.get(i).getWorkingCity().equals("0")) {
+                            tv_available_message.setVisibility(View.VISIBLE);
+                        } else {
+                            tv_available_message.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
             }
         });
-        Button btnContinue = root.findViewById(R.id.btn_continue);
-        btnContinue.setOnClickListener(this::onClick);
+        btn_continue.setOnClickListener(this::onClick);
+        iv_close_quick_msg.setOnClickListener(this::onClick);
+        iv_close_terms_condition.setOnClickListener(this::onClick);
+        tv_support_mail.setOnClickListener(this::onClick);
+        tv_tc.setOnClickListener(this::onClick);
         return root;
     }
 
@@ -99,11 +131,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void createAvailableSlots(List<AvailableSlotsData> availableSlotsData) {
 
-
-        // create the layout params that will be used to define how your
-        // button will be displayed
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         if (availableSlotsData.size() == 2) {
             btn_slot_1.setVisibility(View.VISIBLE);
             btn_slot_2.setVisibility(View.VISIBLE);
@@ -111,96 +138,96 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
             btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
             btn_continue.setEnabled(false);
             btn_continue.setBackgroundColor(getContext().getColor(R.color.greyed_out));
-            btn_continue.setText("Continue");
+            btn_continue.setText(R.string.btn_txt_continue);
             btn_continue.setTextColor(getContext().getColor(R.color.white));
             btn_slot_1.setText(availableSlotsData.get(0).getSlotTime());
             btn_slot_2.setText(availableSlotsData.get(1).getSlotTime());
-            if(availableSlotsData.get(0).getAvailableStatus()) {
+            if (availableSlotsData.get(0).getAvailableStatus()) {
                 btn_slot_1.setTextColor(getContext().getColor(R.color.black));
-                btn_slot_1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btn_continue.setEnabled(true);
-                        btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
-                        btn_continue.setText("Continue");
-                        btn_continue.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_1.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
-                    }
-                });
-            }else {
+            } else {
                 btn_slot_1.setTextColor(getContext().getColor(R.color.greyed_out));
-                btn_slot_1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btn_continue.setEnabled(true);
-                        btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
-                        btn_continue.setText("Notify Me");
-                        btn_continue.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_1.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_notify_button));
-                    }
-                });
             }
-            if(availableSlotsData.get(1).getAvailableStatus()) {
+            if (availableSlotsData.get(1).getAvailableStatus()) {
                 btn_slot_2.setTextColor(getContext().getColor(R.color.black));
-                btn_slot_2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btn_continue.setEnabled(true);
-                        btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
-                        btn_continue.setText("Continue");
-                        btn_continue.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_2.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
-                    }
-                });
             } else {
                 btn_slot_2.setTextColor(getContext().getColor(R.color.greyed_out));
-                btn_slot_2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btn_continue.setEnabled(true);
-                        btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
-                        btn_continue.setText("Notify Me");
-                        btn_continue.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_2.setTextColor(getContext().getColor(R.color.white));
-                        btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_notify_button));
-                    }
-                });
             }
 
         }
-       /* //Create four
-        for (int j = 0; j <= availableSlotsData.size() - 1; j++) {
 
-            // Create Button
-            final Button btn = new Button(getContext());
-            // Give button an ID
-            btn.setId(j + 1);
-            btn.setText(availableSlotsData.get(j).getSlotTime());
-            // set the layoutParams on the button
-            btn.setLayoutParams(params);
-
-            final int index = j;
-            // Set click listener for button
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-
-                    Log.i("TAG", "index :" + index);
-
-                    Toast.makeText(getContext(),
-                            "Clicked Button Index :" + index,
-                            Toast.LENGTH_LONG).show();
-
+        btn_slot_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn1Status = true;
+                if (btn2Status) {
+                    btn2Status = false;
+                    btn_continue.setEnabled(false);
+                    btn_continue.setText(R.string.btn_txt_continue);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.greyed_out));
+                    if (availableSlotsData.get(1).getAvailableStatus()) {
+                        btn_slot_2.setTextColor(getContext().getColor(R.color.black));
+                        btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    } else {
+                        btn_slot_2.setTextColor(getContext().getColor(R.color.greyed_out));
+                        btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    }
                 }
-            });
+                if (availableSlotsData.get(0).getAvailableStatus()) {
+                    btn_continue.setEnabled(true);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
+                    btn_continue.setText(R.string.btn_txt_continue);
+                    btn_continue.setTag("1");
+                    btn_continue.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_1.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
+                } else {
+                    btn_continue.setEnabled(true);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
+                    btn_continue.setText(R.string.btn_txt_notify_me);
+                    btn_continue.setTag("0");
+                    btn_continue.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_1.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_notify_button));
+                }
+            }
+        });
+        btn_slot_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn2Status = true;
+                if (btn1Status) {
+                    btn1Status = false;
+                    btn_continue.setEnabled(false);
+                    btn_continue.setText(R.string.btn_txt_continue);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.greyed_out));
+                    if (availableSlotsData.get(0).getAvailableStatus()) {
+                        btn_slot_1.setTextColor(getContext().getColor(R.color.black));
+                        btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    } else {
+                        btn_slot_1.setTextColor(getContext().getColor(R.color.greyed_out));
+                        btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    }
+                }
+                if (availableSlotsData.get(1).getAvailableStatus()) {
+                    btn_continue.setEnabled(true);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
+                    btn_continue.setText(R.string.btn_txt_continue);
+                    btn_continue.setTag("1");
+                    btn_continue.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_2.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
+                } else {
+                    btn_continue.setEnabled(true);
+                    btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
+                    btn_continue.setText(R.string.btn_txt_notify_me);
+                    btn_continue.setTag("0");
+                    btn_continue.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_2.setTextColor(getContext().getColor(R.color.white));
+                    btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_notify_button));
+                }
+            }
+        });
 
-            //Add button to LinearLayout
-            //ll.addView(btn);
-            //Add button to LinearLayout defined in XML
-            llAvailableSlots.addView(btn);
-        }*/
     }
 
 
@@ -211,33 +238,36 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemSelected
         // TODO: Use the ViewModel
     }
 
-    private int findCityPosition(String city) {
-        for (int i = 0; i < cityDataList.size(); i++) {
-            if (cityDataList.get(i).getId().equals(city))
-                return i;
-        }
-        return 0;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_continue:
-                Request1Fragment request1Fragment = new Request1Fragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
-                fragmentTransaction.commit();
+                if (btn_continue.getTag().equals("1")) {
+                    Request1Fragment request1Fragment = new Request1Fragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
+                    fragmentTransaction.commit();
+                } else if (btn_continue.getTag().equals("0")) {
+                    Log.d("btn_continue", "notify");
+                }
+                break;
+            case R.id.tv_support_mail:
+                ll_vision_mission.setVisibility(View.GONE);
+                ll_send_quick_msg.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tv_tc:
+                ll_vision_mission.setVisibility(View.GONE);
+                ll_terms_and_conditions.setVisibility(View.VISIBLE);
+                break;
+            case R.id.iv_close_quick_msg:
+                ll_vision_mission.setVisibility(View.VISIBLE);
+                ll_send_quick_msg.setVisibility(View.GONE);
+                break;
+            case R.id.iv_close_terms_condition:
+                ll_vision_mission.setVisibility(View.VISIBLE);
+                ll_terms_and_conditions.setVisibility(View.GONE);
                 break;
         }
     }

@@ -1,6 +1,8 @@
 package com.dbot.client.main.profile;
 
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -23,6 +25,10 @@ import com.dbot.client.LandingActivity;
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentProfileBinding;
+import com.dbot.client.main.newrequest.Request2Fragment;
+import com.dbot.client.main.profile.account.AccountInfoFragment;
+import com.dbot.client.main.profile.faq.FAQFragment;
+import com.dbot.client.main.profile.refer.ReferFragment;
 
 import java.io.File;
 
@@ -53,6 +59,36 @@ public class ProfileFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
         binding.tvUserName.setText("Hi "+sessionManager.getClientFullName());
+        binding.llAccountInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccountInfoFragment accountInfoFragment = new AccountInfoFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, accountInfoFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        binding.llFaq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FAQFragment faqFragment = new FAQFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, faqFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        binding.llReferEarn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReferFragment referFragment = new ReferFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, referFragment);
+                fragmentTransaction.commit();
+            }
+        });
         binding.llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

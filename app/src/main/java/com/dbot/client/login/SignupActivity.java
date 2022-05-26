@@ -1,5 +1,7 @@
 package com.dbot.client.login;
 
+import static com.dbot.client.common.CommonFunctions.findCityPosition;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -60,7 +62,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 CityAdapter cityAdapter = new CityAdapter(SignupActivity.this, cityDataList);
                 binding.spCity.setAdapter(cityAdapter);
                 if (loginStatus) {
-                    int position = findCityPosition(sessionManager.getCity());
+                    int position = findCityPosition(cityDataList,sessionManager.getCity());
                     binding.spCity.setSelection(position);
                 }
                 binding.spCity.setOnItemSelectedListener(SignupActivity.this);
@@ -92,13 +94,13 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 email = binding.etEmail.getText().toString();
                 companyName = binding.etCompanyName.getText().toString();
                 int selectedId = binding.rgFreelancer.getCheckedRadioButtonId();
-                RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
                 User user;
                 if (loginStatus) {
-                    user = new User(sessionManager.getClientId(),name, phoneNumber, email, companyName,"99999","test@test.com", city, Integer.parseInt(radioSexButton.getTag().toString()), null, null, 0, null);
+                    user = new User(sessionManager.getClientId(),name, phoneNumber, email, companyName,"99999","test@test.com", city, Integer.parseInt(radioButton.getTag().toString()), null, null, 0, null);
                     loginViewModel.updateClientProfile(user);
                 } else {
-                    user = new User(null,name, phoneNumber, email, companyName,"","", city, Integer.parseInt(radioSexButton.getTag().toString()), deiveId, "ssss", 1, Build.MODEL);
+                    user = new User(null,name, phoneNumber, email, companyName,"","", city, Integer.parseInt(radioButton.getTag().toString()), deiveId, "ssss", 1, Build.MODEL);
                     loginViewModel.signUp(user);
                 }
 
@@ -106,14 +108,6 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             }
         });
 
-    }
-
-    private int findCityPosition(String city) {
-        for (int i = 0; i < cityDataList.size(); i++) {
-            if (cityDataList.get(i).getId().equals(city))
-                return i;
-        }
-        return 0;
     }
 
     @Override

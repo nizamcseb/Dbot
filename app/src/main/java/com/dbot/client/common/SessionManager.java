@@ -3,6 +3,7 @@ package com.dbot.client.common;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.dbot.client.LandingActivity;
 import com.dbot.client.R;
@@ -47,6 +48,16 @@ public class SessionManager {
         setCity(city);
         setFreeLancer(freelancer);
         _context.startActivity(new Intent(_context,MainActivity.class));
+    }
+ public void updateClient(String clientId,String fullName,String phone, String emailId, String companyName, String city, String freelancer) {
+        createLoginSession(true);
+        setClientId(clientId);
+        setClientFullName(fullName);
+        setClientPhone(phone);
+        setClientEmailId(emailId);
+        setClientCompanyName(companyName);
+        setCity(city);
+        setFreeLancer(freelancer);
     }
 
 

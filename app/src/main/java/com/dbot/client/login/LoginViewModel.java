@@ -74,7 +74,7 @@ public class LoginViewModel extends ViewModel {
         call.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                //Log.d("getSignupResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                Log.d("getSignupResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 signUpMutableLiveData.setValue(response.body());
             }
 
