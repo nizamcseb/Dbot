@@ -6,10 +6,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.main.MainActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -32,8 +35,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,9 +50,10 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
     GpsTracker gpsTracker;
     TextView tv_location_address;
     ImageView iv_my_location;
-
+    TextWatcher textWatcher;
     Location nowLocation, location;
     Button btn_req1_next, saveLocation;
+    EditText et_door_no, et_building_name, et_landmark;
 
     public static Request1Fragment newInstance() {
         return new Request1Fragment();
@@ -67,9 +69,19 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_request1, container, false);
+        return root;
+    }
 
-        // startLocationService();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mapView = (MapView) root.findViewById(R.id.mapView);
+        getLocationPermission();
         tv_location_address = root.findViewById(R.id.tv_location_address);
+        et_door_no = root.findViewById(R.id.et_door_no);
+        et_building_name = root.findViewById(R.id.et_building_name);
+        et_landmark = root.findViewById(R.id.et_landmark);
+        setData();
         iv_my_location = root.findViewById(R.id.iv_my_location);
         iv_my_location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,24 +93,44 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
         btn_req1_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //if (checkManditoryFields()) {
+                MainActivity.door_number = et_door_no.getText().toString();
+                MainActivity.building_name = et_building_name.getText().toString();
+                MainActivity.landmark = et_landmark.getText().toString();
+                MainActivity.loc_map = nowLocation;
                 Request2Fragment request2Fragment = new Request2Fragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
                 fragmentTransaction.commit();
+                //}
             }
+
         });
 
-        return root;
+
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mapView = (MapView) root.findViewById(R.id.mapView);
-        getLocationPermission();
+    private void setData() {
+        if (MainActivity.door_number != null)
+            et_door_no.setText(MainActivity.door_number);
+        if (MainActivity.building_name != null)
+            et_building_name.setText(MainActivity.building_name);
+        if (MainActivity.landmark != null)
+            et_landmark.setText(MainActivity.landmark);
 
+    }
 
+    private boolean checkManditoryFields() {
+        if (et_door_no.getText().toString().equals("")) {
+            et_door_no.setError("Required");
+            return false;
+        }
+        if (et_building_name.getText().toString().equals("")) {
+            et_building_name.setError("Required");
+            return false;
+        }
+        return true;
     }
 
     public void getLocation() {
@@ -107,7 +139,7 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
             //userCurrentLocation = new Location(String.valueOf(new LatLng(gpsTracker.getLatitude(),gpsTracker.getLongitude())));
-            startMap(latitude,longitude);
+            startMap(latitude, longitude);
         } else {
             gpsTracker.showSettingsAlert();
         }
@@ -134,11 +166,6 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
                         }
                 );
 
-// ...
-
-// Before you perform the actual permission request, check whether your app
-// already has the permissions, and whether your app needs to show a permission
-// rationale dialog. For more details, see Request permissions.
         locationPermissionRequest.launch(new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -176,9 +203,16 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
                                 LatLng midLatLng = googleMap.getCameraPosition().target;
                                 if (marker != null) {
                                     marker.setPosition(midLatLng);
-                                    nowLocation = new Location(String.valueOf(midLatLng));
-                                    tv_location_address.setText(getAddressText(midLatLng));
                                 }
+                            }
+                        });
+                        googleMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+                            @Override
+                            public void onCameraIdle() {
+                                LatLng midLatLng = googleMap.getCameraPosition().target;
+                                nowLocation = new Location(String.valueOf(midLatLng));
+                                if (getAddressText(midLatLng) != null)
+                                    tv_location_address.setText(getAddressText(midLatLng));
                             }
                         });
                     }
@@ -194,28 +228,6 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
 
         // TODO: Use the ViewModel
     }
-
-
-   /* private void startLocationService() {
-
-        MapsInitializer.initialize(getContext());
-
-
-        saveLocation = root.findViewById(R.id.saveLocation);
-        saveLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (nowLocation != null) {
-                    // if user location is null set the previous location fetched
-                    //location = new GeoPoint(nowLocation.latitude, nowLocation.longitude);
-                    location = nowLocation;
-                } else {
-                    //location = new GeoPoint(userCurrentLocation.getLatitude(), userCurrentLocation.getLongitude());
-                    location = userCurrentLocation;
-                }
-            }
-        });
-    }*/
 
     private String getAddressText(LatLng location) {
         List<Address> addresses = null;
@@ -239,4 +251,5 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
 
 
     }
+
 }

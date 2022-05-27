@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_varient">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primary_varient"
+    tools:context=".main.newrequest.Request2Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginBottom="-50dp"
         android:background="@drawable/bg_preferred_slot">
 
 
@@ -19,6 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_50sdp"
                 android:orientation="vertical">
 
                 <TextView
@@ -57,9 +59,12 @@
 
 
                     <EditText
+                        android:id="@+id/et_project_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:background="@drawable/bg_edit_text"
                         android:hint="Enter here" />
                 </LinearLayout>
@@ -112,9 +117,12 @@
 
 
                     <EditText
+                        android:id="@+id/et_contact_person_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
                         android:background="@drawable/bg_edit_text"
                         android:hint="Enter here" />
                 </LinearLayout>
@@ -141,14 +149,17 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:text="*"
                             android:textColor="@color/red"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
                     </LinearLayout>
 
 
                     <EditText
+                        android:id="@+id/et_contact_person_phone_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
                         android:background="@drawable/bg_edit_text"
                         android:hint="Enter here" />
                 </LinearLayout>
@@ -180,10 +191,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/sb_size_of_property"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:hint="Enter here" />
+                        android:max="4"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -191,6 +204,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_size_of_property"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -202,7 +216,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
-                            android:text="1BHK" />
+                            android:text="5BHK+" />
 
                     </LinearLayout>
 
@@ -235,7 +249,7 @@
                     </LinearLayout>
 
                     <RadioGroup
-                        android:id="@+id/rg_freelancer"
+                        android:id="@+id/rg_type_of_property"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -243,6 +257,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rb_type_of_property_new"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_20sdp"
@@ -250,6 +265,7 @@
                             android:text="New" />
 
                         <RadioButton
+                            android:id="@+id/rb_type_of_property_renovation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_20sdp"
@@ -300,16 +316,18 @@
                             android:orientation="horizontal">
 
                             <CheckBox
+                                android:id="@+id/cb_electrical"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Electrical" />
 
                             <CheckBox
+                                android:id="@+id/cb_plumbing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Electrical" />
+                                android:text="Plumbing" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -319,16 +337,18 @@
                             android:orientation="horizontal">
 
                             <CheckBox
+                                android:id="@+id/cb_plastering"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Electrical" />
+                                android:text="Plastering" />
 
                             <CheckBox
+                                android:id="@+id/cb_flooring"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Electrical" />
+                                android:text="Flooring" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -342,6 +362,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_req2_prev"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"

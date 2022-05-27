@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_varient">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primary_varient"
+    tools:context=".main.newrequest.Request3Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginBottom="-50dp"
         android:background="@drawable/bg_preferred_slot">
 
 
@@ -67,6 +68,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rb_essentials"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top" />
@@ -94,7 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
-                            android:text="2500"
+                            android:text="@string/sample_rupee"
                             android:textSize="@dimen/_15ssp" />
                     </LinearLayout>
 
@@ -110,6 +112,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rb_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="top" />
@@ -137,7 +140,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
-                            android:text="3500"
+                            android:text="@string/sample_rupee"
                             android:textSize="@dimen/_15ssp" />
                     </LinearLayout>
 
@@ -156,9 +159,12 @@
 
 
                 <EditText
+                    android:id="@+id/et_coupon_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:background="@drawable/bg_edit_text"
                     android:hint="Enter Coupon Code" />
 
@@ -171,9 +177,12 @@
                     android:background="@color/greyed_out" />
 
                 <EditText
+                    android:id="@+id/et_available_coupon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:background="@drawable/bg_edit_text"
                     android:hint="Select Available Coupon" />
 
@@ -209,7 +218,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="2500"
+                            android:text="@string/sample_rupee"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
                     <LinearLayout
@@ -228,7 +237,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="2500"
+                            android:text="@string/sample_rupee"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -254,7 +263,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="2500"
+                        android:text="@string/sample_rupee"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"/>
                 </LinearLayout>
@@ -281,6 +290,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_req3_prev"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
@@ -289,6 +299,7 @@
                         android:textSize="@dimen/_15ssp" />
 
                     <Button
+                        android:id="@+id/btn_req3_cancel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"

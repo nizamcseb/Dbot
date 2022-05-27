@@ -5,8 +5,7 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.dbot.client.main.newrequest.Request1Fragment">
+    tools:context=".main.newrequest.Request1Fragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -43,7 +42,8 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.gms.maps.MapView
@@ -69,17 +69,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_preferred_slot"
-        android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/_50sdp"
+        android:paddingBottom="@dimen/_100sdp"
         app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <View
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_7sdp"
-            android:background="@color/primary_varient"
-            android:gravity="center" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/primary_varient"
+                android:gravity="center" />
+        </LinearLayout>
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -116,11 +122,14 @@
 
 
                     <EditText
+                        android:id="@+id/et_door_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -149,11 +158,14 @@
 
 
                     <EditText
+                        android:id="@+id/et_building_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -183,11 +195,14 @@
 
 
                     <EditText
+                        android:id="@+id/et_landmark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionDone"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -198,6 +213,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_req1_prev"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"

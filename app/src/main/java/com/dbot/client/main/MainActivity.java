@@ -1,5 +1,6 @@
 package com.dbot.client.main;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     SessionManager sessionManager;
     List<CityData> cityDataList;
+    public static Location loc_map;
+    public static String door_number,building_name,landmark,project_name,contact_person_name,contact_person_phone;
+    public static int property_size = 9;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
