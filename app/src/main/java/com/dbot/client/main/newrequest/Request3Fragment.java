@@ -26,7 +26,7 @@ public class Request3Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.layout_request3, container, false);
+        View root = inflater.inflate(R.layout.fragment_request3, container, false);
         Button btn_req3_pay = root.findViewById(R.id.btn_req3_pay);
         btn_req3_pay.setOnClickListener(new View.OnClickListener() {
             @Override

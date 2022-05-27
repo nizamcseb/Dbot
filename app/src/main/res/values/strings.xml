@@ -141,4 +141,5 @@
     <string name="hello_dbot_co_in"><u>hello@dbot.co.in</u></string>
     <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
     <string name="terms_and_conditions_title"><![CDATA[Terms & Conditions]]></string>
+    <string name="popup_notify_msg">Hi !\n You have selected an unavailable slot, Your requuest has been received and we will notify you if your requested slot is available</string>
 </resources>

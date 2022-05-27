@@ -26,7 +26,7 @@ public class Request2Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.layout_request2, container, false);
+        View root = inflater.inflate(R.layout.fragment_request2, container, false);
         Button btn_req2_next = root.findViewById(R.id.btn_req2_next);
         btn_req2_next.setOnClickListener(new View.OnClickListener() {
             @Override

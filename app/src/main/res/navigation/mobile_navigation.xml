@@ -33,22 +33,22 @@
         android:id="@+id/navigation_new_request1"
         android:name="com.dbot.client.main.newrequest.Request1Fragment"
         android:label="@string/title_create_new_request"
-        tools:layout="@layout/layout_request1" />
+        tools:layout="@layout/fragment_request1" />
     <fragment
         android:id="@+id/navigation_new_request2"
         android:name="com.dbot.client.main.newrequest.Request2Fragment"
         android:label="@string/title_create_new_request"
-        tools:layout="@layout/layout_request2" />
+        tools:layout="@layout/fragment_request2" />
     <fragment
         android:id="@+id/navigation_new_request3"
         android:name="com.dbot.client.main.newrequest.Request3Fragment"
         android:label="@string/title_create_new_request"
-        tools:layout="@layout/layout_request3" />
+        tools:layout="@layout/fragment_request3" />
     <fragment
         android:id="@+id/navigation_new_request_completed"
         android:name="com.dbot.client.main.newrequest.RequestCompletedFragment"
         android:label="@string/title_create_new_request"
-        tools:layout="@layout/layout_request_completed" />
+        tools:layout="@layout/fragment_request_completed" />
     <fragment
         android:id="@+id/navigation_account_info"
         android:name="com.dbot.client.main.profile.account.AccountInfoFragment"

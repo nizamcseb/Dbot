@@ -251,6 +251,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     fragmentTransaction.commit();
                 } else if (btn_continue.getTag().equals("0")) {
                     Log.d("btn_continue", "notify");
+                    NotifyMePopup notifyMePopup = new NotifyMePopup();
+                    notifyMePopup.showPopupWindow(btn_continue,getActivity());
                 }
                 break;
             case R.id.tv_support_mail:
