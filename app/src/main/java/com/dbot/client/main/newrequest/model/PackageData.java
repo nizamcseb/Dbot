@@ -3,7 +3,7 @@ package com.dbot.client.main.newrequest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Package {
+public class PackageData {
     @SerializedName("package_id")
     @Expose
     private String packageId;

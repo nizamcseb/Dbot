@@ -12,7 +12,7 @@
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_gravity="end"
-        android:src="@drawable/close_icon" />
+        android:src="@drawable/ic_close" />
 
     <TextView
         android:layout_width="match_parent"

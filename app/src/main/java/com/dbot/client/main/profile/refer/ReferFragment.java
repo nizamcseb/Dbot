@@ -13,11 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
-import com.dbot.client.databinding.FragmentAccountInfoBinding;
 import com.dbot.client.databinding.FragmentReferEarnBinding;
 import com.dbot.client.main.profile.ProfileFragment;
-import com.dbot.client.main.requests.RequestsFragment;
-import com.dbot.client.main.requests.RequestsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ReferFragment extends Fragment {

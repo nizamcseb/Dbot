@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_50sdp"
-        android:background="@drawable/bg_preferred_slot">
+        android:background="@drawable/bg_req_bottom_sheet">
 
 
         <ScrollView
@@ -63,6 +63,7 @@
                         android:background="@color/greyed_out" />
 
                     <LinearLayout
+                        android:id="@+id/ll_essential"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -71,7 +72,9 @@
                             android:id="@+id/rb_essentials"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="top" />
+                            android:onClick="onRadioButtonClicked"
+                            android:gravity="top"
+                            android:buttonTint="@color/primary_varient"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -79,6 +82,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_service_title_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -86,6 +90,7 @@
                                 android:textSize="@dimen/_15ssp" />
 
                             <TextView
+                                android:id="@+id/tv_es_package_desc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -93,6 +98,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_es_price"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
@@ -107,6 +113,7 @@
                         android:background="@color/greyed_out" />
 
                     <LinearLayout
+                        android:id="@+id/ll_plus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -115,6 +122,8 @@
                             android:id="@+id/rb_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:onClick="onRadioButtonClicked"
+                            android:buttonTint="@color/primary_varient"
                             android:gravity="top" />
 
                         <LinearLayout
@@ -123,6 +132,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_service_title_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -130,6 +140,7 @@
                                 android:textSize="@dimen/_15ssp" />
 
                             <TextView
+                                android:id="@+id/tv_pl_package_desc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -137,6 +148,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_pl_price"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
@@ -208,6 +220,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/tv_bill_service"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -215,6 +228,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/tv_bill_service_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
@@ -234,6 +248,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
+                            android:id="@+id/tv_coupon_discount_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
@@ -260,6 +275,7 @@
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
                     <TextView
+                        android:id="@+id/tv_bill_total_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"

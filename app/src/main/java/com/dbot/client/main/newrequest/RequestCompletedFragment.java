@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,19 +14,32 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.dbot.client.R;
+import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeFragment;
 
 public class RequestCompletedFragment extends Fragment {
+    String requestId;
 
+    public RequestCompletedFragment(String requestId) {
+        this.requestId = requestId;
+    }
 
     public static RequestCompletedFragment newInstance() {
-        return new RequestCompletedFragment();
+        return new RequestCompletedFragment(newInstance().requestId);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainActivity.clearBookSlotData();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_request_completed, container, false);
+        TextView tv_req_id = root.findViewById(R.id.tv_req_id);
+        tv_req_id.setText("Request id: "+requestId);
         ImageView iv_close = root.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override

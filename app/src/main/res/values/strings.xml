@@ -135,7 +135,7 @@
     <string name="please_choose_a_serviceable_city_to_book">*Please choose a serviceable city to book.</string>
     <string name="btn_txt_continue">CONTINUE</string>
     <string name="btn_txt_notify_me">NOTIFY ME</string>
-    <string name="two_d_drawing_product__msg"><![CDATA[Floor plan and interior wall elevation drawing, delivered in CAD & PDF formats.]]></string>
+    <string name="two_d_drawing_product_msg"><![CDATA[Floor plan and interior wall elevation drawing, delivered in CAD & PDF formats.]]></string>
     <string name="threesixty_product_msg">360 Photographs of all areas at site, delivered in JPEG/PNG formats.</string>
     <string name="three_d_model_product_msg">3D Model of the site. delivered in Sketchup &amp; Revit formats.</string>
     <string name="hello_dbot_co_in"><u>hello@dbot.co.in</u></string>

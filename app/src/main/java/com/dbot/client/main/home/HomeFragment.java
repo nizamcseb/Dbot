@@ -1,6 +1,7 @@
 package com.dbot.client.main.home;
 
-import static com.dbot.client.common.CommonFunctions.findCityPosition;
+import static com.dbot.client.main.MainActivity.book_date;
+import static com.dbot.client.main.MainActivity.slot_time_id;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -32,6 +33,7 @@ import com.dbot.client.common.SessionManager;
 import com.dbot.client.login.CityAdapter;
 import com.dbot.client.login.LoginViewModel;
 import com.dbot.client.login.model.CityData;
+import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.model.AvailableSlotsData;
 import com.dbot.client.main.newrequest.Request1Fragment;
 import com.google.gson.GsonBuilder;
@@ -49,8 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     CalendarView cView;
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
     Button btn_continue, btn_slot_1, btn_slot_2;
-    TextView tv_available_message, tv_support_mail, tv_tc;
-    ImageView iv_close_quick_msg, iv_close_terms_condition;
+    TextView tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
+    ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition;
     boolean btn1Status = false, btn2Status = false;
 
     public static HomeFragment newInstance() {
@@ -67,6 +69,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         tv_available_message.setVisibility(View.INVISIBLE);
         cView = root.findViewById(R.id.calendarView);
         llAvailableSlots = root.findViewById(R.id.ll_available_slots);
+        iv_2d = root.findViewById(R.id.iv_2d);
+        iv_360 = root.findViewById(R.id.iv_360);
+        iv_3d = root.findViewById(R.id.iv_3d);
+        tv_product_msg = root.findViewById(R.id.tv_product_msg);
         ll_vision_mission = root.findViewById(R.id.ll_vision_mission);
         ll_send_quick_msg = root.findViewById(R.id.ll_send_quick_msg);
         ll_terms_and_conditions = root.findViewById(R.id.ll_terms_and_conditions);
@@ -99,7 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 cityDataList = cityData;
                 CityAdapter cityAdapter = new CityAdapter(getContext(), cityDataList);
                 spCity.setAdapter(cityAdapter);
-                int position = findCityPosition(cityDataList, sessionManager.getCity());
+                int position = findCity(cityDataList, sessionManager.getCity());
                 spCity.setSelection(position);
                 spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -124,13 +130,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         iv_close_terms_condition.setOnClickListener(this::onClick);
         tv_support_mail.setOnClickListener(this::onClick);
         tv_tc.setOnClickListener(this::onClick);
+        //Home2
+        iv_2d.setOnClickListener(this::onClick);
+        iv_360.setOnClickListener(this::onClick);
+        iv_3d.setOnClickListener(this::onClick);
         return root;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void createAvailableSlots(List<AvailableSlotsData> availableSlotsData) {
-
+        book_date = getSelectedDate(cView.getDate());
         if (availableSlotsData.size() == 2) {
             btn_slot_1.setVisibility(View.VISIBLE);
             btn_slot_2.setVisibility(View.VISIBLE);
@@ -173,6 +183,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     }
                 }
                 if (availableSlotsData.get(0).getAvailableStatus()) {
+                    slot_time_id = Integer.parseInt(availableSlotsData.get(0).getId());
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
                     btn_continue.setText(R.string.btn_txt_continue);
@@ -209,6 +220,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     }
                 }
                 if (availableSlotsData.get(1).getAvailableStatus()) {
+                    slot_time_id = Integer.parseInt(availableSlotsData.get(1).getId());
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
                     btn_continue.setText(R.string.btn_txt_continue);
@@ -244,17 +256,39 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         switch (view.getId()) {
             case R.id.btn_continue:
                 if (btn_continue.getTag().equals("1")) {
+                    MainActivity.city = Integer.parseInt(cityDataList.get(spCity.getSelectedItemPosition()).getId());
                     Request1Fragment request1Fragment = new Request1Fragment();
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
                     fragmentTransaction.commit();
+                    Log.d("btn_continue", "continue" + slot_time_id+" "+ MainActivity.city);
                 } else if (btn_continue.getTag().equals("0")) {
                     Log.d("btn_continue", "notify");
                     NotifyMePopup notifyMePopup = new NotifyMePopup();
-                    notifyMePopup.showPopupWindow(btn_continue,getActivity());
+                    notifyMePopup.showPopupWindow(btn_continue, getActivity());
                 }
                 break;
+            case R.id.iv_2d:
+                iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_dark));
+                iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
+                iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
+                tv_product_msg.setText(getString(R.string.two_d_drawing_product_msg));
+
+                break;
+            case R.id.iv_360:
+                iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_light));
+                iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_dark));
+                iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
+                tv_product_msg.setText(getString(R.string.threesixty_product_msg));
+                break;
+            case R.id.iv_3d:
+                iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_light));
+                iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
+                iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_dark));
+                tv_product_msg.setText(getString(R.string.three_d_model_product_msg));
+                break;
+
             case R.id.tv_support_mail:
                 ll_vision_mission.setVisibility(View.GONE);
                 ll_send_quick_msg.setVisibility(View.VISIBLE);
@@ -286,5 +320,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     private String getSelectedDate(long date) {
         String dateString = DateFormat.format("dd-MM-yyyy", new Date(date)).toString();
         return dateString;
+    }
+
+    public int findCity(List<CityData> cityData, String city) {
+        for (int i = 0; i < cityData.size(); i++) {
+            if (cityData.get(i).getId().equals(city) && cityData.get(i).getWorkingCity().equals("1"))
+                return i;
+            else if (cityData.get(i).getWorkingCity().equals("1"))
+                return i;
+        }
+        return 0;
     }
 }

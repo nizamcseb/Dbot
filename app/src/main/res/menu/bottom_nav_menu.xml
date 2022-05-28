@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_requests"
+        android:id="@+id/navigation_projects"
         android:icon="@drawable/ic_bottom_menu_projects"
         android:title="" />
     <item
@@ -13,16 +13,6 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_bottom_menu_profile"
         android:title="" />
-    <item
-        android:id="@+id/navigation_new_request"
-        android:icon="@drawable/ic_create_request_24"
-        android:visible="false"
-        android:title="@string/title_create_new_request"/>
-    <item
-        android:id="@+id/navigation_services"
-        android:icon="@drawable/ic_services_24"
-        android:visible="false"
-        android:title="@string/title_services" />
 
 
 

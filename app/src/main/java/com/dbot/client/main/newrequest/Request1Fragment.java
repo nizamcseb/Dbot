@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -26,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.home.HomeFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -35,24 +37,28 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 
-public class Request1Fragment extends Fragment implements OnMapReadyCallback {
+public class Request1Fragment extends Fragment implements OnMapReadyCallback, View.OnClickListener {
 
     private Request1ViewModel mViewModel;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
     GoogleMap mGoogleMap;
     MapView mapView;
     View root;
     GpsTracker gpsTracker;
     TextView tv_location_address;
     ImageView iv_my_location;
-    TextWatcher textWatcher;
+    private BottomSheetBehavior sheetBehavior;;
+    private LinearLayout bottom_sheet,ll_bottom_sheet_expand;
     Location nowLocation, location;
-    Button btn_req1_next, saveLocation;
+    Button btn_req1_next, btn_req1_prev, saveLocation;
     EditText et_door_no, et_building_name, et_landmark;
 
     public static Request1Fragment newInstance() {
@@ -78,6 +84,10 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
         mapView = (MapView) root.findViewById(R.id.mapView);
         getLocationPermission();
         tv_location_address = root.findViewById(R.id.tv_location_address);
+        ll_bottom_sheet_expand = root.findViewById(R.id.ll_bottom_sheet_expand);
+        bottom_sheet = root.findViewById(R.id.bottom_sheet);
+        sheetBehavior = BottomSheetBehavior.from(bottom_sheet);
+
         et_door_no = root.findViewById(R.id.et_door_no);
         et_building_name = root.findViewById(R.id.et_building_name);
         et_landmark = root.findViewById(R.id.et_landmark);
@@ -90,24 +100,38 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
             }
         });
         btn_req1_next = root.findViewById(R.id.btn_req1_next);
-        btn_req1_next.setOnClickListener(new View.OnClickListener() {
+        btn_req1_prev = root.findViewById(R.id.btn_req1_prev);
+        btn_req1_next.setOnClickListener(this::onClick);
+        btn_req1_prev.setOnClickListener(this::onClick);
+        ll_bottom_sheet_expand.setOnClickListener(this::onClick);
+
+        sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
-            public void onClick(View view) {
-                //if (checkManditoryFields()) {
-                MainActivity.door_number = et_door_no.getText().toString();
-                MainActivity.building_name = et_building_name.getText().toString();
-                MainActivity.landmark = et_landmark.getText().toString();
-                MainActivity.loc_map = nowLocation;
-                Request2Fragment request2Fragment = new Request2Fragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
-                fragmentTransaction.commit();
-                //}
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        ll_bottom_sheet_expand.setVisibility(View.VISIBLE);
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED: {
+                        ll_bottom_sheet_expand.setVisibility(View.GONE);
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_COLLAPSED: {
+
+                    }
+                    break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        break;
+                }
             }
 
-        });
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
+            }
+        });
 
     }
 
@@ -225,7 +249,8 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(Request1ViewModel.class);
-
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
         // TODO: Use the ViewModel
     }
 
@@ -252,4 +277,28 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_req1_prev:
+                HomeFragment homeFragment = new HomeFragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, homeFragment);
+                fragmentTransaction.commit();
+                break;
+            case R.id.btn_req1_next:
+                if (checkManditoryFields()) {
+                MainActivity.door_number = et_door_no.getText().toString();
+                MainActivity.building_name = et_building_name.getText().toString();
+                MainActivity.landmark = et_landmark.getText().toString();
+                MainActivity.map_location = nowLocation.toString();
+                Request2Fragment request2Fragment = new Request2Fragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
+                fragmentTransaction.commit();
+                }
+                break;
+            case R.id.ll_bottom_sheet_expand:
+                sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+        }
+    }
 }

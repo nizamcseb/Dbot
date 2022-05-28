@@ -43,6 +43,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -63,14 +64,27 @@
             android:src="@drawable/ic_baseline_my_location_24" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_bottom_sheet_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="bottom|center">
+
+        <View
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:background="@color/primary_varient"
+            android:gravity="center" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_preferred_slot"
+        android:background="@drawable/bg_req_bottom_sheet"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/_100sdp"
         app:behavior_hideable="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -89,11 +103,11 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -216,7 +230,8 @@
                         android:id="@+id/btn_req1_prev"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_weight="1"
                         android:text="Previous"
                         android:textSize="@dimen/_15ssp" />
@@ -225,7 +240,8 @@
                         android:id="@+id/btn_req1_next"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_weight="1"
                         android:backgroundTint="@color/primary_varient"
                         android:text="Next"

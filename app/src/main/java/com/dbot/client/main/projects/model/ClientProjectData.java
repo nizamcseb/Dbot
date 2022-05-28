@@ -1,5 +1,8 @@
-package com.dbot.client.main.newrequest.model;
+package com.dbot.client.main.projects.model;
 
+import com.dbot.client.main.newrequest.model.PackageData;
+import com.dbot.client.main.newrequest.model.ProjectStatus;
+import com.dbot.client.main.newrequest.model.PropertySize;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -53,7 +56,7 @@ public class ClientProjectData {
     private List<Integer> scope = null;
     @SerializedName("package")
     @Expose
-    private Package _package;
+    private PackageData _packageData;
     @SerializedName("coupen_code")
     @Expose
     private String coupenCode;
@@ -199,12 +202,12 @@ public class ClientProjectData {
         this.scope = scope;
     }
 
-    public Package getPackage() {
-        return _package;
+    public PackageData getPackage() {
+        return _packageData;
     }
 
-    public void setPackage(Package _package) {
-        this._package = _package;
+    public void setPackage(PackageData _packageData) {
+        this._packageData = _packageData;
     }
 
     public String getCoupenCode() {
