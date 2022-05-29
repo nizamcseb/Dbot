@@ -56,9 +56,9 @@
         tools:layout="@layout/fragment_account_info" />
     <fragment
         android:id="@+id/navigation_faq"
-        android:name="com.dbot.client.main.profile.faq.FAQFragment"
+        android:name="com.dbot.client.main.profile.faq.FAQsFragment"
         android:label=""
-        tools:layout="@layout/fragment_faq" />
+        tools:layout="@layout/fragment_faqs" />
 <fragment
         android:id="@+id/navigation_refer"
         android:name="com.dbot.client.main.profile.refer.ReferFragment"

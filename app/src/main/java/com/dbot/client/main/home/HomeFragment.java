@@ -14,10 +14,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,8 +37,12 @@ import com.dbot.client.login.CityAdapter;
 import com.dbot.client.login.LoginViewModel;
 import com.dbot.client.login.model.CityData;
 import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.home.adapter.TCAdapter;
 import com.dbot.client.main.home.model.AvailableSlotsData;
+import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.main.newrequest.Request1Fragment;
+import com.dbot.client.retrofit.Status;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
@@ -43,16 +50,17 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener {
     SessionManager sessionManager;
-    private HomeViewModel mViewModel;
+    private HomeViewModel homeViewModel;
     private LoginViewModel loginViewModel;
-    ExpandableLayout expandableLayout;
     List<CityData> cityDataList;
     Spinner spCity;
     CalendarView cView;
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
-    Button btn_continue, btn_slot_1, btn_slot_2;
+    Button btn_continue, btn_slot_1, btn_slot_2, btn_quick_msg_send;
     TextView tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
     ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition;
+    EditText et_quick_msg;
+    ListView lv_Tc;
     boolean btn1Status = false, btn2Status = false;
 
     public static HomeFragment newInstance() {
@@ -79,16 +87,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         iv_close_quick_msg = root.findViewById(R.id.iv_close_quick_msg);
         iv_close_terms_condition = root.findViewById(R.id.iv_close_terms_condition);
         tv_support_mail = root.findViewById(R.id.tv_support_mail);
+        et_quick_msg = root.findViewById(R.id.et_quick_msg);
         tv_tc = root.findViewById(R.id.tv_tc);
+        btn_quick_msg_send = root.findViewById(R.id.btn_quick_msg_send);
+        lv_Tc = root.findViewById(R.id.lv_Tc);
         btn_continue = root.findViewById(R.id.btn_continue);
         btn_continue.setEnabled(false);
         btn_slot_1 = root.findViewById(R.id.btn_slot_1);
         btn_slot_2 = root.findViewById(R.id.btn_slot_2);
         Log.d("calendarView ", getSelectedDate(cView.getDate()));
         cView.setOnDateChangeListener(this::onSelectedDayChange);
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        mViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
-        mViewModel.getAvailableSlotsResult().observe(this, new Observer<List<AvailableSlotsData>>() {
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
+        homeViewModel.getAvailableSlotsResult().observe(this, new Observer<List<AvailableSlotsData>>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @SuppressLint("LongLogTag")
             @Override
@@ -125,11 +136,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 });
             }
         });
+        homeViewModel.getQuickMessageResult().observe(this, new Observer<Status>() {
+            @Override
+            public void onChanged(Status status) {
+                if (status != null) {
+                    Snackbar.make(btn_quick_msg_send, status.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    et_quick_msg.setText("");
+                }
+            }
+        });
+        homeViewModel.getTCResult().observe(this, new Observer<TermsAndConditionsResponse>() {
+            @Override
+            public void onChanged(TermsAndConditionsResponse termsAndConditionsResponse) {
+                if(termsAndConditionsResponse != null){
+                    TCAdapter tcAdapter = new TCAdapter(getContext(),termsAndConditionsResponse.getData());
+                    lv_Tc.setAdapter(tcAdapter);
+                }
+
+            }
+        });
         btn_continue.setOnClickListener(this::onClick);
         iv_close_quick_msg.setOnClickListener(this::onClick);
         iv_close_terms_condition.setOnClickListener(this::onClick);
         tv_support_mail.setOnClickListener(this::onClick);
         tv_tc.setOnClickListener(this::onClick);
+        btn_quick_msg_send.setOnClickListener(this::onClick);
         //Home2
         iv_2d.setOnClickListener(this::onClick);
         iv_360.setOnClickListener(this::onClick);
@@ -246,7 +277,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -262,7 +293,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
                     fragmentTransaction.commit();
-                    Log.d("btn_continue", "continue" + slot_time_id+" "+ MainActivity.city);
+                    Log.d("btn_continue", "continue" + slot_time_id + " " + MainActivity.city);
                 } else if (btn_continue.getTag().equals("0")) {
                     Log.d("btn_continue", "notify");
                     NotifyMePopup notifyMePopup = new NotifyMePopup();
@@ -296,6 +327,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
             case R.id.tv_tc:
                 ll_vision_mission.setVisibility(View.GONE);
                 ll_terms_and_conditions.setVisibility(View.VISIBLE);
+                homeViewModel.getTCData();
                 break;
             case R.id.iv_close_quick_msg:
                 ll_vision_mission.setVisibility(View.VISIBLE);
@@ -305,6 +337,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 ll_vision_mission.setVisibility(View.VISIBLE);
                 ll_terms_and_conditions.setVisibility(View.GONE);
                 break;
+            case R.id.btn_quick_msg_send:
+                if (et_quick_msg.getText().toString().equals(""))
+                    Snackbar.make(btn_quick_msg_send,"Please enter message to send",Snackbar.LENGTH_SHORT).show();
+                else
+                    homeViewModel.sendMessage(sessionManager.getClientId(), et_quick_msg.getText().toString());
+
+                break;
+
         }
     }
 
@@ -314,7 +354,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         String date = String.valueOf(i2 + "-" + i1 + "-" + i);
         Log.d("calendarView ", i2 + "-" + i1 + "-" + i);
         //Log.d("calendarView ", getSelectedDate(calendarView.getDate()));
-        mViewModel.getAvailableSlots(date);
+        homeViewModel.getAvailableSlots(date);
     }
 
     private String getSelectedDate(long date) {

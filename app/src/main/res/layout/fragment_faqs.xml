@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C9C9C9"
-    tools:context=".main.profile.faq.FAQFragment">
+    tools:context=".main.profile.faq.FAQsFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -49,13 +49,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="592dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_preferred_slot"
+                android:background="@drawable/bg_req_bottom_sheet"
                 android:gravity="top|center"
                 android:orientation="vertical">
 
                 <ListView
+                    android:id="@+id/lv_faqs"
                     android:layout_width="match_parent"
-                    android:layout_height="620dp" />
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_faqs"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -7,12 +7,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.login.model.CityData;
-import com.dbot.client.login.model.LoginResponse;
+import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.main.home.model.AvailableSlotsData;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
+import com.dbot.client.main.home.model.QuickMessageResponse;
+import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
+import com.dbot.client.retrofit.Status;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
@@ -24,6 +26,8 @@ import retrofit2.Response;
 public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<List<AvailableSlotsData>> availableSlotsData = new MutableLiveData<>();
+    private MutableLiveData<Status> statusMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<TermsAndConditionsResponse> tCListMutableLiveData = new MutableLiveData<>();
 
     public void getAvailableSlots(String book_date) {
         System.out.println("book_date " + book_date);
@@ -34,7 +38,7 @@ public class HomeViewModel extends ViewModel {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<AvailableSlotsResponse> call, Response<AvailableSlotsResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
 
                     availableSlotsData.setValue(response.body().getData());
                 }
@@ -48,7 +52,56 @@ public class HomeViewModel extends ViewModel {
             }
         });
     }
+
+    public void sendMessage(String client_id, String message) {
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<QuickMessageResponse> call = apiInterface.sendQuickMessage(client_id, message);
+        call.enqueue(new Callback<QuickMessageResponse>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<QuickMessageResponse> call, Response<QuickMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("sendMessageResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    statusMutableLiveData.setValue(response.body().getStatus());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuickMessageResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+    }
+    public void getTCData(){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<TermsAndConditionsResponse> call = apiInterface.getTC();
+        call.enqueue(new Callback<TermsAndConditionsResponse>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<TermsAndConditionsResponse> call, Response<TermsAndConditionsResponse> response) {
+                if(response.isSuccessful()) {
+                    Log.d("getTermsAndConditionsResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    tCListMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TermsAndConditionsResponse> call, Throwable t) {
+
+            }
+        });
+    }
     public LiveData<List<AvailableSlotsData>> getAvailableSlotsResult() {
         return availableSlotsData;
+    }
+
+    public LiveData<Status> getQuickMessageResult() {
+        return statusMutableLiveData;
+    }
+    public LiveData<TermsAndConditionsResponse> getTCResult() {
+        return tCListMutableLiveData;
     }
 }

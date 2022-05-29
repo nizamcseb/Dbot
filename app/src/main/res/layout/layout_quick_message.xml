@@ -23,6 +23,7 @@
         android:textSize="@dimen/_15ssp" />
 
     <EditText
+        android:id="@+id/et_quick_msg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
         android:layout_gravity="center"

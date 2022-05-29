@@ -6,9 +6,12 @@ import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
+import com.dbot.client.main.home.model.QuickMessageResponse;
+import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageResponse;
+import com.dbot.client.main.profile.faq.model.FAQsResponse;
 import com.dbot.client.main.projects.model.ClientProjectResponse;
 
 import retrofit2.Call;
@@ -17,6 +20,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -54,5 +58,18 @@ public interface ApiInterface {
     //Project List
     @GET("slotbooking/getclientprojects/{client_id}")
     Call<ClientProjectResponse> getProjects(@Path("client_id") String client_id);
+
+    //Quickmessage
+    @Headers("Content-Type: application/json")
+    @POST("message/quickmessage")
+    Call<QuickMessageResponse> sendQuickMessage(@Query("client_id") String client_id, @Query("message") String message);
+
+    //TC List
+    @GET("message/terms")
+    Call<TermsAndConditionsResponse> getTC();
+
+    //FAQ List
+    @GET("message/getfaqs")
+    Call<FAQsResponse> getFAQs();
 
 }

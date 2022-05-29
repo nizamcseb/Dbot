@@ -10,26 +10,30 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
-import com.dbot.client.databinding.FragmentFaqBinding;
-import com.dbot.client.databinding.FragmentReferEarnBinding;
+import com.dbot.client.databinding.FragmentFaqsBinding;
 import com.dbot.client.main.profile.ProfileFragment;
+import com.dbot.client.main.profile.faq.model.FAQsData;
 
-public class FAQFragment extends Fragment {
+import java.util.List;
 
-    private FAQViewModel mViewModel;
-    FragmentFaqBinding binding;
+public class FAQsFragment extends Fragment {
 
-    public static FAQFragment newInstance() {
-        return new FAQFragment();
+    private FAQsViewModel mViewModel;
+    FragmentFaqsBinding binding;
+
+
+    public static FAQsFragment newInstance() {
+        return new FAQsFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentFaqBinding.inflate(getLayoutInflater());
+        binding = FragmentFaqsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         binding.ivBackFaq.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +51,18 @@ public class FAQFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(FAQViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(FAQsViewModel.class);
+        mViewModel.getFAQsData();
+        mViewModel.getFAQsDataResult().observe(this, new Observer<List<FAQsData>>() {
+            @Override
+            public void onChanged(List<FAQsData> faQsDataList) {
+                if(faQsDataList != null){
+                    FAQsAdapter faQsAdapter = new FAQsAdapter(getContext(),faQsDataList);
+                    binding.lvFaqs.setAdapter(faQsAdapter);
+                }
+
+            }
+        });
         // TODO: Use the ViewModel
 
     }

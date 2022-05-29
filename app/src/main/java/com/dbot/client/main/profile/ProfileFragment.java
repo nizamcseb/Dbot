@@ -1,6 +1,5 @@
 package com.dbot.client.main.profile;
 
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.NavigationUI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +23,9 @@ import com.dbot.client.LandingActivity;
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentProfileBinding;
-import com.dbot.client.main.newrequest.Request2Fragment;
 import com.dbot.client.main.profile.account.AccountInfoFragment;
-import com.dbot.client.main.profile.faq.FAQFragment;
+import com.dbot.client.main.profile.faq.FAQsFragment;
 import com.dbot.client.main.profile.refer.ReferFragment;
-
-import java.io.File;
 
 public class ProfileFragment extends Fragment {
 
@@ -72,10 +67,10 @@ public class ProfileFragment extends Fragment {
         binding.llFaq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FAQFragment faqFragment = new FAQFragment();
+                FAQsFragment FAQsFragment = new FAQsFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, faqFragment);
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, FAQsFragment);
                 fragmentTransaction.commit();
             }
         });
