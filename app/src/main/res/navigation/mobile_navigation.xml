@@ -25,11 +25,6 @@
         android:label="@string/title_services"
         tools:layout="@layout/fragment_services" />
     <fragment
-        android:id="@+id/navigation_new_request"
-        android:name="com.dbot.client.main.newrequest.NewRequestFragment"
-        android:label="@string/title_create_new_request"
-        tools:layout="@layout/fragment_new_request" />
-    <fragment
         android:id="@+id/navigation_new_request1"
         android:name="com.dbot.client.main.newrequest.Request1Fragment"
         android:label="@string/title_create_new_request"
@@ -59,10 +54,20 @@
         android:name="com.dbot.client.main.profile.faq.FAQsFragment"
         android:label=""
         tools:layout="@layout/fragment_faqs" />
-<fragment
+    <fragment
         android:id="@+id/navigation_refer"
         android:name="com.dbot.client.main.profile.refer.ReferFragment"
         android:label=""
         tools:layout="@layout/fragment_refer_earn" />
+    <fragment
+        android:id="@+id/navigation_logout"
+        android:name="com.dbot.client.main.profile.logout.LogoutFragment"
+        android:label=""
+        tools:layout="@layout/fragment_logout" />
+<fragment
+        android:id="@+id/navigation_project_details"
+        android:name="com.dbot.client.main.projects.ProjectFullDetailsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_project_details" />
 
 </navigation>

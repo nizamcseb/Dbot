@@ -32,7 +32,7 @@
                     android:text="Project Details:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold" />
+                    style="@style/bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -48,7 +48,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Project/Client Name:" />
+                            android:text="Project/Client Name:"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -89,14 +90,16 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Contact Person Name:" />
+                                android:text="Contact Person Name:"
+                                style="@style/bold"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:text="*"
-                                android:textColor="@color/red" />
+                                android:textColor="@color/red"
+                                style="@style/bold"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -143,7 +146,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Contact Person Phone Number:" />
+                            android:text="Contact Person Phone Number:"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -180,7 +184,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Size of Property:" />
+                            android:text="Size of Property:"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -242,7 +247,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="start"
-                            android:text="Type of Property" />
+                            android:text="Type of Property"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -298,7 +304,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Scope completion staus on site:" />
+                            android:text="Scope completion staus on site:"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"

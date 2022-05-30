@@ -18,7 +18,8 @@
             android:gravity="center"
             android:text="Our Products"
             android:textColor="@color/purple_profile"
-            android:textSize="@dimen/_13ssp" />
+            android:textSize="@dimen/_13ssp"
+            style="@style/bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,7 +129,8 @@
                 android:gravity="center"
                 android:text="Packages &amp; Pricing"
                 android:textColor="@color/purple_profile"
-                android:textSize="@dimen/_13ssp" />
+                android:textSize="@dimen/_13ssp"
+                style="@style/bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,7 +159,8 @@
                             android:gravity="center"
                             android:text="Products"
                             android:textColor="@color/purple_profile"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12ssp"
+                            style="@style/bold"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -181,7 +184,8 @@
                             android:gravity="center"
                             android:text="Essentials"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12ssp"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -213,7 +217,8 @@
                             android:gravity="center"
                             android:text="Plus"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12ssp"
+                            style="@style/bold"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -490,7 +495,7 @@
             android:backgroundTint="@color/primary_varient"
             android:gravity="center"
             android:text="Book your documentation"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_12ssp" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

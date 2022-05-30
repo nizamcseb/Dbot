@@ -11,5 +11,6 @@
     android:layout_marginEnd="@dimen/_5sdp"
     android:gravity="start"
     android:text="terms_and_conditions"
-    android:textColor="@color/black"/>
+    android:textColor="@color/black"
+    style="@style/bold"/>
 </LinearLayout>

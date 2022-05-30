@@ -143,4 +143,7 @@
     <string name="terms_and_conditions_title"><![CDATA[Terms & Conditions]]></string>
     <string name="popup_notify_msg">Hi !\n You have selected an unavailable slot, Your requuest has been received and we will notify you if your requested slot is available</string>
     <string name="lorem_parag">Et aspernatur illum ut repellat quia ut ipsam exercitationem. Blanditiis maiores est atque iusto non dicta aliquam qui harum quia vel illum quasi et corrupti incidunt non aperiam iusto.</string>
+
+    <string name="tv_cancel"><u>Cancel</u></string>
+    <string name="tv_reshedule"><u>Reshedule</u></string>
 </resources>

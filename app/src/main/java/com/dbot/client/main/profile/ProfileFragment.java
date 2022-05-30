@@ -25,6 +25,7 @@ import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentProfileBinding;
 import com.dbot.client.main.profile.account.AccountInfoFragment;
 import com.dbot.client.main.profile.faq.FAQsFragment;
+import com.dbot.client.main.profile.logout.LogoutFragment;
 import com.dbot.client.main.profile.refer.ReferFragment;
 
 public class ProfileFragment extends Fragment {
@@ -87,7 +88,12 @@ public class ProfileFragment extends Fragment {
         binding.llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Uncomment the below code to Set the message and title from the strings.xml file
+                LogoutFragment logoutFragment = new LogoutFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, logoutFragment);
+                fragmentTransaction.commit();
+               /* //Uncomment the below code to Set the message and title from the strings.xml file
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 //Setting message manually and performing action on button click
@@ -116,7 +122,7 @@ public class ProfileFragment extends Fragment {
                 AlertDialog alert = builder.create();
                 //Setting the title manually
                 alert.setTitle("Alert");
-                alert.show();
+                alert.show();*/
 
             }
         });

@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:text="@string/popup_notify_msg"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/bold"/>
     <Button
         android:id="@+id/btn_back_to_home"
         android:layout_width="match_parent"

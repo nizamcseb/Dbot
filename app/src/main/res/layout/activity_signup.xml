@@ -33,6 +33,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="@string/thank_you_for_signing_up_with_us"
                 android:textSize="@dimen/_12ssp" />
 
@@ -44,6 +45,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:text="@string/please_enter_the_following_details_nto_complete_the_sign_up"
                 android:textSize="@dimen/_12ssp" />
 
@@ -66,7 +68,8 @@
                         android:gravity="start"
                         android:text="Full Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_15ssp"
+                        style="@style/bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -105,7 +108,8 @@
                         android:gravity="start"
                         android:text="Email Address"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_15ssp"
+                        style="@style/bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -144,7 +148,8 @@
                         android:gravity="start"
                         android:text="Are you a Freelancer?"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_15ssp"
+                        style="@style/bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -205,7 +210,8 @@
                         android:gravity="start"
                         android:text="Firm / Company Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_15ssp"
+                        style="@style/bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -251,7 +257,8 @@
                         android:gravity="start"
                         android:text="*"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_15ssp"
+                        style="@style/bold"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <Spinner

@@ -8,4 +8,9 @@
         <item name="android:background">@color/black</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+    <style name="bold">
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+        <item name="fontFamily">@font/comfortaa_bold</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

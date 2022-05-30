@@ -29,7 +29,8 @@
                     android:layout_height="wrap_content"
                     android:text="Project / Client Name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"/>
+                    android:textSize="@dimen/_13ssp"
+                    style="@style/bold"/>
 
                 <TextView
                     android:id="@+id/tv_project_item_booking_id"
@@ -79,7 +80,8 @@
             android:layout_height="wrap_content"
             android:text="Essential service"
             android:textColor="@color/black"
-            android:textSize="@dimen/_11ssp" />
+            android:textSize="@dimen/_11ssp"
+            style="@style/bold"/>
 
 
         <TextView

@@ -35,7 +35,8 @@
                 android:gravity="center"
                 android:text="Thank you !"
                 android:textColor="@color/primary_varient"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +44,8 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:gravity="center"
                 android:text="We have successfully recieved your payment. Your documentation has been scheduled."
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
 
             <TextView
                 android:id="@+id/tv_req_id"
@@ -52,7 +54,8 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:gravity="center"
                 android:text="Request id: #xxxxxx"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,7 +63,8 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:gravity="center"
                 android:text="Track your requests under \n My Projects"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
         </LinearLayout>
 
     </LinearLayout>

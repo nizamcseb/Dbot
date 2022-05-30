@@ -15,6 +15,7 @@ import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivityMainBinding;
 import com.dbot.client.login.model.CityData;
+import com.dbot.client.main.projects.model.ClientProjectData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public static String book_date, map_location, door_number, building_name, landmark, project_name, contact_person_name, contact_person_phone, coupen_code = "";
     public static List<Integer> scope = null;
     public static int city=0, slot_time_id=0, property_size = 9, project_type = 1, package_id = 9, package_amount = 0, discount = 0, amount_paid = 0, payment_status = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

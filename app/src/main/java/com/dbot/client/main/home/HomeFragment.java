@@ -20,11 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -52,11 +52,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     SessionManager sessionManager;
     private HomeViewModel homeViewModel;
     private LoginViewModel loginViewModel;
+    NestedScrollView ns_home;
     List<CityData> cityDataList;
     Spinner spCity;
     CalendarView cView;
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
-    Button btn_continue, btn_slot_1, btn_slot_2, btn_quick_msg_send;
+    Button btn_continue, btn_book_documentation, btn_slot_1, btn_slot_2, btn_quick_msg_send;
     TextView tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
     ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition;
     EditText et_quick_msg;
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                              @Nullable Bundle savedInstanceState) {
         sessionManager = new SessionManager(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        ns_home = root.findViewById(R.id.ns_home);
         spCity = root.findViewById(R.id.sp_city);
         tv_available_message = root.findViewById(R.id.tv_available_message);
         tv_available_message.setVisibility(View.INVISIBLE);
@@ -91,6 +93,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         tv_tc = root.findViewById(R.id.tv_tc);
         btn_quick_msg_send = root.findViewById(R.id.btn_quick_msg_send);
         lv_Tc = root.findViewById(R.id.lv_Tc);
+        btn_book_documentation = root.findViewById(R.id.btn_book_documentation);
         btn_continue = root.findViewById(R.id.btn_continue);
         btn_continue.setEnabled(false);
         btn_slot_1 = root.findViewById(R.id.btn_slot_1);
@@ -148,14 +151,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         homeViewModel.getTCResult().observe(this, new Observer<TermsAndConditionsResponse>() {
             @Override
             public void onChanged(TermsAndConditionsResponse termsAndConditionsResponse) {
-                if(termsAndConditionsResponse != null){
-                    TCAdapter tcAdapter = new TCAdapter(getContext(),termsAndConditionsResponse.getData());
+                if (termsAndConditionsResponse != null) {
+                    TCAdapter tcAdapter = new TCAdapter(getContext(), termsAndConditionsResponse.getData());
                     lv_Tc.setAdapter(tcAdapter);
                 }
 
             }
         });
         btn_continue.setOnClickListener(this::onClick);
+        btn_book_documentation.setOnClickListener(this::onClick);
         iv_close_quick_msg.setOnClickListener(this::onClick);
         iv_close_terms_condition.setOnClickListener(this::onClick);
         tv_support_mail.setOnClickListener(this::onClick);
@@ -165,7 +169,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         iv_2d.setOnClickListener(this::onClick);
         iv_360.setOnClickListener(this::onClick);
         iv_3d.setOnClickListener(this::onClick);
+        setDefault2D();
         return root;
+    }
+
+    private void setDefault2D() {
+        iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_dark));
+        iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
+        iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
+        tv_product_msg.setText(getString(R.string.two_d_drawing_product_msg));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -300,12 +312,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     notifyMePopup.showPopupWindow(btn_continue, getActivity());
                 }
                 break;
+            case R.id.btn_book_documentation:
+                ns_home.fullScroll(View.FOCUS_UP);
+                break;
             case R.id.iv_2d:
                 iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_dark));
                 iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
                 iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
                 tv_product_msg.setText(getString(R.string.two_d_drawing_product_msg));
-
                 break;
             case R.id.iv_360:
                 iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_light));
@@ -339,7 +353,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 break;
             case R.id.btn_quick_msg_send:
                 if (et_quick_msg.getText().toString().equals(""))
-                    Snackbar.make(btn_quick_msg_send,"Please enter message to send",Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(btn_quick_msg_send, "Please enter message to send", Snackbar.LENGTH_SHORT).show();
                 else
                     homeViewModel.sendMessage(sessionManager.getClientId(), et_quick_msg.getText().toString());
 

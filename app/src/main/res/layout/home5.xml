@@ -22,16 +22,29 @@
         android:background="@drawable/bg_home5"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="d esigner's bot"
-            android:textSize="@dimen/_15ssp"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="d"
+                android:textColor="@color/primary_varient"
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="esigner's bot"
+                android:textSize="@dimen/_15ssp"
+                style="@style/bold"/>
+        </LinearLayout>
+
 
         <include
             layout="@layout/layout_quick_message"
@@ -56,13 +69,14 @@
                 android:orientation="vertical">
 
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:gravity="start"
                     android:text="Our Vision"
                     android:textSize="@dimen/_18ssp"
-                    android:textStyle="bold" />
+                    style="@style/bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,7 +93,7 @@
                     android:gravity="start"
                     android:text="Our Mission"
                     android:textSize="@dimen/_18ssp"
-                    android:textStyle="bold" />
+                    style="@style/bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -98,6 +112,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -138,6 +153,7 @@
                     android:textSize="@dimen/_13ssp" />
 
                 <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

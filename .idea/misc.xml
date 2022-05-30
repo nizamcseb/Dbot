@@ -35,22 +35,27 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_360_photos_dark.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_360_photos_light.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_bottom_menu_profile.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_dbot_word_logo.xml" value="0.302734375" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_home.xml" value="0.25493421052631576" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.25493421052631576" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25493421052631576" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/font/open_sans_bold.xml" value="0.40208333333333335" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_landing.xml" value="0.22" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_otp.xml" value="0.24473684210526317" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_signup.xml" value="0.23585526315789473" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_otp.xml" value="0.33" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_signup.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_account_info.xml" value="0.3015625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_dashboard.xml" value="0.3875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_faq.xml" value="0.2" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_faqs.xml" value="0.290625" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_full_details.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_home.xml" value="0.21208791208791208" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_home_old.xml" value="0.290625" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_logout.xml" value="0.3875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_new_request.xml" value="0.24473684210526317" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_profile.xml" value="0.34270833333333334" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_project_details.xml" value="0.35833333333333334" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_projects.xml" value="0.3572916666666667" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_refer_earn.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request1.xml" value="0.33" />
@@ -65,6 +70,7 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home4.xml" value="0.30625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home5.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/item_faq.xml" value="0.280078125" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/item_faqs.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/item_home_banner.xml" value="0.3734375" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/item_projects.xml" value="0.3572916666666667" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/item_tc.xml" value="0.269921875" />
@@ -75,6 +81,7 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/layout_request3.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/layout_request_completed.xml" value="0.34270833333333334" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/layout_terms_and_conditions.xml" value="0.3015625" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/popup_notify_me.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/requests_fragment.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/spinner_cities.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3875" />

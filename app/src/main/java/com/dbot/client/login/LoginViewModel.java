@@ -93,7 +93,7 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
                 if(response.isSuccessful()) {
-                    Log.d("getCityResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    //Log.d("getCityResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                     cityMutableLiveData.setValue(response.body().getCityListData());
                 }
             }

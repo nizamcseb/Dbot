@@ -47,13 +47,13 @@ public class OtpActivity extends AppCompatActivity {
                                 loginData.getCompanyName(),loginData.getCity(),loginData.getFreelancer());
                         //startActivity(new Intent(OtpActivity.this, MainActivity.class));
 
-                    } /*else {
+                    } else {
+                        Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
+                        signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
+                        signupIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginStatus);
+                        startActivity(signupIntent);
+                    }
 
-                    }*/
-                    Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
-                    signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
-                    signupIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginStatus);
-                    startActivity(signupIntent);
                 }
             }
         });

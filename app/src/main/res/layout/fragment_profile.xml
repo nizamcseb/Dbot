@@ -10,20 +10,22 @@
     android:layout_width="@dimen/_100sdp"
     android:layout_height="@dimen/_100sdp"
     android:layout_margin="@dimen/_10sdp"
-    android:src="@drawable/ic_bottom_menu_home"/>
+    android:src="@drawable/ic_dbot_dark_logo"/>
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_25ssp"/>
+        android:textSize="@dimen/_20ssp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_13ssp"
+        android:textSize="@dimen/_12ssp"
         android:text="12 documentation in 4 months!"/>
 
     <LinearLayout
@@ -45,11 +47,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Account Info"
-                android:textStyle="bold"
+                 style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
@@ -75,11 +77,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="FAQs"
-                android:textStyle="bold"
+                 style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
@@ -105,11 +107,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Payment &amp; Refund"
-                android:textStyle="bold"
+                 style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
              <ImageView
@@ -135,11 +137,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Refer &amp; Earn"
-                android:textStyle="bold"
+                 style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
@@ -165,11 +167,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Log out"
-                android:textStyle="bold"
+                 style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView

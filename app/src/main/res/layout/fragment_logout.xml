@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C9C9C9"
-    tools:context=".main.profile.refer.ReferFragment">
+    tools:context=".main.profile.logout.LogoutFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/iv_back_refer"
+                android:id="@+id/iv_back_logout"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="start"
@@ -35,61 +35,62 @@
                 android:src="@drawable/ic_back" />
 
             <TextView
+                style="@style/bold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:text="Refer &amp; Earn"
+                android:text="Logout"
                 android:textColor="@color/purple_profile"
-                android:textSize="@dimen/_20ssp"
-                style="@style/bold" />
+                android:textSize="@dimen/_20ssp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="592dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_preferred_slot"
-                android:gravity="top|center"
+                android:background="@drawable/bg_req_bottom_sheet"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:text="Invite your friends to try Dbot services and win a FREE documentaion service when they avail their first service."
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-
-                <ImageView
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_150sdp"
-                    android:src="@drawable/ic_speaker_boy"/>
-
-                <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Share the code with your friend"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-
-                <TextView
-                    android:id="@+id/tv_refer_code"
+                    android:text="Are you sure want to logout?"
+                    android:textSize="@dimen/_15ssp"/>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="5efc3q"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_40ssp" />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_copy_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/button_bg"
-                    android:text="Copy Code"
-                    app:backgroundTint="@null" />
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_logout_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:text="BACK"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <Button
+                        android:id="@+id/btn_logout_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/primary_varient"
+                        android:text="LOGOUT"
+                        android:textSize="@dimen/_15ssp" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

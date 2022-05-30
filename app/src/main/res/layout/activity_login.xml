@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_login"
+    android:fitsSystemWindows="true"
     tools:context=".login.LoginActivity">
+
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@drawable/ic_dbot_word_logo"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
@@ -21,21 +33,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:gravity="center"
             android:text="@string/get_your_site_documented_with_100_accuracy_in_just_1_day"
-            android:textStyle="bold"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            style="@style/bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:gravity="center"
             android:text="Login / Signup"
@@ -44,8 +57,8 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:background="@drawable/bg_border_enter_mobile_number"
             android:orientation="vertical">
@@ -60,11 +73,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:gravity="start"
                     android:text="+91"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    style="@style/bold"/>
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_mobile_number"
@@ -72,15 +86,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:background="@null"
-                    android:inputType="number"
                     android:ems="10"
-                    android:hint="Enter your Mobile Number" />
+                    android:hint="Enter your Mobile Number"
+                    android:inputType="number" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
 
         <com.google.android.material.button.MaterialButton
@@ -90,12 +102,14 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/button_bg"
             android:text="@string/txt_btn_send_otp"
+            style="@style/bold"
             app:backgroundTint="@null" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
             android:text="@string/by_continuing_you_agree_to_our_nterms_amp_conditions" />
 

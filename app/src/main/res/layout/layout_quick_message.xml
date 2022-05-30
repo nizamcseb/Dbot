@@ -20,7 +20,8 @@
         android:gravity="center"
         android:text="Send us a quick message"
         android:textColor="@color/black"
-        android:textSize="@dimen/_15ssp" />
+        android:textSize="@dimen/_15ssp"
+        style="@style/bold"/>
 
     <EditText
         android:id="@+id/et_quick_msg"

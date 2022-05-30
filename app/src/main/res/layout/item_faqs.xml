@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/lorem_parag"
-            android:textStyle="bold" />
+            style="@style/bold" />
 
         <View
             android:layout_width="match_parent"

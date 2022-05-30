@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="My Projects"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp" />
+            android:textSize="@dimen/_20ssp"
+            style="@style/bold"/>
     </LinearLayout>
 
     <LinearLayout

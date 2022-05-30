@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
 public class Request2Fragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -146,6 +147,10 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
         }
         if (et_contact_person_phone_number.getText().toString().equals("")) {
             et_contact_person_phone_number.setError("Required");
+            return false;
+        }
+        if(MainActivity.scope.size() == 0) {
+            Snackbar.make(btn_req2_next,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
             return false;
         }
         return true;

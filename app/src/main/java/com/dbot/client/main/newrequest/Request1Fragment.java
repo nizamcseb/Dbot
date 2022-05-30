@@ -6,7 +6,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +54,9 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
     GpsTracker gpsTracker;
     TextView tv_location_address;
     ImageView iv_my_location;
-    private BottomSheetBehavior sheetBehavior;;
-    private LinearLayout bottom_sheet,ll_bottom_sheet_expand;
+    private BottomSheetBehavior sheetBehavior;
+    ;
+    private LinearLayout bottom_sheet, ll_bottom_sheet_expand;
     Location nowLocation, location;
     Button btn_req1_next, btn_req1_prev, saveLocation;
     EditText et_door_no, et_building_name, et_landmark;
@@ -258,7 +258,8 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
         List<Address> addresses = null;
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         try {
-            addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1);
+            if (geocoder != null)
+                addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1);
             // Here 1 represent max location result to returned, by documents it recommended 1 to 5
         } catch (IOException e) {
             e.printStackTrace();
@@ -287,13 +288,13 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
                 break;
             case R.id.btn_req1_next:
                 if (checkManditoryFields()) {
-                MainActivity.door_number = et_door_no.getText().toString();
-                MainActivity.building_name = et_building_name.getText().toString();
-                MainActivity.landmark = et_landmark.getText().toString();
-                MainActivity.map_location = nowLocation.toString();
-                Request2Fragment request2Fragment = new Request2Fragment();
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
-                fragmentTransaction.commit();
+                    MainActivity.door_number = et_door_no.getText().toString();
+                    MainActivity.building_name = et_building_name.getText().toString();
+                    MainActivity.landmark = et_landmark.getText().toString();
+                    MainActivity.map_location = nowLocation.toString();
+                    Request2Fragment request2Fragment = new Request2Fragment();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
+                    fragmentTransaction.commit();
                 }
                 break;
             case R.id.ll_bottom_sheet_expand:
