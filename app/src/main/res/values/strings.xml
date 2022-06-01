@@ -131,7 +131,7 @@
         <item>Madurai</item>
         <item>Selam</item>
     </string-array>
-<string name="GOOGLE_MAP_API_KEY">AIzaSyBLN8m3OinLcUfOZVmptVwTJ0h7T834lx0</string>
+    <string name="GOOGLE_MAP_API_KEY">AIzaSyBLN8m3OinLcUfOZVmptVwTJ0h7T834lx0</string>
     <string name="please_choose_a_serviceable_city_to_book">*Please choose a serviceable city to book.</string>
     <string name="btn_txt_continue">CONTINUE</string>
     <string name="btn_txt_notify_me">NOTIFY ME</string>
@@ -142,6 +142,7 @@
     <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
     <string name="terms_and_conditions_title"><![CDATA[Terms & Conditions]]></string>
     <string name="popup_notify_msg">Hi !\n You have selected an unavailable slot, Your requuest has been received and we will notify you if your requested slot is available</string>
+    <string name="popup_city_not_available_msg">Sorry !\n We are currently not operating in your City. We will notify you once we have launched there.</string>
     <string name="lorem_parag">Et aspernatur illum ut repellat quia ut ipsam exercitationem. Blanditiis maiores est atque iusto non dicta aliquam qui harum quia vel illum quasi et corrupti incidunt non aperiam iusto.</string>
 
     <string name="tv_cancel"><u>Cancel</u></string>

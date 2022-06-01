@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/primary_varient"
     tools:context=".main.newrequest.Request3Fragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:background="@drawable/bg_req_bottom_sheet">
+        android:layout_height="match_parent">
 
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:background="@drawable/bg_req_bottom_sheet">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,14 +22,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="Service Type:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    style="@style/bold" />
+                    android:textSize="@dimen/_15ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,10 +43,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Please choose a package:"
-                            style="@style/bold"/>
+                            android:text="Please choose a package:" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -73,9 +72,9 @@
                             android:id="@+id/rb_essentials"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:onClick="onRadioButtonClicked"
+                            android:buttonTint="@color/primary_varient"
                             android:gravity="top"
-                            android:buttonTint="@color/primary_varient"/>
+                            android:onClick="onRadioButtonClicked" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -84,12 +83,12 @@
 
                             <TextView
                                 android:id="@+id/tv_service_title_1"
+                                style="@style/bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Essentials"
-                                android:textSize="@dimen/_15ssp"
-                                style="@style/bold"/>
+                                android:textSize="@dimen/_15ssp" />
 
                             <TextView
                                 android:id="@+id/tv_es_package_desc"
@@ -101,12 +100,12 @@
 
                         <TextView
                             android:id="@+id/tv_es_price"
+                            style="@style/bold"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
                             android:text="@string/sample_rupee"
-                            android:textSize="@dimen/_15ssp"
-                            style="@style/bold"/>
+                            android:textSize="@dimen/_15ssp" />
                     </LinearLayout>
 
                     <View
@@ -125,9 +124,9 @@
                             android:id="@+id/rb_plus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:onClick="onRadioButtonClicked"
                             android:buttonTint="@color/primary_varient"
-                            android:gravity="top" />
+                            android:gravity="top"
+                            android:onClick="onRadioButtonClicked" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -136,12 +135,12 @@
 
                             <TextView
                                 android:id="@+id/tv_service_title_2"
+                                style="@style/bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Plus"
-                                android:textSize="@dimen/_15ssp"
-                                style="@style/bold"/>
+                                android:textSize="@dimen/_15ssp" />
 
                             <TextView
                                 android:id="@+id/tv_pl_package_desc"
@@ -153,26 +152,25 @@
 
                         <TextView
                             android:id="@+id/tv_pl_price"
+                            style="@style/bold"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="top|end"
                             android:text="@string/sample_rupee"
-                            android:textSize="@dimen/_15ssp"
-                            style="@style/bold"/>
+                            android:textSize="@dimen/_15ssp" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="@color/greyed_out" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@color/greyed_out" />
 
 
                 <EditText
@@ -180,10 +178,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
                     android:background="@drawable/bg_edit_text"
-                    android:hint="Enter Coupon Code" />
+                    android:hint="Enter Coupon Code"
+                    android:imeOptions="actionNext"
+                    android:inputType="text" />
 
                 <View
                     android:layout_width="match_parent"
@@ -198,20 +196,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
                     android:background="@drawable/bg_edit_text"
-                    android:hint="Select Available Coupon" />
+                    android:hint="Select Available Coupon"
+                    android:imeOptions="actionDone"
+                    android:inputType="text" />
 
                 <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="Bill Details:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    style="@style/bold"/>
+                    android:textSize="@dimen/_15ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,13 +232,14 @@
 
                         <TextView
                             android:id="@+id/tv_bill_service_price"
+                            style="@style/bold"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:text="@string/sample_rupee"
-                            style="@style/bold"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -255,14 +254,15 @@
 
                         <TextView
                             android:id="@+id/tv_coupon_discount_price"
+                            style="@style/bold"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:text="@string/sample_rupee"
-                            style="@style/bold"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -274,21 +274,23 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
                     android:orientation="horizontal">
+
                     <TextView
+                        style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bill Total"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
-                        style="@style/bold" />
+                        android:textSize="@dimen/_12ssp" />
+
                     <TextView
                         android:id="@+id/tv_bill_total_price"
+                        style="@style/bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:text="@string/sample_rupee"
-                        android:textSize="@dimen/_12ssp"
-                        style="@style/bold"/>
+                        android:textSize="@dimen/_12ssp" />
                 </LinearLayout>
 
                 <TextView
@@ -296,6 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="*All charges are inclusive of taxes." />
+
                 <Button
                     android:id="@+id/btn_req3_pay"
                     android:layout_width="match_parent"
@@ -305,6 +308,7 @@
                     android:backgroundTint="@color/primary_varient"
                     android:text="Proceed to pay"
                     android:textSize="@dimen/_15ssp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -333,6 +337,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-        </ScrollView>
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

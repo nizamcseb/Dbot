@@ -18,11 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_back_refer"
@@ -47,9 +43,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="592dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_preferred_slot"
+                android:background="@drawable/bg_package"
                 android:gravity="top|center"
                 android:orientation="vertical">
 
@@ -79,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="5efc3q"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_40ssp" />
                 <com.google.android.material.button.MaterialButton
@@ -90,7 +86,42 @@
                     android:background="@drawable/button_bg"
                     android:text="Copy Code"
                     app:backgroundTint="@null" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/white">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Referal History"
+                        android:textColor="@color/black"
+                        android:background="@drawable/bg_tv_referal_history"/>
+                    <TextView
+                        android:id="@+id/tv_rh_claims"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Claims: 2/5"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@color/grey_rh_list_divider"
+                        android:gravity="center" />
+                    <ListView
+                        android:id="@+id/lv_rh"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:divider="@color/grey_rh_list_divider"
+                        tools:listitem="@layout/item_referal_history"/>
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

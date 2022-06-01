@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.dbot.client.R;
+import com.dbot.client.common.Popup;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivitySignupBinding;
 import com.dbot.client.login.model.CityData;
@@ -61,10 +62,12 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 cityDataList = cityData;
                 CityAdapter cityAdapter = new CityAdapter(SignupActivity.this, cityDataList);
                 binding.spCity.setAdapter(cityAdapter);
-                if (loginStatus) {
+                /*if (loginStatus) {
                     int position = findCityPosition(cityDataList,sessionManager.getCity());
                     binding.spCity.setSelection(position);
-                }
+                }*/
+                int position = findCityPosition(cityDataList,sessionManager.getCity());
+                binding.spCity.setSelection(position);
                 binding.spCity.setOnItemSelectedListener(SignupActivity.this);
             }
         });
@@ -116,6 +119,8 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         if (cityDataList.get(i).getWorkingCity().equals("1"))
             city = String.valueOf(cityDataList.get(i).getId());
         else {
+            Popup popup = new Popup();
+            popup.showCityNotAvailablePopupWindow(binding.spCity);
             city = String.valueOf(cityDataList.get(i).getId());
         }
     }

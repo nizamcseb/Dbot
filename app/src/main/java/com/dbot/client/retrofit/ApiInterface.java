@@ -6,12 +6,15 @@ import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
+import com.dbot.client.main.home.model.NotifySlotRequestResponse;
 import com.dbot.client.main.home.model.QuickMessageResponse;
 import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageResponse;
 import com.dbot.client.main.profile.faq.model.FAQsResponse;
+import com.dbot.client.main.profile.refer.model.RcAndRhData;
+import com.dbot.client.main.profile.refer.model.RcAndRhResponse;
 import com.dbot.client.main.projects.model.ClientProjectResponse;
 
 import retrofit2.Call;
@@ -68,8 +71,16 @@ public interface ApiInterface {
     @GET("message/terms")
     Call<TermsAndConditionsResponse> getTC();
 
+    //RcAndRh List
+    @GET("client/getmyreferralcodeandhistory/{client_id}")
+    Call<RcAndRhResponse> getRcAndRhResponse(@Path("client_id") String client_id);
+
     //FAQ List
     @GET("message/getfaqs")
     Call<FAQsResponse> getFAQs();
 
+    //NotifySlot Request
+    @Headers("Content-Type: application/json")
+    @POST("slotbooking/notifyslotavailablerequest")
+    Call<NotifySlotRequestResponse> sendNotifySlotAvailableRequest(@Query("client_id") String client_id, @Query("book_date") String book_date, @Query("slot_time_id") String slot_time_id);
 }

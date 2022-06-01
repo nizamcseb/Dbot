@@ -2,6 +2,7 @@ package com.dbot.client.main.newrequest;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.common.PlacesSearchActivity;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,6 +38,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.IOException;
@@ -55,10 +58,9 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
     TextView tv_location_address;
     ImageView iv_my_location;
     private BottomSheetBehavior sheetBehavior;
-    ;
     private LinearLayout bottom_sheet, ll_bottom_sheet_expand;
-    Location nowLocation, location;
-    Button btn_req1_next, btn_req1_prev, saveLocation;
+    Location nowLocation;
+    Button btn_req1_next, btn_req1_prev;
     EditText et_door_no, et_building_name, et_landmark;
 
     public static Request1Fragment newInstance() {
@@ -103,6 +105,7 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
         btn_req1_prev = root.findViewById(R.id.btn_req1_prev);
         btn_req1_next.setOnClickListener(this::onClick);
         btn_req1_prev.setOnClickListener(this::onClick);
+        tv_location_address.setOnClickListener(this::onClick);
         ll_bottom_sheet_expand.setOnClickListener(this::onClick);
 
         sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -132,6 +135,7 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
 
             }
         });
+
 
     }
 
@@ -300,6 +304,10 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
             case R.id.ll_bottom_sheet_expand:
                 sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
+            case R.id.tv_location_address:
+                getActivity().startActivity(new Intent(getActivity(), PlacesSearchActivity.class));
+                break;
+
         }
     }
 }

@@ -53,4 +53,7 @@
 
     <color name="title_bg">#c7c7c7</color>
     <color name="purple_profile">#48304D</color>
+    <color name="grey_rh_list_divider">#D1D1D1</color>
+    <color name="rv_staus_bg">#E4E4E4</color>
+    <color name="rh_status_awaiting_bg">#F6CF93</color>
 </resources>

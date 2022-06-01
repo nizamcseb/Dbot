@@ -1,5 +1,6 @@
 package com.dbot.client.main.home;
 
+import static com.dbot.client.common.CommonFunctions.findCityPosition;
 import static com.dbot.client.main.MainActivity.book_date;
 import static com.dbot.client.main.MainActivity.slot_time_id;
 
@@ -32,6 +33,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.common.CommonFunctions;
+import com.dbot.client.common.Popup;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.login.CityAdapter;
 import com.dbot.client.login.LoginViewModel;
@@ -39,6 +42,7 @@ import com.dbot.client.login.model.CityData;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.adapter.TCAdapter;
 import com.dbot.client.main.home.model.AvailableSlotsData;
+import com.dbot.client.main.home.model.NotifySlotRequestResponse;
 import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.main.newrequest.Request1Fragment;
 import com.dbot.client.retrofit.Status;
@@ -119,7 +123,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 cityDataList = cityData;
                 CityAdapter cityAdapter = new CityAdapter(getContext(), cityDataList);
                 spCity.setAdapter(cityAdapter);
-                int position = findCity(cityDataList, sessionManager.getCity());
+                int position = findCityPosition(cityDataList, sessionManager.getCity());
                 spCity.setSelection(position);
                 spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -156,6 +160,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     lv_Tc.setAdapter(tcAdapter);
                 }
 
+            }
+        });
+        homeViewModel.getNotifySlotAvailableRequestResult().observe(this, new Observer<NotifySlotRequestResponse>() {
+            @Override
+            public void onChanged(NotifySlotRequestResponse notifySlotRequestResponse) {
+                if (notifySlotRequestResponse.getStatus().getCode() == 1035) {
+                    Popup popup = new Popup();
+                    popup.showNotifyRequestPopupWindow(btn_continue);
+                }
             }
         });
         btn_continue.setOnClickListener(this::onClick);
@@ -225,8 +238,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                         btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
                     }
                 }
+                slot_time_id = Integer.parseInt(availableSlotsData.get(0).getId());
                 if (availableSlotsData.get(0).getAvailableStatus()) {
-                    slot_time_id = Integer.parseInt(availableSlotsData.get(0).getId());
+
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
                     btn_continue.setText(R.string.btn_txt_continue);
@@ -235,6 +249,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     btn_slot_1.setTextColor(getContext().getColor(R.color.white));
                     btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
                 } else {
+
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
                     btn_continue.setText(R.string.btn_txt_notify_me);
@@ -262,8 +277,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                         btn_slot_1.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_not_available_button));
                     }
                 }
+                slot_time_id = Integer.parseInt(availableSlotsData.get(1).getId());
                 if (availableSlotsData.get(1).getAvailableStatus()) {
-                    slot_time_id = Integer.parseInt(availableSlotsData.get(1).getId());
+
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.primary_varient));
                     btn_continue.setText(R.string.btn_txt_continue);
@@ -272,6 +288,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                     btn_slot_2.setTextColor(getContext().getColor(R.color.white));
                     btn_slot_2.setBackground(getContext().getDrawable(R.drawable.bg_preferred_slot_available_button));
                 } else {
+
                     btn_continue.setEnabled(true);
                     btn_continue.setBackgroundColor(getContext().getColor(R.color.purple_profile));
                     btn_continue.setText(R.string.btn_txt_notify_me);
@@ -299,17 +316,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         switch (view.getId()) {
             case R.id.btn_continue:
                 if (btn_continue.getTag().equals("1")) {
-                    MainActivity.city = Integer.parseInt(cityDataList.get(spCity.getSelectedItemPosition()).getId());
-                    Request1Fragment request1Fragment = new Request1Fragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
-                    fragmentTransaction.commit();
-                    Log.d("btn_continue", "continue" + slot_time_id + " " + MainActivity.city);
+                    if (cityDataList.get(spCity.getSelectedItemPosition()).getWorkingCity().equals("1")) {
+                        MainActivity.city = Integer.parseInt(cityDataList.get(spCity.getSelectedItemPosition()).getId());
+                        Request1Fragment request1Fragment = new Request1Fragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request1Fragment);
+                        fragmentTransaction.commit();
+                        Log.d("btn_continue", "continue" + slot_time_id + " " + MainActivity.city);
+                    } else
+                        CommonFunctions.shakeAnimation(tv_available_message, 1000);
                 } else if (btn_continue.getTag().equals("0")) {
                     Log.d("btn_continue", "notify");
-                    NotifyMePopup notifyMePopup = new NotifyMePopup();
-                    notifyMePopup.showPopupWindow(btn_continue, getActivity());
+                    homeViewModel.sendNotifySlotAvailableRequest(sessionManager.getClientId(), getSelectedDate(cView.getDate()),String.valueOf(slot_time_id));
                 }
                 break;
             case R.id.btn_book_documentation:
@@ -376,13 +395,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         return dateString;
     }
 
-    public int findCity(List<CityData> cityData, String city) {
-        for (int i = 0; i < cityData.size(); i++) {
-            if (cityData.get(i).getId().equals(city) && cityData.get(i).getWorkingCity().equals("1"))
-                return i;
-            else if (cityData.get(i).getWorkingCity().equals("1"))
-                return i;
-        }
-        return 0;
-    }
+
 }

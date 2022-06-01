@@ -27,7 +27,15 @@ public class MainActivity extends AppCompatActivity {
     public static SessionManager sessionManager;
     public static String book_date, map_location, door_number, building_name, landmark, project_name, contact_person_name, contact_person_phone, coupen_code = "";
     public static List<Integer> scope = null;
-    public static int city=0, slot_time_id=0, property_size = 9, project_type = 1, package_id = 9, package_amount = 0, discount = 0, amount_paid = 0, payment_status = 0;
+    public static int city=0;
+    public static int slot_time_id=0;
+    public static int property_size = 9;
+    public static int project_type = 1;
+    public static int package_id = 9;
+    public static int package_amount = 0;
+    public static int discount = 0;
+    public static int amount_paid = 0;
+    public static int payment_status = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

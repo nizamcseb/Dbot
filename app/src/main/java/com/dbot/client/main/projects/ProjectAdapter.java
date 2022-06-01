@@ -6,6 +6,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -25,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.dbot.client.R;
@@ -65,6 +67,7 @@ public class ProjectAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //View root;
@@ -80,6 +83,12 @@ public class ProjectAdapter extends BaseAdapter implements Filterable {
 
         tv_project_item_project_name.setText(clientProjectDataList.get(position).getProjectName());
         tv_project_item_booking_id.setText(clientProjectDataList.get(position).getBookingId());
+        if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Active"))
+            tv_project_item_project_status.setTextColor(activity.getColor(R.color.primary_varient));
+        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Completed"))
+            tv_project_item_project_status.setTextColor(Color.GREEN);
+        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Cancelled"))
+            tv_project_item_project_status.setTextColor(Color.RED);
         tv_project_item_project_status.setText(clientProjectDataList.get(position).getProjectStatus().getStatusValue());
         tv_project_item_project_service.setText(clientProjectDataList.get(position).getPackage().getPackageName());
         tv_project_item_project_booked_date.setText(clientProjectDataList.get(position).getBookDate());

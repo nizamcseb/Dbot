@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.main.home.model.AvailableSlotsData;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
+import com.dbot.client.main.home.model.NotifySlotRequestResponse;
 import com.dbot.client.main.home.model.QuickMessageResponse;
 import com.dbot.client.main.home.model.TermsAndConditionsResponse;
 import com.dbot.client.retrofit.ApiClient;
@@ -27,7 +28,8 @@ public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<List<AvailableSlotsData>> availableSlotsData = new MutableLiveData<>();
     private MutableLiveData<Status> statusMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<TermsAndConditionsResponse> tCListMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<TermsAndConditionsResponse> termsAndConditionsResponseMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<NotifySlotRequestResponse> notifySlotRequestResponseMutableLiveData = new MutableLiveData<>();
 
     public void getAvailableSlots(String book_date) {
         System.out.println("book_date " + book_date);
@@ -84,13 +86,38 @@ public class HomeViewModel extends ViewModel {
             public void onResponse(Call<TermsAndConditionsResponse> call, Response<TermsAndConditionsResponse> response) {
                 if(response.isSuccessful()) {
                     Log.d("getTermsAndConditionsResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
-                    tCListMutableLiveData.setValue(response.body());
+                    termsAndConditionsResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<TermsAndConditionsResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+    }
+    public void sendNotifySlotAvailableRequest(String client_id, String book_date, String slot_time_id) {
 
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<NotifySlotRequestResponse> call = apiInterface.sendNotifySlotAvailableRequest(client_id, book_date, slot_time_id);
+        call.enqueue(new Callback<NotifySlotRequestResponse>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<NotifySlotRequestResponse> call, Response<NotifySlotRequestResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("NotifySlotRequestResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    notifySlotRequestResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(Call<NotifySlotRequestResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("NotifySlotRequestResponse ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
             }
         });
     }
@@ -102,6 +129,9 @@ public class HomeViewModel extends ViewModel {
         return statusMutableLiveData;
     }
     public LiveData<TermsAndConditionsResponse> getTCResult() {
-        return tCListMutableLiveData;
+        return termsAndConditionsResponseMutableLiveData;
+    }
+    public LiveData<NotifySlotRequestResponse> getNotifySlotAvailableRequestResult() {
+        return notifySlotRequestResponseMutableLiveData;
     }
 }

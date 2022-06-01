@@ -56,7 +56,8 @@
                 android:layout_gravity="end"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="Active" />
+                android:text="Active"
+                style="@style/bold"/>
         </LinearLayout>
 
     </FrameLayout>

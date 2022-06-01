@@ -10,11 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.databinding.FragmentReferEarnBinding;
+import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.profile.ProfileFragment;
+import com.dbot.client.main.profile.refer.model.RcAndRhResponse;
+import com.dbot.client.retrofit.ApiClient;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ReferFragment extends Fragment {
@@ -35,7 +39,7 @@ public class ReferFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String code = binding.tvReferCode.getText().toString();
-                Snackbar.make(binding.btnCopyCode,"Code Copied",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(binding.btnCopyCode, "Code Copied", Snackbar.LENGTH_SHORT).show();
             }
         });
         binding.ivBackRefer.setOnClickListener(new View.OnClickListener() {
@@ -48,13 +52,26 @@ public class ReferFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+        mViewModel = new ViewModelProvider(this).get(ReferViewModel.class);
+        //if (ApiClient.isTest)
+            mViewModel.geRcAndRhCData(MainActivity.sessionManager.getClientId());
+        //else  mViewModel.geRcAndRhCData("DBOT1775828299");
+        //mViewModel.geRcAndRhCData(MainActivity.sessionManager.getClientId());
+        mViewModel.getRcAndRhResponseResult().observe(this, new Observer<RcAndRhResponse>() {
+            @Override
+            public void onChanged(RcAndRhResponse rcAndRhResponse) {
+                binding.tvReferCode.setText(rcAndRhResponse.getRcAndRhData().getMyReferralCode());
+                ReferalHistoryAdapter referalHistoryAdapter = new ReferalHistoryAdapter(getContext(),rcAndRhResponse.getRcAndRhData().getReferalHistory());
+                binding.lvRh.setAdapter(referalHistoryAdapter);
+            }
+        });
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ReferViewModel.class);
+
         // TODO: Use the ViewModel
 
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_rh_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="First Name Last Name"
+        android:textSize="@dimen/_12ssp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/bg_rh_status_code"
+        android:drawableRight="@drawable/rh_circle_right"
+        android:paddingEnd="-0dp"
+        android:text="Code"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_10ssp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/bg_rh_status_awaiting"
+        android:drawableLeft="@drawable/rh_circle_left"
+        android:paddingStart="-0dp"
+        android:text="AWAITING"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp" />
+</LinearLayout>
