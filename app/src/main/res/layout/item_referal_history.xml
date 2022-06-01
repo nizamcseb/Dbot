@@ -14,22 +14,31 @@
         android:text="First Name Last Name"
         android:textSize="@dimen/_12ssp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:background="@drawable/bg_rh_status_code"
-        android:drawableRight="@drawable/rh_circle_right"
-        android:paddingEnd="-0dp"
-        android:text="Code"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/_10ssp" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:background="@drawable/bg_rh_status_awaiting"
-        android:drawableLeft="@drawable/rh_circle_left"
-        android:paddingStart="-0dp"
-        android:text="AWAITING"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_10ssp" />
+    <TextView
+        android:id="@+id/tv_rh_status"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/ic_rh_status_awaiting"
+        android:text="  Awaiting"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/black" />
+    <!-- <Button
+         android:layout_width="wrap_content"
+         android:layout_height="@dimen/_30sdp"
+         android:background="@drawable/bg_rh_status_code"
+         android:drawableRight="@drawable/rh_circle_right"
+         android:paddingEnd="-0dp"
+         android:text="Code"
+         android:textColor="@color/grey"
+         android:textSize="@dimen/_10ssp" />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="@dimen/_30sdp"
+         android:background="@drawable/bg_rh_status_awaiting"
+         android:drawableLeft="@drawable/rh_circle_left"
+         android:paddingStart="-0dp"
+         android:text="AWAITING"
+         android:textColor="@color/black"
+         android:textSize="@dimen/_10ssp" />-->
 </LinearLayout>

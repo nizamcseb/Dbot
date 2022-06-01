@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.dbot.client.R;
 import com.dbot.client.main.profile.faq.model.FAQsData;
+import com.dbot.client.main.profile.refer.model.RcAndRhData;
 import com.dbot.client.main.profile.refer.model.ReferalHistory;
 
 import java.util.List;
@@ -19,8 +20,9 @@ import java.util.List;
 public class ReferalHistoryAdapter extends ArrayAdapter<ReferalHistory> {
 
     public ReferalHistoryAdapter(@NonNull Context context, List<ReferalHistory> referalHistoryList) {
-        super(context,0, referalHistoryList);
+        super(context, 0, referalHistoryList);
     }
+
     @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -32,7 +34,9 @@ public class ReferalHistoryAdapter extends ArrayAdapter<ReferalHistory> {
         }
 
         TextView tv_rh_name = convertView.findViewById(R.id.tv_rh_name);
+        TextView tv_rh_status = convertView.findViewById(R.id.tv_rh_status);
         tv_rh_name.setText(referalHistory.getFullname());
+        tv_rh_status.setText(referalHistory.getComment());
 
         return convertView;
     }
