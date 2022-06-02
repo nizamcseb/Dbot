@@ -8,15 +8,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="top"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_project_status_without_tick" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_pt_document_request"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_project_status_without_tick" />
+
+            <View
+                android:id="@+id/v_pt_cp_confirmation"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-1dp"
+                android:background="#FFBABABA" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,26 +50,98 @@
                 android:textSize="@dimen/_10ssp" />
 
             <TextView
+                android:id="@+id/tv_pt_document_request"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13.05.2022"
+                android:text=""
                 android:textColor="@color/grey" />
 
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="-2dp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="top"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_pt_cp_confirmation"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_project_status_without_tick" />
+
+            <View
+                android:id="@+id/v_pt_site_access_confirmation"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-1dp"
+                android:background="#FFBABABA" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact person confirmation"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/tv_pt_cp_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/grey" />
+
+        </LinearLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginTop="-2dp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="top"
         android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_project_status_without_tick" />
+            <ImageView
+                android:id="@+id/iv_pt_site_access_confirmation"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_project_status_without_tick" />
+
+            <View
+                android:id="@+id/v_pt_site_documentation"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-1dp"
+                android:background="#FFBABABA" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,31 +153,49 @@
                 style="@style/bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Documentation request"
+                android:text="Site access confirmation"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp" />
 
             <TextView
+                android:id="@+id/tv_pt_site_access_confirmation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13.05.2022"
+                android:text=""
                 android:textColor="@color/grey" />
 
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginTop="-2dp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="top"
         android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_project_status_without_tick" />
+            <ImageView
+                android:id="@+id/iv_pt_site_documentation"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_project_status_without_tick" />
+
+            <View
+                android:id="@+id/v_pt_file_sharing"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-1dp"
+                android:background="#FFBABABA" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,31 +207,38 @@
                 style="@style/bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Documentation request"
+                android:text="Site documentation"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp" />
 
             <TextView
+                android:id="@+id/tv_pt_site_documentation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13.05.2022"
+                android:text=""
                 android:textColor="@color/grey" />
 
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginTop="-2dp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="top"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_project_status_without_tick" />
+
+            <ImageView
+                android:id="@+id/iv_pt_file_sharing"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_project_status_without_tick" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,57 +250,43 @@
                 style="@style/bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Documentation request"
+                android:text="File sharing"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp" />
 
             <TextView
+                android:id="@+id/tv_pt_file_sharing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13.05.2022"
+                android:text=""
                 android:textColor="@color/grey" />
 
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center"
+        android:text="Send Files"
+        android:textSize="@dimen/_12ssp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:orientation="horizontal">
+        android:text="*Files will be sent to the registered email id."
+        android:textSize="@dimen/_10ssp" />
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_project_status_without_tick" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Documentation request"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10ssp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="13.05.2022"
-                android:textColor="@color/grey" />
-
-        </LinearLayout>
-    </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_margin="@dimen/_5sdp"
         android:src="@drawable/bg_package_table_row" />
+
 </LinearLayout>

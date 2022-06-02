@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#80BDB8B8"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_200sdp"
+        android:background="@drawable/bg_popup"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_popup_crc_close"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_close" />
+         <LinearLayout
+            android:id="@+id/ll_popup_crc_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             android:visibility="gone"
+            android:orientation="vertical">
+             <TextView
+                 android:id="@+id/tv_popup_crc_refund_amount_with_req_id"
+                 style="@style/bold"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="center"
+                 android:gravity="center"
+                 android:text="" />
+         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_popup_crc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:visibility="visible"
+            android:orientation="vertical">
+        <TextView
+            style="@style/bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Are you sure you want to cancel this request?" />
+
+        <TextView
+            style="@style/bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/as_per_u_cancelation_amp_refund_policy_u" />
+
+        <TextView
+            android:id="@+id/tv_popup_crc_refund_amount_with_msg"
+            style="@style/bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/btn_popup_crc_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="EXIT" />
+
+                <Button
+                    android:id="@+id/btn_popup_crc_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primary_varient"
+                    android:text="CANCEL" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

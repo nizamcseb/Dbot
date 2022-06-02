@@ -13,9 +13,11 @@ import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageResponse;
 import com.dbot.client.main.profile.faq.model.FAQsResponse;
-import com.dbot.client.main.profile.refer.model.RcAndRhData;
 import com.dbot.client.main.profile.refer.model.RcAndRhResponse;
+import com.dbot.client.main.projects.model.CancelRequestResponse;
 import com.dbot.client.main.projects.model.ClientProjectResponse;
+import com.dbot.client.main.projects.model.ProjectTrackingResponse;
+import com.dbot.client.main.projects.model.RefundAmountResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -62,6 +64,10 @@ public interface ApiInterface {
     @GET("slotbooking/getclientprojects/{client_id}")
     Call<ClientProjectResponse> getProjects(@Path("client_id") String client_id);
 
+    //Project Tracking
+    @GET("slotbooking/getprojecttracking/{booking_id}")
+    Call<ProjectTrackingResponse> getProjectTracking(@Path("booking_id") String booking_id);
+
     //Quickmessage
     @Headers("Content-Type: application/json")
     @POST("message/quickmessage")
@@ -75,6 +81,14 @@ public interface ApiInterface {
     @GET("client/getmyreferralcodeandhistory/{client_id}")
     Call<RcAndRhResponse> getRcAndRhResponse(@Path("client_id") String client_id);
 
+    //Get Refund Amound Request
+    @GET("package/getrefundamount/{booking_id}")
+    Call<RefundAmountResponse> getRefundAmount(@Path("booking_id") String booking_id);
+
+    //Cancel Request
+    @GET("slotbooking/cancelrequest/{booking_id}")
+    Call<CancelRequestResponse> cancelRequest(@Path("booking_id") String booking_id);
+
     //FAQ List
     @GET("message/getfaqs")
     Call<FAQsResponse> getFAQs();
@@ -83,4 +97,6 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     @POST("slotbooking/notifyslotavailablerequest")
     Call<NotifySlotRequestResponse> sendNotifySlotAvailableRequest(@Query("client_id") String client_id, @Query("book_date") String book_date, @Query("slot_time_id") String slot_time_id);
+
+
 }

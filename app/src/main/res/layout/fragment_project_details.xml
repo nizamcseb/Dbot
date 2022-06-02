@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/purple_profile"
+    android:orientation="vertical"
     tools:context=".main.projects.ProjectFullDetailsFragment">
 
     <LinearLayout
@@ -97,6 +96,7 @@
                 android:textColor="@color/grey" />
 
             <TextView
+                android:id="@+id/tv_project_details_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -104,6 +104,7 @@
                 android:textColor="@color/grey" />
 
             <TextView
+                android:id="@+id/tv_project_details_reshedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_reshedule"
@@ -117,6 +118,7 @@
             android:layout_margin="@dimen/_5sdp"
             android:src="@drawable/bg_package_table_row" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -135,11 +137,12 @@
                 android:layout_margin="@dimen/_5sdp"
                 android:orientation="vertical">
 
+                <include layout="@layout/layout_project_status" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
 
 
                     <LinearLayout
@@ -154,16 +157,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Site Address:"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_13ssp" />
 
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="Edit" />
+                        <ImageView
+                            android:id="@+id/iv_project_details_edit"
+                            android:layout_width="@dimen/_13sdp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:src="@drawable/ic_edit_icon"/>
                     </LinearLayout>
 
                     <TextView
@@ -264,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Scope completion staus on site:"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -284,14 +289,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Electrical" />
+                                android:enabled="false"
+                                android:text="Electrical"
+                                android:textColor="@color/black" />
 
                             <CheckBox
                                 android:id="@+id/cb_project_details_plumbing"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Plumbing" />
+                                android:enabled="false"
+                                android:text="Plumbing"
+                                android:textColor="@color/black" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -305,14 +314,18 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Plastering" />
+                                android:enabled="false"
+                                android:text="Plastering"
+                                android:textColor="@color/black" />
 
                             <CheckBox
                                 android:id="@+id/cb_project_details_flooring"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Flooring" />
+                                android:enabled="false"
+                                android:text="Flooring"
+                                android:textColor="@color/black" />
                         </LinearLayout>
                     </LinearLayout>
 
