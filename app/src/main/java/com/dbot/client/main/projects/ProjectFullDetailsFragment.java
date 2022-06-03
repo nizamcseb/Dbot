@@ -55,6 +55,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
     NestedScrollView nsv_my_projects;
     String booking_id;
 
+    Popup popup;
     private ProjectFullDetailsViewlModel mViewModel;
 
     ClientProjectData projectData;
@@ -124,6 +125,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //Log.d("projectDataList", new GsonBuilder().setPrettyPrinting().create().toJson(projectData.getProjectName()));
+        popup = new Popup();
         mViewModel = new ViewModelProvider(this).get(ProjectFullDetailsViewlModel.class);
         mViewModel.getProjectTracking(projectData.getBookingId());
         mViewModel.getProjectTrackingResult().observe(this, new Observer<ProjectTrackingResponse>() {
@@ -258,7 +260,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                     @Override
                     public void onChanged(RefundAmountResponse refundAmountResponse) {
                         if(refundAmountResponse != null){
-                            Popup popup = new Popup();
+
                             popup.showCancelRequestConfirmationPopupWindow(booking_id,refundAmountResponse.getRefundAmount(),tv_project_details_cancel);
                         }
 
@@ -269,6 +271,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
             case R.id.tv_project_details_reshedule:
                 break;
             case R.id.iv_project_details_edit:
+                popup.showEditProjectPopupWindow(getView(),projectData);
                 break;
 
         }

@@ -65,6 +65,9 @@
                 android:textSize="@dimen/_15ssp"
                 style="@style/bold"/>
         </LinearLayout>
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
+    android:background="@drawable/door"/>
     </LinearLayout>
 </LinearLayout>

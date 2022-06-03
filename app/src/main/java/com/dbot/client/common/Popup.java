@@ -6,16 +6,23 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.dbot.client.R;
 import com.dbot.client.main.projects.model.CancelRequestResponse;
+import com.dbot.client.main.projects.model.ClientProjectData;
 import com.dbot.client.main.projects.model.RefundAmount;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
@@ -23,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Popup {
+public class Popup implements View.OnClickListener {
     public Popup() {
 
     }
@@ -146,7 +153,7 @@ public class Popup {
         btn_popup_crc_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelRequest(popupWindow,tv_popup_crc_refund_amount_with_req_id,ll_popup_crc, ll_popup_crc_end, booking_id);
+                cancelRequest(popupWindow, tv_popup_crc_refund_amount_with_req_id, ll_popup_crc, ll_popup_crc_end, booking_id);
             }
         });
     }
@@ -164,7 +171,7 @@ public class Popup {
                     //if (response.body() !=null)
                     ll_popup_crc.setVisibility(View.GONE);
                     ll_popup_crc_end.setVisibility(View.VISIBLE);
-                    tv_popup_crc_refund_amount_with_req_id.setText("Your request" +"#"+booking_id+" has been cancelled."+"\n\n"+"As per Cancellation and Refund Policy, a refund of Rs."+response.body().getRefundAmount().getRefundAmount()+" has been initiated."+"\n\n"+"Track your refunds under Refund Status");
+                    tv_popup_crc_refund_amount_with_req_id.setText("Your request" + "#" + booking_id + " has been cancelled." + "\n\n" + "As per Cancellation and Refund Policy, a refund of Rs." + response.body().getRefundAmount().getRefundAmount() + " has been initiated." + "\n\n" + "Track your refunds under Refund Status");
 
                 }
             }
@@ -178,5 +185,124 @@ public class Popup {
         });
     }
 
+    public void showEditProjectPopupWindow(final View view, ClientProjectData projectData) {
 
+        //Create a View object yourself through inflater
+        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_edit_project, null);
+
+        //Specify the length and width through constants
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+
+        //Make Inactive Items Outside Of PopupWindow
+        boolean focusable = true;
+
+        //Create a window with our parameters
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        //Set the location of the window on the screen
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        EditText et_edit_popup_door_no = popupView.findViewById(R.id.et_edit_popup_door_no);
+        EditText et_edit_popup_building_name = popupView.findViewById(R.id.et_edit_popup_building_name);
+        EditText et_edit_popup_landmark = popupView.findViewById(R.id.et_edit_popup_landmark);
+
+        EditText et_edit_popup_project_name = popupView.findViewById(R.id.et_edit_popup_project_name);
+        EditText et_edit_popup_contact_person_name = popupView.findViewById(R.id.et_edit_popup_contact_person_name);
+        EditText et_edit_popup_contact_person_phone_number = popupView.findViewById(R.id.et_edit_popup_contact_person_phone_number);
+
+        SeekBar sb_edit_popup_size_of_property = popupView.findViewById(R.id.sb_edit_popup_size_of_property);
+        TextView tv_edit_popup_size_of_property = popupView.findViewById(R.id.tv_edit_popup_size_of_property);
+        CheckBox cb_edit_popup_same_as_mine = popupView.findViewById(R.id.cb_edit_popup_same_as_mine);
+        CheckBox cb_edit_popup_electrical = popupView.findViewById(R.id.cb_edit_popup_electrical);
+        CheckBox cb_edit_popup_plumbing = popupView.findViewById(R.id.cb_edit_popup_plumbing);
+        CheckBox cb_edit_popup_plastering = popupView.findViewById(R.id.cb_edit_popup_plastering);
+        CheckBox cb_edit_popup_flooring = popupView.findViewById(R.id.cb_edit_popup_flooring);
+        RadioGroup rg_edit_popup_type_of_property = popupView.findViewById(R.id.rg_edit_popup_type_of_property);
+        RadioButton rb_edit_popup_type_of_property_new = popupView.findViewById(R.id.rb_edit_popup_type_of_property_new);
+        RadioButton rb_edit_popup_type_of_property_renovation = popupView.findViewById(R.id.rb_edit_popup_type_of_property_renovation);
+
+        et_edit_popup_door_no.setText(projectData.getDoorNumber());
+        et_edit_popup_building_name.setText(projectData.getBuildingName());
+        if (projectData.getLandmark() != null)
+            et_edit_popup_landmark.setText(projectData.getLandmark());
+        et_edit_popup_project_name.setText(projectData.getProjectName());
+        et_edit_popup_contact_person_name.setText(projectData.getContactPersonName());
+        et_edit_popup_contact_person_phone_number.setText(projectData.getContactPersonPhone());
+
+        sb_edit_popup_size_of_property.setProgress(Integer.parseInt(projectData.getPropertySize().getId()) - 1);
+        tv_edit_popup_size_of_property.setText(projectData.getPropertySize().getSizeValue());
+        if (projectData.getProjectType().equals("1"))
+            rg_edit_popup_type_of_property.check(rb_edit_popup_type_of_property_new.getId());
+        else if (projectData.getProjectType().equals("2"))
+            rg_edit_popup_type_of_property.check(rb_edit_popup_type_of_property_renovation.getId());
+
+        Button btn_edit_popup_exit = popupView.findViewById(R.id.btn_edit_popup_exit);
+        btn_edit_popup_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        Button btn_edit_popup_save = popupView.findViewById(R.id.btn_edit_popup_save);
+        btn_edit_popup_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (et_edit_popup_door_no.getText().toString().equals("")) {
+                    et_edit_popup_door_no.setError("Required");
+                }else
+                if (et_edit_popup_building_name.getText().toString().equals("")) {
+                    et_edit_popup_building_name.setError("Required");
+                }else
+                if (et_edit_popup_project_name.getText().toString().equals("")) {
+                    et_edit_popup_project_name.setError("Required");
+                }else
+                if (et_edit_popup_contact_person_name.getText().toString().equals("")) {
+                    et_edit_popup_contact_person_name.setError("Required");
+                }else
+                if (et_edit_popup_contact_person_phone_number.getText().toString().equals("")) {
+                    et_edit_popup_contact_person_phone_number.setError("Required");
+                }else {
+                    popupWindow.dismiss();
+                }
+                /*if(MainActivity.scope.size() == 0) {
+                    Snackbar.make(btn_edit_popup_save,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
+                }*/
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+   /* private boolean checkManditoryFields() {
+        if (et_edit_popup_door_no.getText().toString().equals("")) {
+            et_edit_popup_door_no.setError("Required");
+            return false;
+        }
+        if (et_edit_popup_building_name.getText().toString().equals("")) {
+            et_edit_popup_building_name.setError("Required");
+            return false;
+        }
+        if (et_edit_popup_project_name.getText().toString().equals("")) {
+            et_edit_popup_project_name.setError("Required");
+            return false;
+        }
+        if (et_edit_popup_contact_person_name.getText().toString().equals("")) {
+            et_edit_popup_contact_person_name.setError("Required");
+            return false;
+        }
+        if (et_edit_popup_contact_person_phone_number.getText().toString().equals("")) {
+            et_edit_popup_contact_person_phone_number.setError("Required");
+            return false;
+        }
+        if(MainActivity.scope.size() == 0) {
+            Snackbar.make(btn_req2_next,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }*/
 }
