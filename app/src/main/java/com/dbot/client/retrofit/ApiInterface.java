@@ -9,6 +9,7 @@ import com.dbot.client.main.home.model.AvailableSlotsResponse;
 import com.dbot.client.main.home.model.NotifySlotRequestResponse;
 import com.dbot.client.main.home.model.QuickMessageResponse;
 import com.dbot.client.main.home.model.TermsAndConditionsResponse;
+import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageResponse;
@@ -98,5 +99,8 @@ public interface ApiInterface {
     @POST("slotbooking/notifyslotavailablerequest")
     Call<NotifySlotRequestResponse> sendNotifySlotAvailableRequest(@Query("client_id") String client_id, @Query("book_date") String book_date, @Query("slot_time_id") String slot_time_id);
 
+    //Apply Coupon
+    @GET("client/applycouponcode/{client_id}/{coupon_code}")
+    Call<ApplyCouponResponse> getApplyCoupon(@Path("client_id") String client_id, @Path("coupon_code") String coupon_code);
 
 }

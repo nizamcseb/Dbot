@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
     Button btn_continue, btn_book_documentation, btn_slot_1, btn_slot_2, btn_quick_msg_send;
     TextView tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
-    ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition;
+    ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition,iv_tri_2d,iv_tri_360,iv_tri_3d;
     EditText et_quick_msg;
     ListView lv_Tc;
     boolean btn1Status = false, btn2Status = false;
@@ -86,6 +86,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         iv_2d = root.findViewById(R.id.iv_2d);
         iv_360 = root.findViewById(R.id.iv_360);
         iv_3d = root.findViewById(R.id.iv_3d);
+        iv_tri_2d = root.findViewById(R.id.iv_tri_2d);
+        iv_tri_360 = root.findViewById(R.id.iv_tri_360);
+        iv_tri_3d = root.findViewById(R.id.iv_tri_3d);
         tv_product_msg = root.findViewById(R.id.tv_product_msg);
         ll_vision_mission = root.findViewById(R.id.ll_vision_mission);
         ll_send_quick_msg = root.findViewById(R.id.ll_send_quick_msg);
@@ -121,7 +124,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
             @Override
             public void onChanged(List<CityData> cityData) {
                 cityDataList = cityData;
-                CityAdapter cityAdapter = new CityAdapter(getContext(), cityDataList);
+                CityAdapter cityAdapter = new CityAdapter(getActivity(),getContext(), cityDataList);
                 spCity.setAdapter(cityAdapter);
                 int position = findCityPosition(cityDataList, sessionManager.getCity());
                 spCity.setSelection(position);
@@ -187,11 +190,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     }
 
     private void setDefault2D() {
+        setTriangle("2d");
         iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_dark));
         iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
         iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
         tv_product_msg.setText(getString(R.string.two_d_drawing_product_msg));
     }
+
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -335,18 +340,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 ns_home.fullScroll(View.FOCUS_UP);
                 break;
             case R.id.iv_2d:
+                setTriangle("2d");
                 iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_dark));
                 iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
                 iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
                 tv_product_msg.setText(getString(R.string.two_d_drawing_product_msg));
                 break;
             case R.id.iv_360:
+                setTriangle("360");
                 iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_light));
                 iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_dark));
                 iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_light));
                 tv_product_msg.setText(getString(R.string.threesixty_product_msg));
                 break;
             case R.id.iv_3d:
+                setTriangle("3d");
                 iv_2d.setBackground(getContext().getDrawable(R.drawable.ic_2d_drawing_light));
                 iv_360.setBackground(getContext().getDrawable(R.drawable.ic_360_photos_light));
                 iv_3d.setBackground(getContext().getDrawable(R.drawable.ic_3d_drawing_dark));
@@ -395,5 +403,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         return dateString;
     }
 
+    private void setTriangle(String prod) {
+        if(prod.equals("2d")){
+            iv_tri_2d.setVisibility(View.VISIBLE);
+            iv_tri_360.setVisibility(View.INVISIBLE);
+            iv_tri_3d.setVisibility(View.INVISIBLE);
+        }
+        if(prod.equals("360")){
+            iv_tri_2d.setVisibility(View.INVISIBLE);
+            iv_tri_360.setVisibility(View.VISIBLE);
+            iv_tri_3d.setVisibility(View.INVISIBLE);
+        }
+        if(prod.equals("3d")){
+            iv_tri_2d.setVisibility(View.INVISIBLE);
+            iv_tri_360.setVisibility(View.INVISIBLE);
+            iv_tri_3d.setVisibility(View.VISIBLE);
+        }
+    }
 
 }

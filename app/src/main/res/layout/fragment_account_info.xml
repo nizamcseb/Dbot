@@ -183,7 +183,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="1"
                         android:text="YES" />
 
@@ -191,8 +193,10 @@
                         android:id="@+id/rb_freelancer_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="0"
                         android:text="NO" />
 

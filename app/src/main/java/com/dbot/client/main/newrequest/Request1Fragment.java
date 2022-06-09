@@ -38,7 +38,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.IOException;
@@ -269,7 +268,9 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
             e.printStackTrace();
         }
         assert addresses != null;
-        return addresses.get(0).getAddressLine(0);
+        if (addresses != null)
+            return addresses.get(0).getAddressLine(0);
+        else return null;
     }
 
 

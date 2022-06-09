@@ -84,9 +84,9 @@ public class ProjectAdapter extends BaseAdapter implements Filterable {
         tv_project_item_project_name.setText(clientProjectDataList.get(position).getProjectName());
         tv_project_item_booking_id.setText(clientProjectDataList.get(position).getBookingId());
         if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Active"))
-            tv_project_item_project_status.setTextColor(activity.getColor(R.color.primary_varient));
+            tv_project_item_project_status.setTextColor(activity.getColor(R.color.colorPrimaryDark));
         else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Completed"))
-            tv_project_item_project_status.setTextColor(Color.GREEN);
+            tv_project_item_project_status.setTextColor(activity.getColor(R.color.primary_varient));
         else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Cancelled"))
             tv_project_item_project_status.setTextColor(Color.RED);
         tv_project_item_project_status.setText(clientProjectDataList.get(position).getProjectStatus().getStatusValue());

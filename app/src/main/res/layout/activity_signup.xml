@@ -33,8 +33,8 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="@string/thank_you_for_signing_up_with_us"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
 
             <TextView
@@ -45,8 +45,8 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:gravity="center"
-                android:textColor="@color/black"
                 android:text="@string/please_enter_the_following_details_nto_complete_the_sign_up"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -63,13 +63,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="Full Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        style="@style/bold"/>
+                        android:textSize="@dimen/_15ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,8 +85,11 @@
                     android:id="@+id/et_full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text"
+                    android:hint="Enter your Full Name"
                     android:inputType="textPersonName"
-                    android:hint="Enter your Full Name" />
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -103,13 +106,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="Email Address"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        style="@style/bold"/>
+                        android:textSize="@dimen/_15ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -125,8 +128,11 @@
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edit_text"
+                    android:hint="Enter your Email Address"
                     android:inputType="textEmailAddress"
-                    android:hint="Enter your Email Address" />
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -143,13 +149,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="Are you a Freelancer?"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        style="@style/bold"/>
+                        android:textSize="@dimen/_15ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -174,7 +180,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="1"
                         android:text="YES" />
 
@@ -182,8 +190,10 @@
                         android:id="@+id/rb_freelancer_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="0"
                         android:text="NO" />
 
@@ -205,13 +215,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="Firm / Company Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp"
-                        style="@style/bold"/>
+                        android:textSize="@dimen/_15ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -227,8 +237,12 @@
                     android:id="@+id/et_company_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your Firm / Company Name" />
+                    android:background="@drawable/bg_edit_text"
+                    android:hint="Enter your Firm / Company Name"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -251,6 +265,58 @@
                         android:textSize="@dimen/_15ssp" />
 
                     <TextView
+                        style="@style/bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:gravity="start"
+                        android:text="*"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/_15ssp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView
+                    android:id="@+id/tv_city_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_edit_text"
+                    android:drawableStart="@drawable/ic_location"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:drawablePadding="10dp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_12ssp" />
+
+               <!-- <Spinner
+                    android:id="@+id/sp_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="" />-->
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="Referral Code :"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -258,14 +324,17 @@
                         android:text="*"
                         android:textColor="@color/red"
                         android:textSize="@dimen/_15ssp"
-                        style="@style/bold"/>
+                        android:visibility="gone" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <Spinner
-                    android:id="@+id/sp_city"
+                <EditText
+                    android:id="@+id/et_referral_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem=""/>
+                    android:background="@drawable/bg_edit_text"
+                    android:hint="Enter refferal code"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/_12ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.button.MaterialButton

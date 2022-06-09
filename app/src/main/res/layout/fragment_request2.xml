@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primary_varient"
     tools:context=".main.newrequest.Request2Fragment">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:background="@drawable/bg_req_bottom_sheet">
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:background="@drawable/bg_req_bottom_sheet">
 
 
             <LinearLayout
@@ -25,14 +24,14 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="Project Details:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    style="@style/bold" />
+                    android:textSize="@dimen/_15ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,10 +45,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Project/Client Name:"
-                            style="@style/bold"/>
+                            android:text="Project/Client Name:" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -65,10 +64,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -88,24 +87,24 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                style="@style/bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Contact Person Name:"
-                                style="@style/bold"/>
+                                android:text="Contact Person Name:" />
 
                             <TextView
+                                style="@style/bold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:text="*"
-                                android:textColor="@color/red"
-                                style="@style/bold"/>
+                                android:textColor="@color/red" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="end"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|end"
                             android:orientation="horizontal">
 
                             <TextView
@@ -115,8 +114,11 @@
 
                             <CheckBox
                                 android:id="@+id/cb_same_as_mine"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:background="@drawable/cb_same_as_mine_bg"
+                                android:button="@null" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -126,10 +128,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionNext"
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -144,10 +146,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Contact Person Phone Number:"
-                            style="@style/bold"/>
+                            android:text="Contact Person Phone Number:" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -164,10 +166,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:imeOptions="actionDone"
-                        android:inputType="phone"
                         android:background="@drawable/bg_edit_text"
-                        android:hint="Enter here" />
+                        android:hint="Enter here"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,10 +184,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Size of Property:"
-                            style="@style/bold"/>
+                            android:text="Size of Property:" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -203,10 +205,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:thumbTint="@color/primary_varient"
-                        app:tickMarkTint="@color/grey"
+                        android:max="4"
                         android:progressTint="@color/greyed_out"
-                        android:max="4"/>
+                        android:thumbTint="@color/primary_varient" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -244,11 +245,11 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="start"
-                            android:text="Type of Property"
-                            style="@style/bold"/>
+                            android:text="Type of Property" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -272,7 +273,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_20sdp"
+                            android:button="@drawable/rb_bg"
+                            android:checked="true"
                             android:buttonTint="@color/primary_varient"
+                            android:paddingStart="@dimen/_10sdp"
                             android:tag="1"
                             android:text="New" />
 
@@ -281,7 +285,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_20sdp"
+                            android:button="@drawable/rb_bg"
                             android:buttonTint="@color/primary_varient"
+                            android:paddingStart="@dimen/_10sdp"
                             android:tag="2"
                             android:text="Renovation" />
 
@@ -302,10 +308,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Scope completion staus on site:"
-                            style="@style/bold"/>
+                            android:text="Scope completion staus on site:" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -327,21 +333,51 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:orientation="horizontal">
 
-                            <CheckBox
-                                android:id="@+id/cb_electrical"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:layout_weight="1"
-                                android:text="Electrical" />
+                                android:orientation="horizontal">
 
-                            <CheckBox
-                                android:id="@+id/cb_plumbing"
+                                <CheckBox
+                                    android:id="@+id/cb_electrical"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_marginStart="-5dp"
+                                    android:background="@drawable/cb_scope_bg"
+                                    android:button="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Electrical" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:layout_weight="1"
-                                android:text="Plumbing" />
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cb_plumbing"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:background="@drawable/cb_scope_bg"
+                                    android:button="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Plumbing" />
+                            </LinearLayout>
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -349,20 +385,47 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="horizontal">
-
-                            <CheckBox
-                                android:id="@+id/cb_plastering"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:layout_weight="1"
-                                android:text="Plastering" />
+                                android:orientation="horizontal">
 
-                            <CheckBox
-                                android:id="@+id/cb_flooring"
+                                <CheckBox
+                                    android:id="@+id/cb_plastering"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:background="@drawable/cb_scope_bg"
+                                    android:button="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Plastering" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:layout_weight="1"
-                                android:text="Flooring" />
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/cb_flooring"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_marginStart="-5dp"
+                                    android:background="@drawable/cb_scope_bg"
+                                    android:button="@null" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Flooring" />
+                            </LinearLayout>
+
                         </LinearLayout>
                     </LinearLayout>
 
@@ -398,6 +461,6 @@
             </LinearLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -1,56 +1,95 @@
 package com.dbot.client.login;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.dbot.client.R;
 import com.dbot.client.login.model.CityData;
+import com.dbot.client.main.projects.ProjectFilter;
+import com.dbot.client.main.projects.model.ClientProjectData;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CityAdapter extends ArrayAdapter<CityData> {
-    public CityAdapter(Context context,
-                            List<CityData> cityDataArrayList)
-    {
-        super(context, 0, cityDataArrayList);
+public class CityAdapter extends BaseAdapter implements Filterable {
+
+    Activity activity;
+    Context context;
+    public List<CityData> cityDataList;
+    LayoutInflater inflater;
+
+    List<CityData> filterList;
+    CityFilter filter;
+
+    public CityAdapter(Activity activity, Context context, List<CityData> cityDataList) {
+        this.activity = activity;
+        this.context = context;
+        this.cityDataList = cityDataList;
+        this.filterList = cityDataList;
+        inflater = (LayoutInflater.from(context));
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable
-            View convertView, @NonNull ViewGroup parent)
-    {
-        return initView(position, convertView, parent);
+    public int getCount() {
+        return cityDataList.size();
     }
 
     @Override
-    public View getDropDownView(int position, @Nullable
-            View convertView, @NonNull ViewGroup parent)
-    {
-        return initView(position, convertView, parent);
+    public Object getItem(int position) {
+        return cityDataList.get(position);
     }
 
-    private View initView(int position, View convertView,
-                          ViewGroup parent)
-    {
-        // It is used to set our custom view.
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        //View root;
+       // It is used to set our custom view.
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.spinner_cities, parent, false);
+                convertView = LayoutInflater.from(context).inflate(R.layout.item_cities, parent, false);
+                }
+
+                TextView textViewName = convertView.findViewById(R.id.tvCityName);
+                //CityData cityData = getItem(position);
+                // current item is not null.
+                if (cityDataList != null) {
+                textViewName.setText(cityDataList.get(position).getCityName());
+                }
+
+                return convertView;
+    }
+
+
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new CityFilter(filterList, this);
         }
 
-        TextView textViewName = convertView.findViewById(R.id.tvCityName);
-        CityData cityData = getItem(position);
-        // current item is not null.
-        if (cityData != null) {
-            textViewName.setText(cityData.getCityName());
-        }
-        return convertView;
+        return filter;
     }
+
+
+
+
+
 }

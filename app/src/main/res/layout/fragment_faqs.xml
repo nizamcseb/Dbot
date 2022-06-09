@@ -57,6 +57,7 @@
                     android:id="@+id/lv_faqs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp"
                     tools:listitem="@layout/item_faqs"/>
 
             </LinearLayout>

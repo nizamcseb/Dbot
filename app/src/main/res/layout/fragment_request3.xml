@@ -172,16 +172,39 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@color/greyed_out" />
 
-
-                <EditText
-                    android:id="@+id/et_coupon_code"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/bg_edit_text"
-                    android:hint="Enter Coupon Code"
-                    android:imeOptions="actionNext"
-                    android:inputType="text" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_coupon_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/bg_edit_text"
+                        android:hint="Enter Coupon Code"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:singleLine="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_coupon_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="APPLY"
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:background="@drawable/bg_tv_coupon_apply"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+
 
                 <View
                     android:layout_width="match_parent"

@@ -149,8 +149,8 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
             et_contact_person_phone_number.setError("Required");
             return false;
         }
-        if(MainActivity.scope.size() == 0) {
-            Snackbar.make(btn_req2_next,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
+        if (MainActivity.scope.size() == 0) {
+            Snackbar.make(btn_req2_next, "Select atleast one scope", Snackbar.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -189,9 +189,13 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
             case R.id.cb_same_as_mine:
-                if (b)
+                if (b) {
                     et_contact_person_name.setText(MainActivity.sessionManager.getClientFullName());
-                else et_contact_person_name.setText("");
+                    et_contact_person_phone_number.setText(MainActivity.sessionManager.getClientPhone());
+                } else {
+                    et_contact_person_name.setText("");
+                    et_contact_person_phone_number.setText("");
+                }
                 break;
             case R.id.cb_electrical:
                 if (b)
@@ -202,19 +206,19 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
             case R.id.cb_plumbing:
                 if (b)
                     MainActivity.scope.add(2);
-                else MainActivity.scope.removeIf(i -> i ==2);
+                else MainActivity.scope.removeIf(i -> i == 2);
                 Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(MainActivity.scope));
                 break;
             case R.id.cb_plastering:
                 if (b)
                     MainActivity.scope.add(3);
-                else MainActivity.scope.removeIf(i -> i ==3);
+                else MainActivity.scope.removeIf(i -> i == 3);
                 Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(MainActivity.scope));
                 break;
             case R.id.cb_flooring:
                 if (b)
                     MainActivity.scope.add(4);
-                else MainActivity.scope.removeIf(i -> i ==4);
+                else MainActivity.scope.removeIf(i -> i == 4);
                 Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(MainActivity.scope));
                 break;
 

@@ -35,8 +35,20 @@ public class ReferalHistoryAdapter extends ArrayAdapter<ReferalHistory> {
 
         TextView tv_rh_name = convertView.findViewById(R.id.tv_rh_name);
         TextView tv_rh_status = convertView.findViewById(R.id.tv_rh_status);
+        if(referalHistory.getStatus() == 1) {
+            tv_rh_status.setText("CODE");
+            tv_rh_status.setBackground(getContext().getDrawable(R.drawable.ic_rh_status_code1));
+        }
+        if(referalHistory.getStatus() == 2) {
+            tv_rh_status.setText("CODE");
+            tv_rh_status.setBackground(getContext().getDrawable(R.drawable.ic_rh_status_code2));
+        }
+        if(referalHistory.getStatus() == 3) {
+            tv_rh_status.setText("AWAITING");
+            tv_rh_status.setBackground(getContext().getDrawable(R.drawable.ic_rh_status_awaiting));
+        }
         tv_rh_name.setText(referalHistory.getFullname());
-        tv_rh_status.setText(referalHistory.getComment());
+        //tv_rh_status.setText(referalHistory.getComment());
 
         return convertView;
     }

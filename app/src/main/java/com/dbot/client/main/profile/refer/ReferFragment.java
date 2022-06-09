@@ -61,6 +61,7 @@ public class ReferFragment extends Fragment {
             @Override
             public void onChanged(RcAndRhResponse rcAndRhResponse) {
                 binding.tvReferCode.setText(rcAndRhResponse.getRcAndRhData().getMyReferralCode());
+                binding.tvRhClaims.setText("Claims : "+rcAndRhResponse.getRcAndRhData().getClaimed()+"/"+rcAndRhResponse.getRcAndRhData().getTotal());
                 ReferalHistoryAdapter referalHistoryAdapter = new ReferalHistoryAdapter(getContext(),rcAndRhResponse.getRcAndRhData().getReferalHistory());
                 binding.lvRh.setAdapter(referalHistoryAdapter);
             }

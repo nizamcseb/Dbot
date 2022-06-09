@@ -74,7 +74,7 @@ public class AccountInfoFragment extends Fragment {
             @Override
             public void onChanged(List<CityData> cityData) {
                 cityDataList = cityData;
-                CityAdapter cityAdapter = new CityAdapter(getContext(), cityDataList);
+                CityAdapter cityAdapter = new CityAdapter(getActivity(),getContext(), cityDataList);
                 binding.spProfileCity.setAdapter(cityAdapter);
                 int position = findCityPosition(cityDataList, sessionManager.getCity());
                 binding.spProfileCity.setSelection(position);

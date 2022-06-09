@@ -198,11 +198,10 @@
                             android:text="*"
                             android:textColor="@color/red" />
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|end"
                         android:orientation="horizontal">
 
                         <TextView
@@ -212,9 +211,13 @@
 
                         <CheckBox
                             android:id="@+id/cb_edit_popup_same_as_mine"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:background="@drawable/cb_same_as_mine_bg"
+                            android:button="@null" />
                     </LinearLayout>
+
                 </LinearLayout>
 
 
@@ -366,7 +369,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="1"
                         android:text="New" />
 
@@ -374,8 +379,10 @@
                         android:id="@+id/rb_edit_popup_type_of_property_renovation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:button="@drawable/rb_bg"
                         android:buttonTint="@color/primary_varient"
+                        android:paddingStart="@dimen/_10sdp"
                         android:tag="2"
                         android:text="Renovation" />
 
@@ -420,21 +427,50 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:orientation="horizontal">
 
-                        <CheckBox
-                            android:id="@+id/cb_edit_popup_electrical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Electrical" />
 
-                        <CheckBox
-                            android:id="@+id/cb_edit_popup_plumbing"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_weight="1"
-                            android:text="Plumbing" />
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/cb_edit_popup_electrical"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_marginStart="-5dp"
+                                android:background="@drawable/cb_scope_bg"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Electrical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/cb_edit_popup_plumbing"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:background="@drawable/cb_scope_bg"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Plumbing" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -443,19 +479,47 @@
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <CheckBox
-                            android:id="@+id/cb_edit_popup_plastering"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_weight="1"
-                            android:text="Plastering" />
+                            android:orientation="horizontal">
 
-                        <CheckBox
-                            android:id="@+id/cb_edit_popup_flooring"
+                            <CheckBox
+                                android:id="@+id/cb_edit_popup_plastering"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:background="@drawable/cb_scope_bg"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Plastering" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_weight="1"
-                            android:text="Flooring" />
+                            android:orientation="horizontal">
+
+                            <CheckBox
+                                android:id="@+id/cb_edit_popup_flooring"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_marginStart="-5dp"
+                                android:background="@drawable/cb_scope_bg"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Flooring" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -21,9 +22,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageData;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
@@ -34,11 +37,13 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     View root;
     LinearLayout ll_essential, ll_plus;
     RadioButton rb_essentials, rb_plus;
-    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price;
+    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price, tv_coupon_apply;
     Button btn_req3_prev, btn_req3_pay;
+    EditText et_coupon_code;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     List<PackageData> packageDataList;
+    int discount_amount = 0, service_amount = 0, total_amount = 0;
 
     public static Request3Fragment newInstance() {
         return new Request3Fragment();
@@ -59,6 +64,8 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         ll_plus = root.findViewById(R.id.ll_plus);
         rb_essentials = root.findViewById(R.id.rb_essentials);
         rb_plus = root.findViewById(R.id.rb_plus);
+        et_coupon_code = root.findViewById(R.id.et_coupon_code);
+        tv_coupon_apply = root.findViewById(R.id.tv_coupon_apply);
         tv_service_title_1 = root.findViewById(R.id.tv_service_title_1);
         tv_service_title_2 = root.findViewById(R.id.tv_service_title_2);
         tv_es_package_desc = root.findViewById(R.id.tv_es_package_desc);
@@ -72,8 +79,8 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
 
         tv_bill_service.setText("");
         tv_bill_service_price.setText("");
-        tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + "0");
-        tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + "0");
+        tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
+        tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + total_amount);
 
 
         ll_essential.setOnClickListener(this::onClick);
@@ -84,6 +91,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         btn_req3_pay = root.findViewById(R.id.btn_req3_pay);
         btn_req3_prev.setOnClickListener(this::onClick);
         btn_req3_pay.setOnClickListener(this::onClick);
+        tv_coupon_apply.setOnClickListener(this::onClick);
     }
 
     @Override
@@ -146,7 +154,8 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                 MainActivity.package_id = Integer.parseInt(packageDataList.get(0).getPackageId());
                 MainActivity.package_amount = Integer.parseInt(packageDataList.get(0).getPrice());
                 MainActivity.amount_paid = Integer.parseInt(packageDataList.get(0).getPrice());
-
+                service_amount = Integer.parseInt(packageDataList.get(0).getPrice());
+                calculateTotal();
                 break;
             case R.id.ll_plus:
                 rb_essentials.setChecked(false);
@@ -157,13 +166,44 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                 MainActivity.package_id = Integer.parseInt(packageDataList.get(1).getPackageId());
                 MainActivity.package_amount = Integer.parseInt(packageDataList.get(1).getPrice());
                 MainActivity.amount_paid = Integer.parseInt(packageDataList.get(1).getPrice());
+                service_amount = Integer.parseInt(packageDataList.get(1).getPrice());
+                calculateTotal();
+                break;
+            case R.id.tv_coupon_apply:
+                if (!et_coupon_code.getText().toString().equals("")) {
+                    mViewModel.applyCoupon(MainActivity.sessionManager.getClientId(), et_coupon_code.getText().toString());
+                    mViewModel.getApplyCouponResult().observe(this, new Observer<ApplyCouponResponse>() {
+                        @Override
+                        public void onChanged(ApplyCouponResponse applyCouponResponse) {
+                            if (applyCouponResponse != null) {
+                                if (applyCouponResponse.getStatus().getCode() == 1062) {
+                                    discount_amount = applyCouponResponse.getCoupon().getDiscountAmount();
+                                    tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
+                                    calculateTotal();
+                                } else if (applyCouponResponse.getStatus().getCode() == 1061) {
+
+                                }
+                                Snackbar.make(getView(), applyCouponResponse.getStatus().getMessage(), Snackbar.LENGTH_SHORT);
+                            }
+                        }
+                    });
+                } else {
+                    et_coupon_code.setError("Required");
+                }
                 break;
 
 
         }
     }
 
+    private void calculateTotal() {
+        total_amount = service_amount-discount_amount;
+        tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " +total_amount);
+    }
+
     private void bookSlot() {
+        MainActivity.discount = discount_amount;
+        MainActivity.amount_paid = total_amount;
         BookSlot bookSlot = new BookSlot();
         bookSlot.setClientId(MainActivity.sessionManager.getClientId());
         bookSlot.setBookDate(MainActivity.book_date);

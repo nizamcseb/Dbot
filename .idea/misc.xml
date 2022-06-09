@@ -11,15 +11,19 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/bg_rv_status.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/bg_tv_referal_history.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/rh_circle_gray.xml" value="0.38645833333333335" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/rh_circle_left.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/rh_circle_left.xml" value="0.33" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-anydpi/rh_circle_right.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-v24/bg_preferred_slot_available_button.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-v24/bg_preferred_slot_available_button_.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-v24/bg_preferred_slot_notify_button.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-v24/cb_scope_bg.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25493421052631576" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-xhdpi/bg_edit_text.xml" value="0.36354166666666665" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-xxhdpi/bg_package.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-xxhdpi/bg_package_titlet.xml" value="0.2175925925925926" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable-xxhdpi/bg_product_msg.xml" value="0.3223958333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/a.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/b.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_border_enter_mobile_number.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_border_et_mobile_number.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_edit_text.xml" value="0.36354166666666665" />
@@ -34,15 +38,24 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_preferred_slot.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_preferred_slot_button.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_preferred_slot_not_available_button.xml" value="0.3223958333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_product_msg.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_product_msg_triangle.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_quick_message.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_radio_button.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_request_completed.xml" value="0.3734375" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_rh_status_awaiting.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_rh_status_code.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_tc_contact.xml" value="0.3177083333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_tv_coupon_apply.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/button_bg.xml" value="0.25493421052631576" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/cb_bg.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_2d_drawing_light.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_360_photos_dark.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_360_photos_light.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_bg_rh_status_code1.xml" value="0.23223684210526316" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_bottom_menu_profile.xml" value="0.3880208333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_cb_black_with_tick.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_cb_black_without_tick.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_dbot_word_logo.xml" value="0.302734375" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_home.xml" value="0.25493421052631576" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.25493421052631576" />
@@ -51,6 +64,14 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_project_status_without_tick.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_rh_status_awaiting.xml" value="0.23223684210526316" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_rh_status_code1.xml" value="0.3026041666666667" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_rh_status_code2.xml" value="0.4036458333333333" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_bg.xml" value="0.30364583333333334" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_checked_false.xml" value="0.30364583333333334" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_checked_true.xml" value="0.30364583333333334" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_false.xml" value="0.245703125" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_status_false.xml" value="0.245703125" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_status_true.xml" value="0.245703125" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/rb_true.xml" value="0.245703125" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/font/open_sans_bold.xml" value="0.40208333333333335" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_landing.xml" value="0.22" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -58,6 +79,8 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_otp.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_places_search.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_signup.xml" value="0.33" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/bg_radio_button.xml" value="0.3734375" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/dialog_city_search.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_account_info.xml" value="0.3015625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_dashboard.xml" value="0.3875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_faq.xml" value="0.2" />
@@ -72,13 +95,13 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_projects.xml" value="0.3572916666666667" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_refer_earn.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request1.xml" value="0.2" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request2.xml" value="0.3875" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request3.xml" value="0.3875" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request2.xml" value="0.25" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request3.xml" value="0.25" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_request_completed.xml" value="0.18" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_requests.xml" value="0.365625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_services.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home1.xml" value="0.33" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home2.xml" value="0.371875" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home2.xml" value="0.33" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home3.xml" value="0.35794871794871796" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home4.xml" value="0.30625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/home5.xml" value="0.33" />

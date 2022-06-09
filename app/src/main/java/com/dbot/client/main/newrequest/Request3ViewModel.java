@@ -10,6 +10,7 @@ import com.dbot.client.login.model.CityData;
 import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
+import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageData;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 public class Request3ViewModel extends ViewModel {
     private MutableLiveData<List<PackageData>> mutableLiveData = new MutableLiveData<>();
     private MutableLiveData<BookSlotResponse> bookSlotResponseMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ApplyCouponResponse> applyCouponResponseMutableLiveData = new MutableLiveData<>();
     public void getPackages(){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<PackageResponse> call = apiInterface.getPackages();
@@ -64,10 +66,31 @@ public class Request3ViewModel extends ViewModel {
             }
         });
     }
+    public void applyCoupon(String client_id,String coupon_code){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<ApplyCouponResponse> call = apiInterface.getApplyCoupon(client_id,coupon_code);
+        call.enqueue(new Callback<ApplyCouponResponse>() {
+            @Override
+            public void onResponse(Call<ApplyCouponResponse> call, Response<ApplyCouponResponse> response) {
+                Log.d("ApplyCouponResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                applyCouponResponseMutableLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ApplyCouponResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+    }
     public LiveData<List<PackageData>> getPackagesResult() {
         return mutableLiveData;
     }
     public LiveData<BookSlotResponse> getBookSlotResult() {
         return bookSlotResponseMutableLiveData;
+    }
+    public LiveData<ApplyCouponResponse> getApplyCouponResult() {
+        return applyCouponResponseMutableLiveData;
     }
 }

@@ -13,4 +13,5 @@
         <item name="fontFamily">@font/comfortaa_bold</item>
         <item name="android:textStyle">normal</item>
     </style>
+
 </resources>

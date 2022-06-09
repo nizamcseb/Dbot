@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:background="@drawable/ic_rh_status_awaiting"
-        android:text="  Awaiting"
+        android:text="Awaiting"
         android:textSize="@dimen/_10ssp"
         android:textColor="@color/black" />
     <!-- <Button
