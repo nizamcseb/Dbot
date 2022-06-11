@@ -5,9 +5,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,12 +14,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.dbot.client.LandingActivity;
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentProfileBinding;
+import com.dbot.client.main.profile.pr.PrFragment;
 import com.dbot.client.main.profile.account.AccountInfoFragment;
 import com.dbot.client.main.profile.faq.FAQsFragment;
 import com.dbot.client.main.profile.logout.LogoutFragment;
@@ -72,6 +68,16 @@ public class ProfileFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, FAQsFragment);
+                fragmentTransaction.commit();
+            }
+        });
+        binding.llPaymentRefund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrFragment prFragment = new PrFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, prFragment);
                 fragmentTransaction.commit();
             }
         });

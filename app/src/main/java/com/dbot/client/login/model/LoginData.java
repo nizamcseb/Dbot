@@ -29,10 +29,10 @@ public class LoginData implements Serializable {
     private String companyName;
     @SerializedName("company_phone")
     @Expose
-    private Object companyPhone;
+    private String companyPhone;
     @SerializedName("company_email")
     @Expose
-    private Object companyEmail;
+    private String companyEmail;
 
     public String getClientId() {
         return clientId;
@@ -90,19 +90,19 @@ public class LoginData implements Serializable {
         this.companyName = companyName;
     }
 
-    public Object getCompanyPhone() {
+    public String getCompanyPhone() {
         return companyPhone;
     }
 
-    public void setCompanyPhone(Object companyPhone) {
+    public void setCompanyPhone(String companyPhone) {
         this.companyPhone = companyPhone;
     }
 
-    public Object getCompanyEmail() {
+    public String getCompanyEmail() {
         return companyEmail;
     }
 
-    public void setCompanyEmail(Object companyEmail) {
+    public void setCompanyEmail(String companyEmail) {
         this.companyEmail = companyEmail;
     }
 

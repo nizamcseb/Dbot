@@ -1,7 +1,9 @@
 package com.dbot.client.main.newrequest;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +23,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.common.Tags;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageData;
+import com.dbot.client.main.payu.PayUActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class Request3Fragment extends Fragment implements View.OnClickListener {
@@ -102,9 +107,9 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
             @Override
             public void onChanged(BookSlotResponse bookSlotResponse) {
                 if (bookSlotResponse.getStatus().getCode() == 1031) {
-                    RequestCompletedFragment requestCompletedFragment = new RequestCompletedFragment(bookSlotResponse.getData().getRequestId());
+                    /*RequestCompletedFragment requestCompletedFragment = new RequestCompletedFragment(bookSlotResponse.getData().getRequestId());
                     fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, requestCompletedFragment);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
                 }
             }
         });
@@ -202,6 +207,8 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     }
 
     private void bookSlot() {
+
+
         MainActivity.discount = discount_amount;
         MainActivity.amount_paid = total_amount;
         BookSlot bookSlot = new BookSlot();
@@ -229,7 +236,10 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setPaymentStatus(MainActivity.payment_status);
 
         Log.d("bookslotdata", new GsonBuilder().setPrettyPrinting().create().toJson(bookSlot));
-        mViewModel.bookSlot(bookSlot);
+        Intent paymentIntent = new Intent(getActivity(), PayUActivity.class);
+        paymentIntent.putExtra(Tags.TAG_BOOK_SLOT_DATA, bookSlot);
+        getActivity().startActivity(paymentIntent);
+        //mViewModel.bookSlot(bookSlot);
     }
 
     public void onRadioButtonClicked(View view) {

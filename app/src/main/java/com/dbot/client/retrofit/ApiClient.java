@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    public static boolean isTest = false;
+    public static boolean isTest = true;
     public static String BASE_TEST_URL = "http://apis.dbot.space/";
     public static String BASE_PROD_URL = "http://apis.dbot.space/";
     private static Retrofit retrofit;

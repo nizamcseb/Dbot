@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +18,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.dbot.client.R;
+import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.projects.UpdateProject;
 import com.dbot.client.main.projects.model.CancelRequestResponse;
 import com.dbot.client.main.projects.model.ClientProjectData;
 import com.dbot.client.main.projects.model.RefundAmount;
@@ -25,12 +28,15 @@ import com.dbot.client.retrofit.ApiInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Popup implements View.OnClickListener {
+public class Popup implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     public Popup() {
 
     }
@@ -185,6 +191,8 @@ public class Popup implements View.OnClickListener {
         });
     }
 
+    EditText et_edit_popup_door_no, et_edit_popup_building_name, et_edit_popup_landmark, et_edit_popup_project_name, et_edit_popup_contact_person_name, et_edit_popup_contact_person_phone_number;
+    List<Integer> scope = null;
     public void showEditProjectPopupWindow(final View view, ClientProjectData projectData) {
 
         //Create a View object yourself through inflater
@@ -203,17 +211,46 @@ public class Popup implements View.OnClickListener {
 
         //Set the location of the window on the screen
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        scope = new ArrayList<Integer>();
+        et_edit_popup_door_no = popupView.findViewById(R.id.et_edit_popup_door_no);
+        et_edit_popup_building_name = popupView.findViewById(R.id.et_edit_popup_building_name);
+        et_edit_popup_landmark = popupView.findViewById(R.id.et_edit_popup_landmark);
 
-        EditText et_edit_popup_door_no = popupView.findViewById(R.id.et_edit_popup_door_no);
-        EditText et_edit_popup_building_name = popupView.findViewById(R.id.et_edit_popup_building_name);
-        EditText et_edit_popup_landmark = popupView.findViewById(R.id.et_edit_popup_landmark);
-
-        EditText et_edit_popup_project_name = popupView.findViewById(R.id.et_edit_popup_project_name);
-        EditText et_edit_popup_contact_person_name = popupView.findViewById(R.id.et_edit_popup_contact_person_name);
-        EditText et_edit_popup_contact_person_phone_number = popupView.findViewById(R.id.et_edit_popup_contact_person_phone_number);
+        et_edit_popup_project_name = popupView.findViewById(R.id.et_edit_popup_project_name);
+        et_edit_popup_contact_person_name = popupView.findViewById(R.id.et_edit_popup_contact_person_name);
+        et_edit_popup_contact_person_phone_number = popupView.findViewById(R.id.et_edit_popup_contact_person_phone_number);
 
         SeekBar sb_edit_popup_size_of_property = popupView.findViewById(R.id.sb_edit_popup_size_of_property);
         TextView tv_edit_popup_size_of_property = popupView.findViewById(R.id.tv_edit_popup_size_of_property);
+        if (sb_edit_popup_size_of_property != null) {
+            sb_edit_popup_size_of_property.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    if (seekBar.getProgress() == 0)
+                        tv_edit_popup_size_of_property.setText("1BHK");
+                    if (seekBar.getProgress() == 1)
+                        tv_edit_popup_size_of_property.setText("2BHK");
+                    if (seekBar.getProgress() == 2)
+                        tv_edit_popup_size_of_property.setText("3BHK");
+                    if (seekBar.getProgress() == 3)
+                        tv_edit_popup_size_of_property.setText("4BHK");
+                    if (seekBar.getProgress() == 4)
+                        tv_edit_popup_size_of_property.setText("5BHK+");
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
+                }
+            });
+        }
+
         CheckBox cb_edit_popup_same_as_mine = popupView.findViewById(R.id.cb_edit_popup_same_as_mine);
         CheckBox cb_edit_popup_electrical = popupView.findViewById(R.id.cb_edit_popup_electrical);
         CheckBox cb_edit_popup_plumbing = popupView.findViewById(R.id.cb_edit_popup_plumbing);
@@ -223,6 +260,32 @@ public class Popup implements View.OnClickListener {
         RadioButton rb_edit_popup_type_of_property_new = popupView.findViewById(R.id.rb_edit_popup_type_of_property_new);
         RadioButton rb_edit_popup_type_of_property_renovation = popupView.findViewById(R.id.rb_edit_popup_type_of_property_renovation);
 
+        if (projectData.getScope() != null) {
+            for (int i = 0; i < projectData.getScope().size(); i++) {
+                if (projectData.getScope().get(i) == 1) {
+                    cb_edit_popup_electrical.setChecked(true);
+                    scope.add(1);
+                }
+                if (projectData.getScope().get(i) == 2) {
+                    cb_edit_popup_plumbing.setChecked(true);
+                    scope.add(2);
+                }
+                if (projectData.getScope().get(i) == 3) {
+                    cb_edit_popup_plastering.setChecked(true);
+                    scope.add(3);
+                }
+                if (projectData.getScope().get(i) == 4) {
+                    cb_edit_popup_flooring.setChecked(true);
+                    scope.add(4);
+                }
+
+            }
+        }
+        cb_edit_popup_same_as_mine.setOnCheckedChangeListener(this::onCheckedChanged);
+        cb_edit_popup_electrical.setOnCheckedChangeListener(this::onCheckedChanged);
+        cb_edit_popup_plumbing.setOnCheckedChangeListener(this::onCheckedChanged);
+        cb_edit_popup_plastering.setOnCheckedChangeListener(this::onCheckedChanged);
+        cb_edit_popup_flooring.setOnCheckedChangeListener(this::onCheckedChanged);
         et_edit_popup_door_no.setText(projectData.getDoorNumber());
         et_edit_popup_building_name.setText(projectData.getBuildingName());
         if (projectData.getLandmark() != null)
@@ -249,22 +312,25 @@ public class Popup implements View.OnClickListener {
         btn_edit_popup_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_edit_popup_door_no.getText().toString().equals("")) {
-                    et_edit_popup_door_no.setError("Required");
-                }else
-                if (et_edit_popup_building_name.getText().toString().equals("")) {
-                    et_edit_popup_building_name.setError("Required");
-                }else
-                if (et_edit_popup_project_name.getText().toString().equals("")) {
-                    et_edit_popup_project_name.setError("Required");
-                }else
-                if (et_edit_popup_contact_person_name.getText().toString().equals("")) {
-                    et_edit_popup_contact_person_name.setError("Required");
-                }else
-                if (et_edit_popup_contact_person_phone_number.getText().toString().equals("")) {
-                    et_edit_popup_contact_person_phone_number.setError("Required");
-                }else {
-                    popupWindow.dismiss();
+                int selectedId = rg_edit_popup_type_of_property.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) popupView.findViewById(selectedId);
+                UpdateProject updateProject = new UpdateProject();
+                updateProject.setClientId(projectData.getClientId());
+                updateProject.setBookingId(projectData.getBookingId());
+                updateProject.setDoorNumber(et_edit_popup_door_no.getText().toString());
+                updateProject.setBuildingName(et_edit_popup_building_name.getText().toString());
+                updateProject.setLandmark(et_edit_popup_landmark.getText().toString());
+                updateProject.setProjectName(et_edit_popup_project_name.getText().toString());
+                updateProject.setContactPersonName(et_edit_popup_contact_person_name.getText().toString());
+                updateProject.setContactPersonPhone(et_edit_popup_contact_person_phone_number.getText().toString());
+                updateProject.setPropertySize(sb_edit_popup_size_of_property.getProgress()+1);
+                updateProject.setProjectType(Integer.parseInt(radioButton.getTag().toString()));
+                updateProject.setScope(scope);
+
+                if(checkManditoryFields(btn_edit_popup_save)){
+
+                    Log.d("updateProject",new GsonBuilder().setPrettyPrinting().create().toJson(updateProject));
+                    Snackbar.make(btn_edit_popup_save,"Success",Snackbar.LENGTH_SHORT).show();
                 }
                 /*if(MainActivity.scope.size() == 0) {
                     Snackbar.make(btn_edit_popup_save,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
@@ -278,7 +344,46 @@ public class Popup implements View.OnClickListener {
     public void onClick(View view) {
 
     }
-   /* private boolean checkManditoryFields() {
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        switch (compoundButton.getId()) {
+            case R.id.cb_edit_popup_same_as_mine:
+                if (b) {
+                    et_edit_popup_contact_person_name.setText(MainActivity.sessionManager.getClientFullName());
+                    et_edit_popup_contact_person_phone_number.setText(MainActivity.sessionManager.getClientPhone());
+                } else {
+                    et_edit_popup_contact_person_name.setText("");
+                    et_edit_popup_contact_person_phone_number.setText("");
+                }
+                break;
+            case R.id.cb_edit_popup_electrical:
+                if (b)
+                    scope.add(1);
+                else scope.removeIf(i -> i == 1);
+                Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(scope));
+                break;
+            case R.id.cb_edit_popup_plumbing:
+                if (b)
+                    scope.add(2);
+                else scope.removeIf(i -> i == 2);
+                Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(scope));
+                break;
+            case R.id.cb_edit_popup_plastering:
+                if (b)
+                    scope.add(3);
+                else scope.removeIf(i -> i == 3);
+                Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(scope));
+                break;
+            case R.id.cb_edit_popup_flooring:
+                if (b)
+                    scope.add(4);
+                else scope.removeIf(i -> i == 4);
+                Log.d("scope", new GsonBuilder().setPrettyPrinting().create().toJson(MainActivity.scope));
+                break;
+        }
+    }
+    private boolean checkManditoryFields(View view) {
         if (et_edit_popup_door_no.getText().toString().equals("")) {
             et_edit_popup_door_no.setError("Required");
             return false;
@@ -299,10 +404,10 @@ public class Popup implements View.OnClickListener {
             et_edit_popup_contact_person_phone_number.setError("Required");
             return false;
         }
-        if(MainActivity.scope.size() == 0) {
-            Snackbar.make(btn_req2_next,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
+        if(scope.size() == 0) {
+            Snackbar.make(view,"Select atleast one scope",Snackbar.LENGTH_SHORT).show();
             return false;
         }
         return true;
-    }*/
+    }
 }

@@ -90,6 +90,8 @@ public class SignupActivity extends AppCompatActivity {
                                 signUpResponse.getClientData().getClientPhone(),
                                 signUpResponse.getClientData().getClientEmail(),
                                 signUpResponse.getClientData().getCompanyName(),
+                                signUpResponse.getClientData().getCompanyPhone(),
+                                signUpResponse.getClientData().getCompanyEmail(),
                                 signUpResponse.getClientData().getCity(),
                                 signUpResponse.getClientData().getFreelancer());
                 }

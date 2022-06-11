@@ -268,7 +268,7 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
             e.printStackTrace();
         }
         assert addresses != null;
-        if (addresses != null)
+        if (addresses.size() != 0)
             return addresses.get(0).getAddressLine(0);
         else return null;
     }

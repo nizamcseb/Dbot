@@ -14,6 +14,7 @@ import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageResponse;
 import com.dbot.client.main.profile.faq.model.FAQsResponse;
+import com.dbot.client.main.profile.pr.rs.model.RefundResponse;
 import com.dbot.client.main.profile.refer.model.RcAndRhResponse;
 import com.dbot.client.main.projects.model.CancelRequestResponse;
 import com.dbot.client.main.projects.model.ClientProjectResponse;
@@ -103,4 +104,7 @@ public interface ApiInterface {
     @GET("client/applycouponcode/{client_id}/{coupon_code}")
     Call<ApplyCouponResponse> getApplyCoupon(@Path("client_id") String client_id, @Path("coupon_code") String coupon_code);
 
+    //Get Refund List
+    @GET("report/refundstatus/{client_id}")
+    Call<RefundResponse> getRefundList(@Path("client_id") String client_id);
 }

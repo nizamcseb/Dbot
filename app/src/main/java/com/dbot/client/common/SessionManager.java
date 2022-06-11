@@ -38,24 +38,28 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String city, String freelancer) {
+    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
         setClientPhone(phone);
         setClientEmailId(emailId);
         setClientCompanyName(companyName);
+        setClientCompanyPhone(companyPhone);
+        setClientCompanyEmail(companyEmail);
         setCity(city);
         setFreeLancer(freelancer);
         _context.startActivity(new Intent(_context,MainActivity.class));
     }
- public void updateClient(String clientId,String fullName,String phone, String emailId, String companyName, String city, String freelancer) {
+ public void updateClient(String clientId,String fullName,String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
         setClientPhone(phone);
         setClientEmailId(emailId);
         setClientCompanyName(companyName);
+        setClientCompanyPhone(companyPhone);
+        setClientCompanyEmail(companyEmail);
         setCity(city);
         setFreeLancer(freelancer);
     }
@@ -130,7 +134,28 @@ public class SessionManager {
 
         return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_NAME), null);
     }
+    public void setClientCompanyPhone(String companyPhone) {
 
+        editor.putString(_context.getString(R.string.TAG_CLIENT_COMPANY_PHONE), companyPhone);
+
+        editor.commit();
+    }
+
+    public String getClientCompanyPhone() {
+
+        return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_PHONE), null);
+    }
+    public void setClientCompanyEmail(String companyEmail) {
+
+        editor.putString(_context.getString(R.string.TAG_CLIENT_COMPANY_EMAIL), companyEmail);
+
+        editor.commit();
+    }
+
+    public String getClientCompanyEmail() {
+
+        return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_EMAIL), null);
+    }
  public void setCity(String city) {
 
         editor.putString(_context.getString(R.string.TAG_CLIENT_CITY), city);

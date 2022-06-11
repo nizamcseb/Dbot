@@ -118,6 +118,8 @@
     <string name="TAG_CLIENT_PHONE">client_phone</string>
     <string name="TAG_CLIENT_EMAIL">client_email</string>
     <string name="TAG_CLIENT_COMPANY_NAME">company_name</string>
+    <string name="TAG_CLIENT_COMPANY_PHONE">company_phone</string>
+    <string name="TAG_CLIENT_COMPANY_EMAIL">company_email</string>
     <string name="TAG_CLIENT_CITY">client_city</string>
     <string name="TAG_FREELANCER">freelancer</string>
 
@@ -148,4 +150,13 @@
     <string name="tv_cancel"><u>Cancel</u></string>
     <string name="tv_reshedule"><u>Reshedule</u></string>
     <string name="as_per_u_cancelation_amp_refund_policy_u">As per <u>Cancelation &amp; Refund policy</u></string>
+    <string name="cancelation_and_refund_policy"><u>Cancelation &amp; Refund policy</u></string>
+
+    <string name="msg_network_failed">N/W Connection Failed</string>
+    <!--PayU-->
+    <string name="some_error_occurred">Some error occurred...</string>
+    <string name="transaction_cancelled_by_user">Transaction cancelled by user</string>
+    <string name="package_details">PACKAGE DETAILS</string>
+    <string name="pay_now">PAY NOW</string>
+    <string name="payment_and_refund"><![CDATA[Payment & Refund]]></string>
 </resources>
