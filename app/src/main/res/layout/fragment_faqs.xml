@@ -7,13 +7,7 @@
     android:background="#C9C9C9"
     tools:context=".main.profile.faq.FAQsFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,39 +22,52 @@
                 android:id="@+id/iv_back_faq"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_gravity="start"
-                android:src="@drawable/ic_back" />
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:src="@drawable/ic_back_black" />
 
             <TextView
+                style="@style/bold"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:text="FAQs"
                 android:textColor="@color/purple_profile"
-                android:textSize="@dimen/_20ssp"
-                style="@style/bold"/>
+                android:textSize="@dimen/_20ssp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="592dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/bg_req_bottom_sheet"
                 android:gravity="top|center"
                 android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_faq_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/bg_edit_text"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:hint="Type Keyword to search..." />
 
                 <ListView
                     android:id="@+id/lv_faqs"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/_10sdp"
-                    tools:listitem="@layout/item_faqs"/>
+                    tools:listitem="@layout/item_faqs" />
 
             </LinearLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

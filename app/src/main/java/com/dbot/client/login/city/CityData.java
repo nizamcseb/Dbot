@@ -1,4 +1,4 @@
-package com.dbot.client.login.model;
+package com.dbot.client.login.city;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

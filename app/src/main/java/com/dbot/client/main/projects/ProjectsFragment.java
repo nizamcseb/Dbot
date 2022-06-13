@@ -1,7 +1,6 @@
 package com.dbot.client.main.projects;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeFragment;
-import com.dbot.client.main.profile.refer.ReferFragment;
+import com.dbot.client.main.projects.details.ProjectFullDetailsFragment;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -52,7 +50,8 @@ public class ProjectsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         projectsViewModel = new ViewModelProvider(this).get(ProjectsViewModel.class);
         // TODO: Use the ViewModel
-        projectsViewModel.getProjects(MainActivity.sessionManager.getClientId()).observe(this, new Observer<List<ClientProjectData>>() {
+        projectsViewModel.getProjects(MainActivity.sessionManager.getClientId());
+        projectsViewModel.getProjectResult().observe(this, new Observer<List<ClientProjectData>>() {
             @Override
             public void onChanged(List<ClientProjectData> clientProjectDataList) {
                 if (clientProjectDataList != null) {

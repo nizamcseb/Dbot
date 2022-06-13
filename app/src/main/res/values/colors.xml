@@ -14,6 +14,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#311B92</color>
+    <color name="phonenumber">#0088F4</color>
     <color name="fb_color">#3b5998</color>
     <color name="google_color">#db4a39</color>
     <color name="colorPrimaryDark">#00574B</color>
@@ -51,9 +52,20 @@
     <color name="target_upcoming">#FF9800</color>
     <color name="nav_drawer_selected_color">#115095</color>
 
+    <color name="status_active">#fe9900</color>
+    <color name="status_cancelled">#FF1100</color>
+    <color name="status_completed">#4CAF50</color>
+
+    <color name="refund_status_initiated">#fe9900</color>
+    <color name="refund_status_processing">#48304D</color>
+    <color name="refund_status_completed">#4CAF50</color>
+
+
+    <color name="green">#4CAF50</color>
     <color name="title_bg">#c7c7c7</color>
     <color name="purple_profile">#48304D</color>
     <color name="grey_rh_list_divider">#D1D1D1</color>
     <color name="rv_staus_bg">#E4E4E4</color>
     <color name="rh_status_awaiting_bg">#F6CF93</color>
+    <color name="refund_status_filled_color">#34183A</color>
 </resources>

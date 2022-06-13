@@ -1,19 +1,18 @@
 
 package com.dbot.client.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.ActivityOtpBinding;
 import com.dbot.client.login.model.LoginData;
-import com.dbot.client.main.MainActivity;
 import com.dbot.client.retrofit.ApiClient;
+import com.google.android.material.snackbar.Snackbar;
 
 public class OtpActivity extends AppCompatActivity {
     ActivityOtpBinding binding;
@@ -44,7 +43,11 @@ public class OtpActivity extends AppCompatActivity {
                                 loginData.getFullname(),
                                 loginData.getClientPhone(),
                                 loginData.getClientEmail(),
-                                loginData.getCompanyName(),loginData.getCity(),loginData.getFreelancer());
+                                loginData.getCompanyName(),
+                                loginData.getCompanyPhone(),
+                                loginData.getCompanyEmail(),
+                                loginData.getCity(),
+                                loginData.getFreelancer());
                         //startActivity(new Intent(OtpActivity.this, MainActivity.class));
 
                     } else {
@@ -54,7 +57,8 @@ public class OtpActivity extends AppCompatActivity {
                         startActivity(signupIntent);
                     }
 
-                }
+                } else
+                    Snackbar.make(binding.btnContinue, "Incorrect OTP", Snackbar.LENGTH_SHORT).show();
             }
         });
     }

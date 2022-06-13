@@ -232,11 +232,11 @@
         android:orientation="horizontal">
 
 
-            <ImageView
-                android:id="@+id/iv_pt_file_sharing"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="25dp"
-                android:src="@drawable/ic_project_status_without_tick" />
+        <ImageView
+            android:id="@+id/iv_pt_file_sharing"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_project_status_without_tick" />
 
 
 
@@ -265,6 +265,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_pt_send_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

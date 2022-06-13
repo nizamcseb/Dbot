@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple_profile"
     android:orientation="vertical"
-    tools:context=".main.projects.ProjectFullDetailsFragment">
+    tools:context=".main.projects.details.ProjectFullDetailsFragment">
 
     <LinearLayout
         android:id="@+id/ll_top"
@@ -21,7 +21,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back_white" />
 
         <TextView
             style="@style/bold"
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 android:layout_gravity="center|start"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_project_details_project_name"
@@ -62,23 +62,60 @@
                     android:text="Project / Client Name:"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13ssp" />
-
                 <TextView
-                    android:id="@+id/tv_project_details_project_booking_id"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_project_details_project_status"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="#sdasdf"
-                    android:textColor="@color/grey" />
+                    android:gravity="end"
+                    android:text="Active" />
+
             </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tv_project_details_project_booking_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="start|center"
+        android:text="#sdasdfccccccccccc"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/grey" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_project_details_cp_name"
+            style="@style/bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="nnnnnnnnnnnn"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tv_project_details_cp_phone"
+            style="@style/bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@android:drawable/sym_action_call"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="999999999"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="@color/phonenumber"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_project_details_project_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="Active" />
+</LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -179,7 +216,7 @@
                         android:text="address" />
 
 
-                    <TextView
+                  <!--  <TextView
                         style="@style/bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -202,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
                         android:text="phone" />
-
+-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

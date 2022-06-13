@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/navigation_new_request_completed"
         android:name="com.dbot.client.main.newrequest.RequestCompletedFragment"
-        android:label="@string/title_create_new_request"
+        android:label=""
         tools:layout="@layout/fragment_request_completed" />
     <fragment
         android:id="@+id/navigation_account_info"
@@ -64,10 +64,20 @@
         android:name="com.dbot.client.main.profile.logout.LogoutFragment"
         android:label=""
         tools:layout="@layout/fragment_logout" />
-<fragment
+    <fragment
         android:id="@+id/navigation_project_details"
-        android:name="com.dbot.client.main.projects.ProjectFullDetailsFragment"
+        android:name="com.dbot.client.main.projects.details.ProjectFullDetailsFragment"
         android:label=""
         tools:layout="@layout/fragment_project_details" />
+    <fragment
+        android:id="@+id/navigation_payment_refund"
+        android:name="com.dbot.client.main.profile.pr.PrFragment"
+        android:label=""
+        tools:layout="@layout/fragment_pr" />
+    <fragment
+        android:id="@+id/navigation_refund_status"
+        android:name="com.dbot.client.main.profile.pr.rs.RefundStatusFragment"
+        android:label=""
+        tools:layout="@layout/fragment_refund_status" />
 
 </navigation>

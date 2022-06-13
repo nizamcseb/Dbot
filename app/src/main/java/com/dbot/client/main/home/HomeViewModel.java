@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.login.model.CityResponse;
 import com.dbot.client.main.home.model.AvailableSlotsData;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
 import com.dbot.client.main.home.model.NotifySlotRequestResponse;

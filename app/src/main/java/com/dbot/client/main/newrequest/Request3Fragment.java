@@ -1,14 +1,20 @@
 package com.dbot.client.main.newrequest;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -21,11 +27,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.common.Tags;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
+import com.dbot.client.main.newrequest.model.AvailableCoupon;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageData;
+import com.dbot.client.main.payu.PayUActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
@@ -37,7 +46,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     View root;
     LinearLayout ll_essential, ll_plus;
     RadioButton rb_essentials, rb_plus;
-    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price, tv_coupon_apply;
+    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price, tv_coupon_apply, tv_available_coupon;
     Button btn_req3_prev, btn_req3_pay;
     EditText et_coupon_code;
     FragmentManager fragmentManager;
@@ -68,6 +77,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         tv_coupon_apply = root.findViewById(R.id.tv_coupon_apply);
         tv_service_title_1 = root.findViewById(R.id.tv_service_title_1);
         tv_service_title_2 = root.findViewById(R.id.tv_service_title_2);
+        tv_available_coupon = root.findViewById(R.id.tv_available_coupon);
         tv_es_package_desc = root.findViewById(R.id.tv_es_package_desc);
         tv_pl_package_desc = root.findViewById(R.id.tv_pl_package_desc);
         tv_es_price = root.findViewById(R.id.tv_es_price);
@@ -83,6 +93,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + total_amount);
 
 
+        tv_available_coupon.setOnClickListener(this::onClick);
         ll_essential.setOnClickListener(this::onClick);
         ll_plus.setOnClickListener(this::onClick);
         rb_essentials.setOnClickListener(this::onRadioButtonClicked);
@@ -98,18 +109,18 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(Request3ViewModel.class);
-        mViewModel.getBookSlotResult().observe(this, new Observer<BookSlotResponse>() {
+        mViewModel.getBookSlotResult().observe(getViewLifecycleOwner(), new Observer<BookSlotResponse>() {
             @Override
             public void onChanged(BookSlotResponse bookSlotResponse) {
                 if (bookSlotResponse.getStatus().getCode() == 1031) {
-                    RequestCompletedFragment requestCompletedFragment = new RequestCompletedFragment(bookSlotResponse.getData().getRequestId());
+                    /*RequestCompletedFragment requestCompletedFragment = new RequestCompletedFragment(bookSlotResponse.getData().getRequestId());
                     fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, requestCompletedFragment);
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commit();*/
                 }
             }
         });
         mViewModel.getPackages();
-        mViewModel.getPackagesResult().observe(this, new Observer<List<PackageData>>() {
+        mViewModel.getPackagesResult().observe(getViewLifecycleOwner(), new Observer<List<PackageData>>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(List<PackageData> packageData) {
@@ -123,6 +134,13 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                     tv_pl_package_desc.setText(packageData.get(1).getDescription());
                     tv_pl_price.setText(getString(R.string.symbol_rupee) + " " + packageData.get(1).getPrice());
                 }
+            }
+        });
+        mViewModel.getAvailableCouponResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableCoupon>>() {
+            @Override
+            public void onChanged(List<AvailableCoupon> availableCouponList) {
+                if (availableCouponList != null)
+                    selectAvailableCouponDialog(availableCouponList);
             }
         });
         fragmentManager = getFragmentManager();
@@ -145,6 +163,11 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
 
                 }
                 break;
+            case R.id.tv_available_coupon:
+                mViewModel.getAvailableCoupons(MainActivity.sessionManager.getClientId());
+
+                break;
+
             case R.id.ll_essential:
                 rb_essentials.setChecked(true);
                 rb_plus.setChecked(false);
@@ -197,11 +220,13 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     }
 
     private void calculateTotal() {
-        total_amount = service_amount-discount_amount;
-        tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " +total_amount);
+        total_amount = service_amount - discount_amount;
+        tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + total_amount);
     }
 
     private void bookSlot() {
+
+
         MainActivity.discount = discount_amount;
         MainActivity.amount_paid = total_amount;
         BookSlot bookSlot = new BookSlot();
@@ -229,7 +254,10 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setPaymentStatus(MainActivity.payment_status);
 
         Log.d("bookslotdata", new GsonBuilder().setPrettyPrinting().create().toJson(bookSlot));
-        mViewModel.bookSlot(bookSlot);
+        Intent paymentIntent = new Intent(getActivity(), PayUActivity.class);
+        paymentIntent.putExtra(Tags.TAG_BOOK_SLOT_DATA, bookSlot);
+        getActivity().startActivity(paymentIntent);
+        //mViewModel.bookSlot(bookSlot);
     }
 
     public void onRadioButtonClicked(View view) {
@@ -261,5 +289,45 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+    private void selectAvailableCouponDialog(List<AvailableCoupon> availableCouponList) {
+        // Initialize dialog
+        Dialog dialog = new Dialog(getContext());
+
+        // set custom dialog
+        dialog.setContentView(R.layout.dialog_available_coupons);
+
+        // set custom height and width
+        //dialog.getWindow().setLayout(650, 800);
+
+        // set transparent background
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialog.setCanceledOnTouchOutside(true);
+
+        // show dialog
+        dialog.show();
+
+        // Initialize and assign variable
+
+        ListView listView = dialog.findViewById(R.id.list_view);
+
+        AvailableCouponAdapter availableCouponAdapter = new AvailableCouponAdapter(getContext(), availableCouponList);
+
+        listView.setAdapter(availableCouponAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                tv_available_coupon.setText("1 Coupon Applied");
+                tv_available_coupon.setTextColor(getActivity().getColor(R.color.green));
+                discount_amount =availableCouponList.get(position).getDiscountAmount();
+                tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
+                calculateTotal();
+                // Dismiss dialog
+                dialog.dismiss();
+            }
+        });
     }
 }

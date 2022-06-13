@@ -51,12 +51,13 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Account Info"
+                android:textColor="@color/purple_profile"
                  style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="end|center"
                 android:layout_weight="1"
@@ -81,12 +82,13 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="FAQs"
+                android:textColor="@color/purple_profile"
                  style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="end|center"
                 android:layout_weight="1"
@@ -111,12 +113,13 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Payment &amp; Refund"
+                android:textColor="@color/purple_profile"
                  style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
              <ImageView
-                 android:layout_width="@dimen/_30sdp"
-                 android:layout_height="@dimen/_20sdp"
+                 android:layout_width="@dimen/_25sdp"
+                 android:layout_height="match_parent"
                  android:layout_marginEnd="@dimen/_10sdp"
                  android:gravity="end|center"
                  android:layout_weight="1"
@@ -141,12 +144,13 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Refer &amp; Earn"
+                android:textColor="@color/purple_profile"
                  style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="end|center"
                 android:layout_weight="1"
@@ -171,12 +175,13 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="Log out"
+                android:textColor="@color/purple_profile"
                  style="@style/bold"
                 android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="end|center"
                 android:layout_weight="1"

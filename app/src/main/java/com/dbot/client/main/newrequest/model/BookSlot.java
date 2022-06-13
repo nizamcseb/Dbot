@@ -3,9 +3,10 @@ package com.dbot.client.main.newrequest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BookSlot {
+public class BookSlot implements Serializable {
     @SerializedName("client_id")
     private String client_id;
     @SerializedName("book_date")

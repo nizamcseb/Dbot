@@ -14,18 +14,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.dbot.client.R;
+import com.dbot.client.common.Tags;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeFragment;
 
 public class RequestCompletedFragment extends Fragment {
-    String requestId;
+    //String requestId;
 
-    public RequestCompletedFragment(String requestId) {
-        this.requestId = requestId;
+    public RequestCompletedFragment() {
+        //this.requestId = requestId;
     }
 
     public static RequestCompletedFragment newInstance() {
-        return new RequestCompletedFragment(newInstance().requestId);
+        return new RequestCompletedFragment();
     }
 
     @Override
@@ -39,7 +40,10 @@ public class RequestCompletedFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_request_completed, container, false);
         TextView tv_req_id = root.findViewById(R.id.tv_req_id);
-        tv_req_id.setText("Request id: "+requestId);
+        Bundle bundle = this.getArguments();
+        if (bundle != null)
+            tv_req_id.setText(bundle.getString(Tags.TAG_PAYMENT_TXN_ID));
+        //tv_req_id.setText("Request id: "+requestId);
         ImageView iv_close = root.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override

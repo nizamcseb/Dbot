@@ -26,7 +26,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_gravity="start"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back_black" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,6 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="User Name"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp"
                     android:inputType="textPersonName" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -95,6 +97,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp"
                     android:inputType="phone" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -120,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email Address"
+                    android:textSize="@dimen/_12ssp"
                     android:inputType="textEmailAddress" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -227,6 +232,7 @@
                         style="@style/bold"/>
 
                     <TextView
+                        android:id="@+id/tv_star_profile_company_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -240,6 +246,9 @@
                     android:id="@+id/et_profile_company_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="textPersonName"
                     android:hint="Enter your Firm / Company Name" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -266,6 +275,7 @@
                         style="@style/bold"/>
 
                     <TextView
+                        android:id="@+id/tv_star_profile_company_phone_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -280,6 +290,9 @@
                     android:id="@+id/et_profile_company_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="phone"
                     android:hint="Enter your Firm / Company Phone Number" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -306,6 +319,7 @@
                         style="@style/bold"/>
 
                     <TextView
+                        android:id="@+id/tv_star_profile_company_email_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
@@ -319,6 +333,9 @@
                     android:id="@+id/et_profile_company_email_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="textEmailAddress"
                     android:hint="Enter your Firm / Company Email Address" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 

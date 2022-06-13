@@ -21,10 +21,10 @@ import retrofit2.Response;
 
 public class ProjectsViewModel extends ViewModel {
     // TODO: Implement the ViewModel
-    private MutableLiveData<List<ClientProjectData>> listMutableLiveData;
+    private MutableLiveData<List<ClientProjectData>> listMutableLiveData = new MutableLiveData<>();
 
 
-    public LiveData<List<ClientProjectData>> getProjects(String client_id) {
+    public void getProjects(String client_id) {
         listMutableLiveData = new MutableLiveData<>();
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<ClientProjectResponse> call = apiInterface.getProjects(client_id);
@@ -48,6 +48,8 @@ public class ProjectsViewModel extends ViewModel {
                 listMutableLiveData.setValue(null);
             }
         });
+    }
+    public LiveData<List<ClientProjectData>> getProjectResult() {
         return listMutableLiveData;
     }
 }

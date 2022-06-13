@@ -1,11 +1,14 @@
-package com.dbot.client.main.projects;
+package com.dbot.client.main.projects.details;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +24,20 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.common.Popup;
+import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.projects.ProjectsFragment;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.dbot.client.main.projects.model.ProjectTrackingResponse;
-import com.dbot.client.main.projects.model.RefundAmount;
-import com.dbot.client.main.projects.model.RefundAmountResponse;
+import com.dbot.client.main.projects.details.model.FileRequestResponse;
+import com.dbot.client.main.projects.details.model.ProjectTrackingResponse;
+import com.dbot.client.main.projects.details.model.RefundAmountResponse;
+import com.dbot.client.retrofit.ApiClient;
+import com.dbot.client.retrofit.ApiInterface;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProjectFullDetailsFragment extends Fragment implements View.OnClickListener {
     View root;
@@ -51,9 +63,11 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
             tv_project_details_cancel,
             tv_project_details_reshedule;
     CheckBox cb_project_details_electrical, cb_project_details_plumbing, cb_project_details_plastering, cb_project_details_flooring;
-    View v_pt_cp_confirmation,v_pt_site_access_confirmation,v_pt_site_documentation,v_pt_file_sharing;
+    View v_pt_cp_confirmation, v_pt_site_access_confirmation, v_pt_site_documentation, v_pt_file_sharing;
     NestedScrollView nsv_my_projects;
     String booking_id;
+    Button btn_pt_send_file;
+    boolean isFinalProcessCompleted = false;
 
     Popup popup;
     private ProjectFullDetailsViewlModel mViewModel;
@@ -115,9 +129,15 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
         cb_project_details_plastering = root.findViewById(R.id.cb_project_details_plastering);
         cb_project_details_flooring = root.findViewById(R.id.cb_project_details_flooring);
 
+
+        btn_pt_send_file = root.findViewById(R.id.btn_pt_send_file);
+
         iv_project_details_edit.setOnClickListener(this::onClick);
         tv_project_details_cancel.setOnClickListener(this::onClick);
         tv_project_details_reshedule.setOnClickListener(this::onClick);
+        btn_pt_send_file.setOnClickListener(this::onClick);
+        tv_project_details_cp_phone.setOnClickListener(this::onClick);
+
         return root;
     }
 
@@ -125,10 +145,11 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //Log.d("projectDataList", new GsonBuilder().setPrettyPrinting().create().toJson(projectData.getProjectName()));
+
         popup = new Popup();
         mViewModel = new ViewModelProvider(this).get(ProjectFullDetailsViewlModel.class);
         mViewModel.getProjectTracking(projectData.getBookingId());
-        mViewModel.getProjectTrackingResult().observe(this, new Observer<ProjectTrackingResponse>() {
+        mViewModel.getProjectTrackingResult().observe(getViewLifecycleOwner(), new Observer<ProjectTrackingResponse>() {
             @Override
             public void onChanged(ProjectTrackingResponse projectTrackingResponse) {
                 if (projectTrackingResponse != null) {
@@ -161,6 +182,8 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                         iv_pt_file_sharing.setImageDrawable(getActivity().getDrawable(R.drawable.ic_project_status_with_tick_png));
                         tv_pt_file_sharing.setText(projectTrackingResponse.getProjectTrackingData().getFilesSharing());
                         v_pt_file_sharing.setBackgroundColor(R.color.primary_varient);
+                        isFinalProcessCompleted = true;
+                        btn_pt_send_file.setBackgroundTintList(getActivity().getColorStateList(R.color.primary_varient));
                     } else
                         tv_pt_file_sharing.setText("ETA - " + projectTrackingResponse.getProjectTrackingData().getFilesSharingEta());
 
@@ -234,20 +257,14 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                 //Do something
             }
         });
-        /*nsv_my_projects.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @SuppressLint("LongLogTag")
+        mViewModel.getFileRequestResult().observe(getViewLifecycleOwner(), new Observer<FileRequestResponse>() {
             @Override
-            public void onScrollChanged() {
-                View view = (View) nsv_my_projects.getChildAt(nsv_my_projects.getChildCount() - 1);
-
-                int diff = (view.getBottom() - (nsv_my_projects.getHeight() + nsv_my_projects
-                        .getScrollY()));
-
-                if (scrollY === v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
-                    // end of the scroll view
+            public void onChanged(FileRequestResponse fileRequestResponse) {
+                if(fileRequestResponse!=null) {
+                    Snackbar.make(getView(),fileRequestResponse.getStatus().getMessage(),Snackbar.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -255,25 +272,63 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_project_details_cancel:
-                mViewModel.getRefundAmound(booking_id);
+                /*mViewModel.getRefundAmound(booking_id);
                 mViewModel.getRefundAmoundResult().observe(this, new Observer<RefundAmountResponse>() {
                     @Override
                     public void onChanged(RefundAmountResponse refundAmountResponse) {
-                        if(refundAmountResponse != null){
+                        if (refundAmountResponse != null) {
 
-                            popup.showCancelRequestConfirmationPopupWindow(booking_id,refundAmountResponse.getRefundAmount(),tv_project_details_cancel);
+                            popup.showCancelRequestConfirmationPopupWindow(booking_id, refundAmountResponse.getRefundAmount(), tv_project_details_cancel);
                         }
 
                     }
-                });
+                });*/
+                getRefundAmound(booking_id);
+                break;
+            case R.id.tv_project_details_cp_phone:
+                String number=tv_project_details_cp_phone.getText().toString();
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+number));
+                startActivity(callIntent);
+                break;
+             case R.id.tv_project_details_reshedule:
+                 popup.showReshedulePopupWindow(getContext(),this,getViewLifecycleOwner(),booking_id,getView(),mViewModel, MainActivity.sessionManager.getClientId());
+                break;
 
-                break;
-            case R.id.tv_project_details_reshedule:
-                break;
             case R.id.iv_project_details_edit:
-                popup.showEditProjectPopupWindow(getView(),projectData);
+                popup.showEditProjectPopupWindow(getActivity(), getView(), projectData, mViewModel);
+                break;
+            case R.id.btn_pt_send_file:
+                if(isFinalProcessCompleted)
+                    mViewModel.sendFileRequest(booking_id);
+
                 break;
 
         }
+    }
+
+    public void getRefundAmound(String booking_id) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<RefundAmountResponse> call = apiInterface.getRefundAmount(booking_id);
+        call.enqueue(new Callback<RefundAmountResponse>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<RefundAmountResponse> call, Response<RefundAmountResponse> response) {
+
+                if (response.isSuccessful()) {
+                    Log.d("RefundAmountResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    if (response.body() != null)
+                        //refundAmountResponseMutableLiveData.setValue(response.body());
+                        popup.showCancelRequestConfirmationPopupWindow(booking_id, response.body().getRefundAmount(), tv_project_details_cancel, mViewModel);
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(Call<RefundAmountResponse> call, Throwable t) {
+                Log.e("RefundAmountResponse error", t.getMessage());
+                //refundAmountResponseMutableLiveData.setValue(null);
+            }
+        });
     }
 }
