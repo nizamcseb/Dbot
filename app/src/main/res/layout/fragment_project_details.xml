@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple_profile"
     android:orientation="vertical"
-    tools:context=".main.projects.ProjectFullDetailsFragment">
+    tools:context=".main.projects.details.ProjectFullDetailsFragment">
 
     <LinearLayout
         android:id="@+id/ll_top"

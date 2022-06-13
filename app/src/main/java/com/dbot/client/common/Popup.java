@@ -1,12 +1,19 @@
 package com.dbot.client.common;
 
+import static com.dbot.client.common.CommonFunctions.getSelectedDate;
+import static com.dbot.client.main.MainActivity.book_date;
+import static com.dbot.client.main.MainActivity.sessionManager;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -19,20 +26,26 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
-import com.dbot.client.main.projects.ProjectFullDetailsViewlModel;
-import com.dbot.client.main.projects.model.UpdateProject;
-import com.dbot.client.main.projects.model.CancelRequestResponse;
+import com.dbot.client.main.home.HomeViewModel;
+import com.dbot.client.main.home.model.AvailableSlotsData;
+import com.dbot.client.main.projects.details.ProjectFullDetailsViewlModel;
+import com.dbot.client.main.projects.details.model.CancelRequestResponse;
+import com.dbot.client.main.projects.details.model.RefundAmount;
+import com.dbot.client.main.projects.details.model.ResheduleResponse;
+import com.dbot.client.main.projects.details.model.UpdateProject;
+import com.dbot.client.main.projects.details.model.UpdateProjectResponse;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.dbot.client.main.projects.model.RefundAmount;
-import com.dbot.client.main.projects.model.UpdateProjectResponse;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
-import com.dbot.client.retrofit.Status;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
@@ -351,7 +364,8 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
 
                                 } else
                                     Snackbar.make(btn_edit_popup_save, response.getStatus().getMessage(), Snackbar.LENGTH_SHORT).show();
-                            }else Snackbar.make(btn_edit_popup_save, "Somthing went wrong", Snackbar.LENGTH_SHORT).show();
+                            } else
+                                Snackbar.make(btn_edit_popup_save, "Somthing went wrong", Snackbar.LENGTH_SHORT).show();
                         }
                     });
 
@@ -369,8 +383,8 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
         switch (compoundButton.getId()) {
             case R.id.cb_edit_popup_same_as_mine:
                 if (b) {
-                    et_edit_popup_contact_person_name.setText(MainActivity.sessionManager.getClientFullName());
-                    et_edit_popup_contact_person_phone_number.setText(MainActivity.sessionManager.getClientPhone());
+                    et_edit_popup_contact_person_name.setText(sessionManager.getClientFullName());
+                    et_edit_popup_contact_person_phone_number.setText(sessionManager.getClientPhone());
                 } else {
                     et_edit_popup_contact_person_name.setText("");
                     et_edit_popup_contact_person_phone_number.setText("");
@@ -431,5 +445,198 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
         return true;
     }
 
+    CalendarView cView;
+    int slot_time_id = 0;
+    String date = "";
+    Button btn_slot_1, btn_slot_2, btn_edit_popup_save;
+    boolean btn1Status = false, btn2Status = false;
+
+    public void showReshedulePopupWindow(Context context, ViewModelStoreOwner viewModelStoreOwner, LifecycleOwner lifecycleOwner, String booking_id, final View view, ProjectFullDetailsViewlModel mViewModel, String client_id) {
+
+        //Create a View object yourself through inflater
+        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_reshedule, null);
+
+        //Specify the length and width through constants
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+
+        //Make Inactive Items Outside Of PopupWindow
+        boolean focusable = false;
+
+        //Create a window with our parameters
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        //Set the location of the window on the screen
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        cView = popupView.findViewById(R.id.calendarView);
+        date = getSelectedDate(cView.getDate());
+        btn_slot_1 = popupView.findViewById(R.id.btn_slot_1);
+        btn_slot_2 = popupView.findViewById(R.id.btn_slot_2);
+        HomeViewModel homeViewModel = new ViewModelProvider(viewModelStoreOwner).get(HomeViewModel.class);
+        homeViewModel.getAvailableSlots(date);
+        homeViewModel.getAvailableSlotsResult().observe(lifecycleOwner, new Observer<List<AvailableSlotsData>>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onChanged(List<AvailableSlotsData> availableSlotsData) {
+                Log.d("getAvailableSlotsResponse", new GsonBuilder().setPrettyPrinting().create().toJson(availableSlotsData));
+                createAvailableSlots(context, availableSlotsData);
+            }
+        });
+        mViewModel.getResheduleResponseResult().observe(lifecycleOwner, new Observer<ResheduleResponse>() {
+            @Override
+            public void onChanged(ResheduleResponse resheduleResponse) {
+                if (resheduleResponse != null) {
+                    if (resheduleResponse.getStatus().getCode() == 1031) {
+                        homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
+                        Toast.makeText(context, resheduleResponse.getResheduleData().getRequestId() + " " + "Request Send", Toast.LENGTH_SHORT).show();
+                        popupWindow.dismiss();
+                    } else
+                        Toast.makeText(context, resheduleResponse.getStatus().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        cView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                i1 = i1 + 1;
+                date = String.valueOf(i2 + "-" + i1 + "-" + i);
+                Log.d("calendarView ", i2 + "-" + i1 + "-" + i);
+                //Log.d("calendarView ", getSelectedDate(calendarView.getDate()));
+                homeViewModel.getAvailableSlots(date);
+            }
+        });
+        Button btn_edit_popup_exit = popupView.findViewById(R.id.btn_edit_popup_exit);
+        btn_edit_popup_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+
+            }
+        });
+        btn_edit_popup_save = popupView.findViewById(R.id.btn_edit_popup_save);
+        btn_edit_popup_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("btn_edit_popup_save", String.valueOf(slot_time_id));
+                if (btn_edit_popup_save.getTag().equals("1")) {
+                    mViewModel.resheduleSlot(booking_id, client_id, date, slot_time_id);
+                } else if (btn_edit_popup_save.getTag().equals("0")) {
+                    Log.d("btn_continue", "notify");
+                    //homeViewModel.sendNotifySlotAvailableRequest(sessionManager.getClientId(), getSelectedDate(cView.getDate()),String.valueOf(slot_time_id));
+                }
+            }
+        });
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void createAvailableSlots(Context context, List<AvailableSlotsData> availableSlotsData) {
+        book_date = getSelectedDate(cView.getDate());
+        if (availableSlotsData.size() == 2) {
+            btn_slot_1.setVisibility(View.VISIBLE);
+            btn_slot_2.setVisibility(View.VISIBLE);
+            btn_slot_1.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+            btn_slot_2.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+            btn_edit_popup_save.setEnabled(false);
+            btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.greyed_out));
+            btn_edit_popup_save.setText(R.string.btn_txt_save);
+            btn_edit_popup_save.setTextColor(context.getColor(R.color.white));
+            btn_slot_1.setText(availableSlotsData.get(0).getSlotTime());
+            btn_slot_2.setText(availableSlotsData.get(1).getSlotTime());
+            if (availableSlotsData.get(0).getAvailableStatus()) {
+                btn_slot_1.setTextColor(context.getColor(R.color.black));
+            } else {
+                btn_slot_1.setTextColor(context.getColor(R.color.greyed_out));
+            }
+            if (availableSlotsData.get(1).getAvailableStatus()) {
+                btn_slot_2.setTextColor(context.getColor(R.color.black));
+            } else {
+                btn_slot_2.setTextColor(context.getColor(R.color.greyed_out));
+            }
+
+        }
+
+        btn_slot_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn1Status = true;
+                if (btn2Status) {
+                    btn2Status = false;
+                    btn_edit_popup_save.setEnabled(false);
+                    btn_edit_popup_save.setText(R.string.btn_txt_save);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.greyed_out));
+                    if (availableSlotsData.get(1).getAvailableStatus()) {
+                        btn_slot_2.setTextColor(context.getColor(R.color.black));
+                        btn_slot_2.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    } else {
+                        btn_slot_2.setTextColor(context.getColor(R.color.greyed_out));
+                        btn_slot_2.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    }
+                }
+                slot_time_id = Integer.parseInt(availableSlotsData.get(0).getId());
+                if (availableSlotsData.get(0).getAvailableStatus()) {
+
+                    btn_edit_popup_save.setEnabled(true);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.primary_varient));
+                    btn_edit_popup_save.setText(R.string.btn_txt_save);
+                    btn_edit_popup_save.setTag("1");
+                    btn_edit_popup_save.setTextColor(context.getColor(R.color.white));
+                    btn_slot_1.setTextColor(context.getColor(R.color.white));
+                    btn_slot_1.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_available_button));
+                } else {
+
+                    btn_edit_popup_save.setEnabled(true);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.purple_profile));
+                    btn_edit_popup_save.setText(R.string.btn_txt_notify_me);
+                    btn_edit_popup_save.setTag("0");
+                    btn_edit_popup_save.setTextColor(context.getColor(R.color.white));
+                    btn_slot_1.setTextColor(context.getColor(R.color.white));
+                    btn_slot_1.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_notify_button));
+                }
+            }
+        });
+        btn_slot_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn2Status = true;
+                if (btn1Status) {
+                    btn1Status = false;
+                    btn_edit_popup_save.setEnabled(false);
+                    btn_edit_popup_save.setText(R.string.btn_txt_save);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.greyed_out));
+                    if (availableSlotsData.get(0).getAvailableStatus()) {
+                        btn_slot_1.setTextColor(context.getColor(R.color.black));
+                        btn_slot_1.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    } else {
+                        btn_slot_1.setTextColor(context.getColor(R.color.greyed_out));
+                        btn_slot_1.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_not_available_button));
+                    }
+                }
+                slot_time_id = Integer.parseInt(availableSlotsData.get(1).getId());
+                if (availableSlotsData.get(1).getAvailableStatus()) {
+
+                    btn_edit_popup_save.setEnabled(true);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.primary_varient));
+                    btn_edit_popup_save.setText(R.string.btn_txt_save);
+                    btn_edit_popup_save.setTag("1");
+                    btn_edit_popup_save.setTextColor(context.getColor(R.color.white));
+                    btn_slot_2.setTextColor(context.getColor(R.color.white));
+                    btn_slot_2.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_available_button));
+                } else {
+
+                    btn_edit_popup_save.setEnabled(true);
+                    btn_edit_popup_save.setBackgroundColor(context.getColor(R.color.purple_profile));
+                    btn_edit_popup_save.setText(R.string.btn_txt_notify_me);
+                    btn_edit_popup_save.setTag("0");
+                    btn_edit_popup_save.setTextColor(context.getColor(R.color.white));
+                    btn_slot_2.setTextColor(context.getColor(R.color.white));
+                    btn_slot_2.setBackground(context.getDrawable(R.drawable.bg_preferred_slot_notify_button));
+                }
+            }
+        });
+
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.dbot.client.main.projects;
+package com.dbot.client.main.projects.details;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,10 +24,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
 import com.dbot.client.common.Popup;
+import com.dbot.client.main.MainActivity;
+import com.dbot.client.main.projects.ProjectsFragment;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.dbot.client.main.projects.model.FileRequestResponse;
-import com.dbot.client.main.projects.model.ProjectTrackingResponse;
-import com.dbot.client.main.projects.model.RefundAmountResponse;
+import com.dbot.client.main.projects.details.model.FileRequestResponse;
+import com.dbot.client.main.projects.details.model.ProjectTrackingResponse;
+import com.dbot.client.main.projects.details.model.RefundAmountResponse;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -147,7 +149,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
         popup = new Popup();
         mViewModel = new ViewModelProvider(this).get(ProjectFullDetailsViewlModel.class);
         mViewModel.getProjectTracking(projectData.getBookingId());
-        mViewModel.getProjectTrackingResult().observe(this, new Observer<ProjectTrackingResponse>() {
+        mViewModel.getProjectTrackingResult().observe(getViewLifecycleOwner(), new Observer<ProjectTrackingResponse>() {
             @Override
             public void onChanged(ProjectTrackingResponse projectTrackingResponse) {
                 if (projectTrackingResponse != null) {
@@ -285,11 +287,12 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                 break;
             case R.id.tv_project_details_cp_phone:
                 String number=tv_project_details_cp_phone.getText().toString();
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:"+number));
                 startActivity(callIntent);
                 break;
              case R.id.tv_project_details_reshedule:
+                 popup.showReshedulePopupWindow(getContext(),this,getViewLifecycleOwner(),booking_id,getView(),mViewModel, MainActivity.sessionManager.getClientId());
                 break;
 
             case R.id.iv_project_details_edit:

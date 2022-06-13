@@ -1,4 +1,4 @@
-package com.dbot.client.main.projects.model;
+package com.dbot.client.main.projects.details.model;
 
 import com.dbot.client.retrofit.Status;
 import com.google.gson.annotations.Expose;

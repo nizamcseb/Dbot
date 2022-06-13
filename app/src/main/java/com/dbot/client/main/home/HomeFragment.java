@@ -1,6 +1,7 @@
 package com.dbot.client.main.home;
 
 import static com.dbot.client.common.CommonFunctions.findCityPosition;
+import static com.dbot.client.common.CommonFunctions.getSelectedDate;
 import static com.dbot.client.main.MainActivity.book_date;
 import static com.dbot.client.main.MainActivity.slot_time_id;
 
@@ -109,7 +110,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         cView.setOnDateChangeListener(this::onSelectedDayChange);
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
-        homeViewModel.getAvailableSlotsResult().observe(this, new Observer<List<AvailableSlotsData>>() {
+        homeViewModel.getAvailableSlotsResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableSlotsData>>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @SuppressLint("LongLogTag")
             @Override
@@ -120,7 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         });
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
-        loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
+        loginViewModel.getCityResult().observe(getViewLifecycleOwner(), new Observer<List<CityData>>() {
             @Override
             public void onChanged(List<CityData> cityData) {
                 cityDataList = cityData;
@@ -146,7 +147,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 });
             }
         });
-        homeViewModel.getQuickMessageResult().observe(this, new Observer<Status>() {
+        homeViewModel.getQuickMessageResult().observe(getViewLifecycleOwner(), new Observer<Status>() {
             @Override
             public void onChanged(Status status) {
                 if (status != null) {
@@ -155,7 +156,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 }
             }
         });
-        homeViewModel.getTCResult().observe(this, new Observer<TermsAndConditionsResponse>() {
+        homeViewModel.getTCResult().observe(getViewLifecycleOwner(), new Observer<TermsAndConditionsResponse>() {
             @Override
             public void onChanged(TermsAndConditionsResponse termsAndConditionsResponse) {
                 if (termsAndConditionsResponse != null) {
@@ -165,7 +166,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
 
             }
         });
-        homeViewModel.getNotifySlotAvailableRequestResult().observe(this, new Observer<NotifySlotRequestResponse>() {
+        homeViewModel.getNotifySlotAvailableRequestResult().observe(getViewLifecycleOwner(), new Observer<NotifySlotRequestResponse>() {
             @Override
             public void onChanged(NotifySlotRequestResponse notifySlotRequestResponse) {
                 if (notifySlotRequestResponse.getStatus().getCode() == 1035) {
@@ -398,10 +399,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         homeViewModel.getAvailableSlots(date);
     }
 
-    private String getSelectedDate(long date) {
-        String dateString = DateFormat.format("dd-MM-yyyy", new Date(date)).toString();
-        return dateString;
-    }
+
 
     private void setTriangle(String prod) {
         if(prod.equals("2d")){

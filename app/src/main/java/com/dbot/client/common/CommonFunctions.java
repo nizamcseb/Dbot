@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import com.dbot.client.retrofit.ApiInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -102,7 +104,10 @@ public class CommonFunctions {
     public static void netWorkErrorAlert(Activity activity) {
         Snackbar.make(activity.getCurrentFocus().getRootView(), activity.getString(R.string.msg_network_failed), Snackbar.LENGTH_SHORT).show();
     }
-
+    public static String getSelectedDate(long date) {
+        String dateString = DateFormat.format("dd-MM-yyyy", new Date(date)).toString();
+        return dateString;
+    }
     public static boolean checkEmptyValidatation(EditText editText) {
         if (editText.getText().toString().equals("") || editText.getText().toString().equals(null))
             return false;

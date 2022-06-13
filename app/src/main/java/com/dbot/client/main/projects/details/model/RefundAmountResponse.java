@@ -1,5 +1,6 @@
-package com.dbot.client.main.projects.model;
+package com.dbot.client.main.projects.details.model;
 
+import com.dbot.client.main.projects.details.model.RefundAmount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

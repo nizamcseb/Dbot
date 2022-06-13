@@ -1,7 +1,6 @@
 package com.dbot.client.main.projects;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dbot.client.R;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeFragment;
-import com.dbot.client.main.profile.refer.ReferFragment;
+import com.dbot.client.main.projects.details.ProjectFullDetailsFragment;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 

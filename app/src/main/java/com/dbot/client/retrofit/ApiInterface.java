@@ -17,13 +17,14 @@ import com.dbot.client.main.newrequest.model.PackageResponse;
 import com.dbot.client.main.profile.faq.model.FAQsResponse;
 import com.dbot.client.main.profile.pr.rs.model.RefundResponse;
 import com.dbot.client.main.profile.refer.model.RcAndRhResponse;
-import com.dbot.client.main.projects.model.CancelRequestResponse;
+import com.dbot.client.main.projects.details.model.CancelRequestResponse;
+import com.dbot.client.main.projects.details.model.ResheduleResponse;
 import com.dbot.client.main.projects.model.ClientProjectResponse;
-import com.dbot.client.main.projects.model.FileRequestResponse;
-import com.dbot.client.main.projects.model.ProjectTrackingResponse;
-import com.dbot.client.main.projects.model.RefundAmountResponse;
-import com.dbot.client.main.projects.model.UpdateProject;
-import com.dbot.client.main.projects.model.UpdateProjectResponse;
+import com.dbot.client.main.projects.details.model.FileRequestResponse;
+import com.dbot.client.main.projects.details.model.ProjectTrackingResponse;
+import com.dbot.client.main.projects.details.model.RefundAmountResponse;
+import com.dbot.client.main.projects.details.model.UpdateProject;
+import com.dbot.client.main.projects.details.model.UpdateProjectResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -120,6 +121,11 @@ public interface ApiInterface {
     //Get Refund List
     @GET("report/refundstatus/{client_id}")
     Call<RefundResponse> getRefundList(@Path("client_id") String client_id);
+
+    @Headers("Content-Type: application/json")
+    @POST("slotbooking/reschedule")
+    Call<ResheduleResponse> sendReshedule(@Query("booking_id") String booking_id,@Query("client_id") String client_id, @Query("book_date") String book_date, @Query("slot_time_id") Integer slot_time_id);
+
 
     //Get Available Coupons
     @GET("client/getavailablecoupons/{client_id}")
