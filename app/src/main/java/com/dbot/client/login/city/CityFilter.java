@@ -1,9 +1,10 @@
-package com.dbot.client.login;
+package com.dbot.client.login.city;
 
 import android.util.Log;
 import android.widget.Filter;
 
-import com.dbot.client.login.model.CityData;
+import com.dbot.client.login.city.CityAdapter;
+import com.dbot.client.login.city.CityData;
 
 import java.util.ArrayList;
 import java.util.List;

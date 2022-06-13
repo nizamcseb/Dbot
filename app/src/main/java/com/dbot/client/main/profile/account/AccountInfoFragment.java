@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentAccountInfoBinding;
-import com.dbot.client.login.CityAdapter;
 import com.dbot.client.login.LoginViewModel;
-import com.dbot.client.login.model.CityData;
+import com.dbot.client.login.city.CityAdapter;
+import com.dbot.client.login.city.CityData;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
 import com.dbot.client.main.profile.ProfileFragment;
@@ -68,9 +69,24 @@ public class AccountInfoFragment extends Fragment {
             binding.etProfileCompanyPhoneNumber.setText(sessionManager.getClientCompanyPhone());
         if (sessionManager.getClientCompanyEmail() != null)
             binding.etProfileCompanyEmailAddress.setText(sessionManager.getClientCompanyEmail());
-        if (sessionManager.getFreeLancer() == 1)
+        if (sessionManager.getFreeLancer() == 1) {
             binding.rgFreelancer.check(binding.rbFreelancerYes.getId());
-        else binding.rgFreelancer.check(binding.rbFreelancerNo.getId());
+            stars(true);
+        } else {
+            binding.rgFreelancer.check(binding.rbFreelancerNo.getId());
+        }
+        binding.rgFreelancer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int id = radioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) root.findViewById(id);
+                if(radioButton.getTag().toString().equals("1"))
+                    stars(true);
+                if(radioButton.getTag().toString().equals("0"))
+                    stars(false);
+
+            }
+        });
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
         loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
@@ -112,13 +128,16 @@ public class AccountInfoFragment extends Fragment {
                     binding.etProfilePhone.setError("Required");
                 else if (!checkEmptyValidatation(binding.etProfileEmail))
                     binding.etProfileEmail.setError("Required");
-                else if (!checkEmptyValidatation(binding.etProfileCompanyName))
+                else if (!checkEmptyValidatation(binding.etProfileCompanyName) && radioButton.getTag().toString().equals("0")) {
+
                     binding.etProfileCompanyName.setError("Required");
-                else if (!checkEmptyValidatation(binding.etProfileCompanyPhoneNumber))
+                } else if (!checkEmptyValidatation(binding.etProfileCompanyPhoneNumber) && radioButton.getTag().toString().equals("0")) {
+
                     binding.etProfileCompanyPhoneNumber.setError("Required");
-                else if (!checkEmptyValidatation(binding.etProfileCompanyEmailAddress))
+                } else if (!checkEmptyValidatation(binding.etProfileCompanyEmailAddress) && radioButton.getTag().toString().equals("0")) {
+
                     binding.etProfileCompanyEmailAddress.setError("Required");
-                else {
+                } else {
                     User user = new User(sessionManager.getClientId(),
                             name, phone, email, cName, cPhone, cEmail, city, Integer.parseInt(radioButton.getTag().toString()), null, null, 0, null);
                     loginViewModel.updateClientProfile(user);
@@ -153,6 +172,18 @@ public class AccountInfoFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+    }
+
+    private void stars(boolean hide) {
+        if(hide) {
+            binding.tvStarProfileCompanyName.setVisibility(View.INVISIBLE);
+            binding.tvStarProfileCompanyPhoneNumber.setVisibility(View.INVISIBLE);
+            binding.tvStarProfileCompanyEmailAddress.setVisibility(View.INVISIBLE);
+        }else {
+            binding.tvStarProfileCompanyName.setVisibility(View.VISIBLE);
+            binding.tvStarProfileCompanyPhoneNumber.setVisibility(View.VISIBLE);
+            binding.tvStarProfileCompanyEmailAddress.setVisibility(View.VISIBLE);
+        }
     }
 
 }

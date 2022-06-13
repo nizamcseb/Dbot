@@ -6,11 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.login.model.CityData;
-import com.dbot.client.login.model.CityResponse;
-import com.dbot.client.login.model.SignUpResponse;
-import com.dbot.client.login.model.User;
 import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
+import com.dbot.client.main.newrequest.model.AvailableCoupon;
+import com.dbot.client.main.newrequest.model.AvailableCouponResponse;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;
 import com.dbot.client.main.newrequest.model.PackageData;
@@ -27,6 +25,7 @@ import retrofit2.Response;
 
 public class Request3ViewModel extends ViewModel {
     private MutableLiveData<List<PackageData>> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<AvailableCoupon>> availableCouponMutableData = new MutableLiveData<>();
     private MutableLiveData<BookSlotResponse> bookSlotResponseMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ApplyCouponResponse> applyCouponResponseMutableLiveData = new MutableLiveData<>();
     public void getPackages(){
@@ -43,7 +42,30 @@ public class Request3ViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<PackageResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+    }
+    public void getAvailableCoupons(String client_id){
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<AvailableCouponResponse> call = apiInterface.getAvailableCoupons(client_id);
+        call.enqueue(new Callback<AvailableCouponResponse>() {
+            @Override
+            public void onResponse(Call<AvailableCouponResponse> call, Response<AvailableCouponResponse> response) {
+                if(response.isSuccessful()) {
+                    Log.d("getAvailableCouponResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    availableCouponMutableData.setValue(response.body().getData());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<AvailableCouponResponse> call, Throwable t) {
+                availableCouponMutableData.setValue(null);
+                call.cancel();
+                t.printStackTrace();
+                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
             }
         });
     }
@@ -60,6 +82,7 @@ public class Request3ViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<BookSlotResponse> call, Throwable t) {
+                bookSlotResponseMutableLiveData.setValue(null);
                 call.cancel();
                 t.printStackTrace();
                 Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
@@ -78,6 +101,7 @@ public class Request3ViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ApplyCouponResponse> call, Throwable t) {
+                applyCouponResponseMutableLiveData.setValue(null);
                 call.cancel();
                 t.printStackTrace();
                 Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
@@ -87,10 +111,14 @@ public class Request3ViewModel extends ViewModel {
     public LiveData<List<PackageData>> getPackagesResult() {
         return mutableLiveData;
     }
+    public LiveData<List<AvailableCoupon>> getAvailableCouponResult() {
+        return availableCouponMutableData;
+    }
     public LiveData<BookSlotResponse> getBookSlotResult() {
         return bookSlotResponseMutableLiveData;
     }
     public LiveData<ApplyCouponResponse> getApplyCouponResult() {
         return applyCouponResponseMutableLiveData;
     }
+
 }

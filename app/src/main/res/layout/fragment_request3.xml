@@ -214,15 +214,16 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@color/greyed_out" />
 
-                <EditText
-                    android:id="@+id/et_available_coupon"
+                <TextView
+                    android:id="@+id/tv_available_coupon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:drawableEnd="@drawable/ic_arrow_down"
                     android:background="@drawable/bg_edit_text"
-                    android:hint="Select Available Coupon"
-                    android:imeOptions="actionDone"
-                    android:inputType="text" />
+                    android:text="Select Available Coupon"
+                    android:textSize="@dimen/_13ssp"
+                     />
 
                 <TextView
                     style="@style/bold"

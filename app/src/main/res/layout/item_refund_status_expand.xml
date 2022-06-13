@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_rs_booking_id"
@@ -61,13 +62,13 @@
 
                 <ImageView
                     android:id="@+id/iv_rs_initiated"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/ic_project_status_without_tick" />
 
                 <View
                     android:id="@+id/v_rs_processed"
-                    android:layout_width="@dimen/_6sdp"
+                    android:layout_width="@dimen/_3sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="-1dp"
@@ -115,13 +116,13 @@
 
                 <ImageView
                     android:id="@+id/iv_rs_processed"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/ic_project_status_without_tick" />
 
                 <View
                     android:id="@+id/v_rs_credited"
-                    android:layout_width="@dimen/_6sdp"
+                    android:layout_width="@dimen/_3sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="-1dp"
@@ -166,8 +167,8 @@
 
             <ImageView
                 android:id="@+id/iv_rs_credited"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/ic_project_status_without_tick" />
 
 

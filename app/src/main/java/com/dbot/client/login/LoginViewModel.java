@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.login.model.CityData;
-import com.dbot.client.login.model.CityResponse;
+import com.dbot.client.login.city.CityData;
+import com.dbot.client.login.city.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;

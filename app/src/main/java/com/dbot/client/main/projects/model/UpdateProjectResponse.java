@@ -1,26 +1,25 @@
-package com.dbot.client.login.model;
+package com.dbot.client.main.projects.model;
 
 import com.dbot.client.retrofit.Status;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class CityResponse {
+public class UpdateProjectResponse {
     @SerializedName("data")
     @Expose
-    private List<CityData> data = null;
+    private ClientProjectData data;
     @SerializedName("status")
     @Expose
     private Status status;
 
-    public List<CityData> getCityListData() {
+    public ClientProjectData getClientProjectData() {
         return data;
     }
 
-    public void setCityListData(List<CityData> data) {
+    public void setClientProjectData(ClientProjectData data) {
         this.data = data;
     }
+
     public Status getStatus() {
         return status;
     }

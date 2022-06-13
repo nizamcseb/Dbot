@@ -159,4 +159,5 @@
     <string name="package_details">PACKAGE DETAILS</string>
     <string name="pay_now">PAY NOW</string>
     <string name="payment_and_refund"><![CDATA[Payment & Refund]]></string>
+    <string name="invite_msg_refer_earn">Invite your friends to try Dbot services and win a <b>FREE</b> documentaion service when they avail their first service.</string>
 </resources>

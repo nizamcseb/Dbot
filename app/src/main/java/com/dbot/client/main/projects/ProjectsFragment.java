@@ -52,7 +52,8 @@ public class ProjectsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         projectsViewModel = new ViewModelProvider(this).get(ProjectsViewModel.class);
         // TODO: Use the ViewModel
-        projectsViewModel.getProjects(MainActivity.sessionManager.getClientId()).observe(this, new Observer<List<ClientProjectData>>() {
+        projectsViewModel.getProjects(MainActivity.sessionManager.getClientId());
+        projectsViewModel.getProjectResult().observe(this, new Observer<List<ClientProjectData>>() {
             @Override
             public void onChanged(List<ClientProjectData> clientProjectDataList) {
                 if (clientProjectDataList != null) {

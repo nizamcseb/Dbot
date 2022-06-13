@@ -1,6 +1,9 @@
 package com.dbot.client.main.profile.faq;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +48,7 @@ public class FAQsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
         return view;
     }
 
@@ -57,8 +61,25 @@ public class FAQsFragment extends Fragment {
             @Override
             public void onChanged(List<FAQsData> faQsDataList) {
                 if(faQsDataList != null){
-                    FAQsAdapter faQsAdapter = new FAQsAdapter(getContext(),faQsDataList);
+                    FAQsAdapter faQsAdapter = new FAQsAdapter(getActivity(),getContext(),faQsDataList);
                     binding.lvFaqs.setAdapter(faQsAdapter);
+                    binding.etFaqSearch.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            Log.d("searchText",charSequence.toString());
+                            faQsAdapter.getFilter().filter(charSequence.toString());
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
+                    });
                 }
 
             }

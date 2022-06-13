@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.dbot.client.R;
-import com.dbot.client.login.model.CityData;
+import com.dbot.client.login.city.CityData;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.newrequest.model.BookSlot;
 import com.dbot.client.main.newrequest.model.BookSlotResponse;

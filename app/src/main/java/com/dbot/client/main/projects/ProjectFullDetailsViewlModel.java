@@ -7,16 +7,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.main.profile.faq.model.FAQsData;
 import com.dbot.client.main.projects.model.ClientProjectData;
-import com.dbot.client.main.projects.model.ClientProjectResponse;
+import com.dbot.client.main.projects.model.FileRequestResponse;
 import com.dbot.client.main.projects.model.ProjectTrackingResponse;
-import com.dbot.client.main.projects.model.RefundAmountResponse;
+import com.dbot.client.main.projects.model.UpdateProject;
+import com.dbot.client.main.projects.model.UpdateProjectResponse;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
+import com.dbot.client.retrofit.Status;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +25,8 @@ public class ProjectFullDetailsViewlModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<ClientProjectData> listMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ProjectTrackingResponse> projectTrackingResponseMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<RefundAmountResponse> refundAmountResponseMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<UpdateProjectResponse> updateProjectResponseMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<FileRequestResponse> fileRequestResponseMutableLiveData = new MutableLiveData<>();
 
 
     public LiveData<ClientProjectData> getProject(ClientProjectData clientProjectData) {
@@ -60,27 +60,51 @@ public class ProjectFullDetailsViewlModel extends ViewModel {
             }
         });
     }
-    public void getRefundAmound(String booking_id) {
+    public void updateProject(UpdateProject updateProject) {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<RefundAmountResponse> call = apiInterface.getRefundAmount(booking_id);
-        call.enqueue(new Callback<RefundAmountResponse>() {
+        Call<UpdateProjectResponse> call = apiInterface.updateProject(updateProject);
+        call.enqueue(new Callback<UpdateProjectResponse>() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onResponse(Call<RefundAmountResponse> call, Response<RefundAmountResponse> response) {
+            public void onResponse(Call<UpdateProjectResponse> call, Response<UpdateProjectResponse> response) {
 
                 if (response.isSuccessful()) {
-                    Log.d("RefundAmountResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    Log.d("UpdateProjectResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                     if (response.body() !=null)
-                        refundAmountResponseMutableLiveData.setValue(response.body());
+                        updateProjectResponseMutableLiveData.setValue(response.body());
 
                 }
             }
 
             @SuppressLint("LongLogTag")
             @Override
-            public void onFailure(Call<RefundAmountResponse> call, Throwable t) {
-                Log.e("RefundAmountResponse error",t.getMessage());
-                refundAmountResponseMutableLiveData.setValue(null);
+            public void onFailure(Call<UpdateProjectResponse> call, Throwable t) {
+                Log.e("updateProject error",t.getMessage());
+                updateProjectResponseMutableLiveData.setValue(null);
+            }
+        });
+    }
+    public void sendFileRequest(String booking_id) {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<FileRequestResponse> call = apiInterface.sendFileRequest(booking_id);
+        call.enqueue(new Callback<FileRequestResponse>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<FileRequestResponse> call, Response<FileRequestResponse> response) {
+
+                if (response.isSuccessful()) {
+                    Log.d("FileRequestResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+                    if (response.body() !=null)
+                        fileRequestResponseMutableLiveData.setValue(response.body());
+
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(Call<FileRequestResponse> call, Throwable t) {
+                Log.e("ProjectTrackingResponse error",t.getMessage());
+                fileRequestResponseMutableLiveData.setValue(null);
             }
         });
     }
@@ -90,7 +114,10 @@ public class ProjectFullDetailsViewlModel extends ViewModel {
     public LiveData<ProjectTrackingResponse> getProjectTrackingResult() {
         return projectTrackingResponseMutableLiveData;
     }
-    public LiveData<RefundAmountResponse> getRefundAmoundResult() {
-        return refundAmountResponseMutableLiveData;
+    public LiveData<UpdateProjectResponse> getUpdateProjectResult() {
+        return updateProjectResponseMutableLiveData;
+    }
+    public LiveData<FileRequestResponse> getFileRequestResult() {
+        return fileRequestResponseMutableLiveData;
     }
 }

@@ -54,34 +54,34 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tv_rs_processed_date = convertView.findViewById(R.id.tv_rs_processed_date);
         TextView tv_rs_credited_date = convertView.findViewById(R.id.tv_rs_credited_date);
         tv_rs_booking_id.setText(refundDataList.get(listPosition).getBookingId());
-        tv_rs_refund_amount.setText(context.getString(R.string.symbol_rupee)+" "+refundDataList.get(listPosition).getRefundAmount());
+        tv_rs_refund_amount.setText(context.getString(R.string.symbol_rupee) + " " + refundDataList.get(listPosition).getRefundAmount());
         tv_rs_status.setText(refundDataList.get(listPosition).getRefundStatus().getStatus());
-       if(refundDataList.get(listPosition).getRefundStatus().getId().equals("1")) {
-           tv_rs_status.setTextColor(context.getColor(R.color.primary_varient));
-           iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("1")) {
+            tv_rs_status.setTextColor(context.getColor(R.color.primary_varient));
+            iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
 
-       }
-       if(refundDataList.get(listPosition).getRefundStatus().getId().equals("2")) {
-           tv_rs_status.setTextColor(context.getColor(R.color.purple_profile));
-           iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
-           iv_rs_processed.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
-           v_rs_processed.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
+        }
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("2")) {
+            tv_rs_status.setTextColor(context.getColor(R.color.purple_profile));
+            iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+            iv_rs_processed.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+            v_rs_processed.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
 
-       }
-       if(refundDataList.get(listPosition).getRefundStatus().getId().equals("3")) {
-           tv_rs_status.setTextColor(context.getColor(R.color.green));
-           iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
-           iv_rs_processed.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
-           v_rs_processed.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
-           iv_rs_credited.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
-           v_rs_credited.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
+        }
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("3")) {
+            tv_rs_status.setTextColor(context.getColor(R.color.green));
+            iv_rs_initiated.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+            iv_rs_processed.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+            v_rs_processed.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
+            iv_rs_credited.setImageDrawable(context.getDrawable(R.drawable.ic_refund_status_done));
+            v_rs_credited.setBackgroundColor(context.getColor(R.color.refund_status_filled_color));
 
-       }
-        if(refundDataList.get(listPosition).getRefundInitiatedOn() != null)
+        }
+        if (refundDataList.get(listPosition).getRefundInitiatedOn() != null)
             tv_rs_initiated_date.setText(refundDataList.get(listPosition).getRefundInitiatedOn());
-        if(refundDataList.get(listPosition).getRefundProcessedOn() != null)
+        if (refundDataList.get(listPosition).getRefundProcessedOn() != null)
             tv_rs_processed_date.setText(refundDataList.get(listPosition).getRefundProcessedOn());
-        if(refundDataList.get(listPosition).getRefundCreditedOn() != null)
+        if (refundDataList.get(listPosition).getRefundCreditedOn() != null)
             tv_rs_credited_date.setText(refundDataList.get(listPosition).getRefundCreditedOn());
         return convertView;
     }
@@ -114,13 +114,20 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.item_refund_status_group, null);
         }
-        TextView tv_rs_booking_id =convertView.findViewById(R.id.tv_rs_booking_id);
-        TextView tv_rs_refund_amount =convertView.findViewById(R.id.tv_rs_refund_amount);
-        TextView tv_rs_status =convertView.findViewById(R.id.tv_rs_status);
+        TextView tv_rs_booking_id = convertView.findViewById(R.id.tv_rs_booking_id);
+        TextView tv_rs_refund_amount = convertView.findViewById(R.id.tv_rs_refund_amount);
+        TextView tv_rs_status = convertView.findViewById(R.id.tv_rs_status);
 
         tv_rs_booking_id.setText(refundDataList.get(listPosition).getBookingId());
-        tv_rs_refund_amount.setText(context.getString(R.string.symbol_rupee)+" "+refundDataList.get(listPosition).getRefundAmount());
+        tv_rs_refund_amount.setText(context.getString(R.string.symbol_rupee) + " " + refundDataList.get(listPosition).getRefundAmount());
         tv_rs_status.setText(refundDataList.get(listPosition).getRefundStatus().getStatus());
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("1"))
+            tv_rs_status.setTextColor(context.getColor(R.color.refund_status_initiated));
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("2"))
+            tv_rs_status.setTextColor(context.getColor(R.color.refund_status_processing));
+        if (refundDataList.get(listPosition).getRefundStatus().getId().equals("3"))
+            tv_rs_status.setTextColor(context.getColor(R.color.refund_status_completed));
+
         return convertView;
     }
 
