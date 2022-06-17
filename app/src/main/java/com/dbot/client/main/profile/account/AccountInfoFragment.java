@@ -5,12 +5,17 @@ import static com.dbot.client.common.CommonFunctions.findCityPosition;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +29,10 @@ import com.dbot.client.R;
 import com.dbot.client.common.SessionManager;
 import com.dbot.client.databinding.FragmentAccountInfoBinding;
 import com.dbot.client.login.LoginViewModel;
-import com.dbot.client.login.city.CityAdapter;
-import com.dbot.client.login.city.CityData;
+import com.dbot.client.login.OtpEditText;
+import com.dbot.client.common.city.CityAdapter;
+import com.dbot.client.common.city.CityData;
+import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
 import com.dbot.client.main.profile.ProfileFragment;
@@ -42,6 +49,8 @@ public class AccountInfoFragment extends Fragment {
     List<CityData> cityDataList;
     String city;
     View root;
+    User user;
+    boolean isOtpVerified = false;
 
     public static AccountInfoFragment newInstance() {
         return new AccountInfoFragment();
@@ -80,16 +89,16 @@ public class AccountInfoFragment extends Fragment {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int id = radioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) root.findViewById(id);
-                if(radioButton.getTag().toString().equals("1"))
+                if (radioButton.getTag().toString().equals("1"))
                     stars(true);
-                if(radioButton.getTag().toString().equals("0"))
+                if (radioButton.getTag().toString().equals("0"))
                     stars(false);
 
             }
         });
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
-        loginViewModel.getCityResult().observe(this, new Observer<List<CityData>>() {
+        loginViewModel.getCityResult().observe(getViewLifecycleOwner(), new Observer<List<CityData>>() {
             @Override
             public void onChanged(List<CityData> cityData) {
                 cityDataList = cityData;
@@ -138,13 +147,24 @@ public class AccountInfoFragment extends Fragment {
 
                     binding.etProfileCompanyEmailAddress.setError("Required");
                 } else {
-                    User user = new User(sessionManager.getClientId(),
+
+                    user = new User(sessionManager.getClientId(),
                             name, phone, email, cName, cPhone, cEmail, city, Integer.parseInt(radioButton.getTag().toString()), null, null, 0, null);
-                    loginViewModel.updateClientProfile(user);
+                    if (sessionManager.getClientPhone().equals(phone))
+                        loginViewModel.updateClientProfile(user);
+                    else {
+                        loginViewModel.loginGetOtp(phone);
+                    }
                 }
             }
         });
-        loginViewModel.getSignUpResult().observe(this, new Observer<SignUpResponse>() {
+        loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), new Observer<LoginResponse>() {
+            @Override
+            public void onChanged(LoginResponse loginResponse) {
+                otpVerificationPopup(getView(), loginResponse);
+            }
+        });
+        loginViewModel.getSignUpResult().observe(getViewLifecycleOwner(), new Observer<SignUpResponse>() {
             @Override
             public void onChanged(SignUpResponse signUpResponse) {
                 if (signUpResponse.getStatus().getCode() == 1027) {
@@ -175,15 +195,50 @@ public class AccountInfoFragment extends Fragment {
     }
 
     private void stars(boolean hide) {
-        if(hide) {
+        if (hide) {
             binding.tvStarProfileCompanyName.setVisibility(View.INVISIBLE);
             binding.tvStarProfileCompanyPhoneNumber.setVisibility(View.INVISIBLE);
             binding.tvStarProfileCompanyEmailAddress.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             binding.tvStarProfileCompanyName.setVisibility(View.VISIBLE);
             binding.tvStarProfileCompanyPhoneNumber.setVisibility(View.VISIBLE);
             binding.tvStarProfileCompanyEmailAddress.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void otpVerificationPopup(View view, LoginResponse loginResponse) {
+
+        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_otp, null);
+
+        //Specify the length and width through constants
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+
+        //Make Inactive Items Outside Of PopupWindow
+        boolean focusable = true;
+
+        //Create a window with our parameters
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        //Set the location of the window on the screen
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        OtpEditText otpEditText = popupView.findViewById(R.id.et_popup_otp);
+        Button btn_popup_continue = popupView.findViewById(R.id.btn_popup_continue);
+        btn_popup_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(otpEditText.getText().toString().equals(String.valueOf(loginResponse.getOtp()))) {
+                    isOtpVerified = true;
+                    loginViewModel.updateClientProfile(user);
+                    //Toast.makeText(getContext(), "Otp verified successfully", Toast.LENGTH_SHORT).show();
+                    popupWindow.dismiss();
+                }else Toast.makeText(getContext(), "Enter Correct OTP", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
 }

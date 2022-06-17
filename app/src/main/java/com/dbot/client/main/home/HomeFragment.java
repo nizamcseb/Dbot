@@ -2,25 +2,23 @@ package com.dbot.client.main.home;
 
 import static com.dbot.client.common.CommonFunctions.findCityPosition;
 import static com.dbot.client.common.CommonFunctions.getSelectedDate;
+import static com.dbot.client.common.Popup.SearchCity;
 import static com.dbot.client.main.MainActivity.book_date;
 import static com.dbot.client.main.MainActivity.slot_time_id;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,14 +30,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dbot.client.R;
 import com.dbot.client.common.CommonFunctions;
 import com.dbot.client.common.Popup;
 import com.dbot.client.common.SessionManager;
-import com.dbot.client.login.city.CityAdapter;
+import com.dbot.client.common.city.CityData;
+import com.dbot.client.common.city.SaveCity;
 import com.dbot.client.login.LoginViewModel;
-import com.dbot.client.login.city.CityData;
+import com.dbot.client.login.SignupActivity;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.adapter.TCAdapter;
 import com.dbot.client.main.home.model.AvailableSlotsData;
@@ -50,23 +50,24 @@ import com.dbot.client.retrofit.Status;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
-import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener, NestedScrollView.OnScrollChangeListener, SaveCity, SwipeRefreshLayout.OnRefreshListener {
     SessionManager sessionManager;
     private HomeViewModel homeViewModel;
     private LoginViewModel loginViewModel;
-    NestedScrollView ns_home;
-    List<CityData> cityDataList;
-    Spinner spCity;
+    SaveCity saveCity;
+    NestedScrollView ns_home1, ns_home2, ns_home3, ns_home4, ns_home5;
+    SwipeRefreshLayout swipeRefreshLayout2,swipeRefreshLayout3,swipeRefreshLayout4,swipeRefreshLayout5;
+    CityData cityData;
     CalendarView cView;
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
     Button btn_continue, btn_book_documentation, btn_slot_1, btn_slot_2, btn_quick_msg_send;
-    TextView tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
-    ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition,iv_tri_2d,iv_tri_360,iv_tri_3d;
+    TextView tv_city_search, tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
+    ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition, iv_tri_2d, iv_tri_360, iv_tri_3d;
     EditText et_quick_msg;
     ListView lv_Tc;
+    View home1, home2, home3, home4, home5;
     boolean btn1Status = false, btn2Status = false;
 
     public static HomeFragment newInstance() {
@@ -78,8 +79,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                              @Nullable Bundle savedInstanceState) {
         sessionManager = new SessionManager(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        ns_home = root.findViewById(R.id.ns_home);
-        spCity = root.findViewById(R.id.sp_city);
+        ns_home1 = root.findViewById(R.id.ns_home1);
+        ns_home2 = root.findViewById(R.id.ns_home2);
+        ns_home3 = root.findViewById(R.id.ns_home3);
+        ns_home4 = root.findViewById(R.id.ns_home4);
+        ns_home5 = root.findViewById(R.id.ns_home5);
+        swipeRefreshLayout2 = root.findViewById(R.id.swipeRefreshLayout2);
+        swipeRefreshLayout3 = root.findViewById(R.id.swipeRefreshLayout3);
+        swipeRefreshLayout4 = root.findViewById(R.id.swipeRefreshLayout4);
+        swipeRefreshLayout5 = root.findViewById(R.id.swipeRefreshLayout5);
+
+        tv_city_search = root.findViewById(R.id.tv_city_search);
         tv_available_message = root.findViewById(R.id.tv_available_message);
         tv_available_message.setVisibility(View.INVISIBLE);
         cView = root.findViewById(R.id.calendarView);
@@ -107,7 +117,58 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         btn_slot_1 = root.findViewById(R.id.btn_slot_1);
         btn_slot_2 = root.findViewById(R.id.btn_slot_2);
         Log.d("calendarView ", getSelectedDate(cView.getDate()));
+        home1 = root.findViewById(R.id.home1);
+        home2 = root.findViewById(R.id.home2);
+        home3 = root.findViewById(R.id.home3);
+        home4 = root.findViewById(R.id.home4);
+        home5 = root.findViewById(R.id.home5);
         cView.setOnDateChangeListener(this::onSelectedDayChange);
+        ns_home1.setOnScrollChangeListener(this::onScrollChange);
+        ns_home2.setOnScrollChangeListener(this::onScrollChange);
+        ns_home3.setOnScrollChangeListener(this::onScrollChange);
+        ns_home4.setOnScrollChangeListener(this::onScrollChange);
+        ns_home5.setOnScrollChangeListener(this::onScrollChange);
+        swipeRefreshLayout2.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (swipeRefreshLayout2.isRefreshing()) {
+                    swipeRefreshLayout2.setRefreshing(false);
+                }
+                home2.setVisibility(View.GONE);
+                home1.setVisibility(View.VISIBLE);
+            }
+        });
+        swipeRefreshLayout3.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (swipeRefreshLayout3.isRefreshing()) {
+                    swipeRefreshLayout3.setRefreshing(false);
+                }
+                home3.setVisibility(View.GONE);
+                home2.setVisibility(View.VISIBLE);
+            }
+        });
+        swipeRefreshLayout4.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (swipeRefreshLayout4.isRefreshing()) {
+                    swipeRefreshLayout4.setRefreshing(false);
+                }
+                home4.setVisibility(View.GONE);
+                home3.setVisibility(View.VISIBLE);
+            }
+        });
+        swipeRefreshLayout5.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (swipeRefreshLayout5.isRefreshing()) {
+                    swipeRefreshLayout5.setRefreshing(false);
+                }
+                home5.setVisibility(View.GONE);
+                home4.setVisibility(View.VISIBLE);
+            }
+        });
+
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
         homeViewModel.getAvailableSlotsResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableSlotsData>>() {
@@ -119,32 +180,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 createAvailableSlots(availableSlotsData);
             }
         });
+        saveCity = this;
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getCityData();
         loginViewModel.getCityResult().observe(getViewLifecycleOwner(), new Observer<List<CityData>>() {
             @Override
-            public void onChanged(List<CityData> cityData) {
-                cityDataList = cityData;
-                CityAdapter cityAdapter = new CityAdapter(getActivity(),getContext(), cityDataList);
-                spCity.setAdapter(cityAdapter);
+            public void onChanged(List<CityData> cityDataList) {
+               // cityDataList = cityData;
+                //CityAdapter cityAdapter = new CityAdapter(getActivity(), getContext(), cityDataList);
+                //spCity.setAdapter(cityAdapter);
                 int position = findCityPosition(cityDataList, sessionManager.getCity());
-                spCity.setSelection(position);
-                spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                cityData =  cityDataList.get(position);
+                tv_city_search.setText(cityData.getCityName());
+                tv_city_search.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        Log.d("selected city", cityDataList.get(i).getWorkingCity());
-                        if (cityDataList.get(i).getWorkingCity().equals("0")) {
-                            tv_available_message.setVisibility(View.VISIBLE);
-                        } else {
-                            tv_available_message.setVisibility(View.INVISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
+                    public void onClick(View view) {
+                        //saveCity = (SaveCity) getContext();
+                        SearchCity(getActivity(),cityDataList,saveCity);
                     }
                 });
+
+
             }
         });
         homeViewModel.getQuickMessageResult().observe(getViewLifecycleOwner(), new Observer<Status>() {
@@ -322,8 +378,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         switch (view.getId()) {
             case R.id.btn_continue:
                 if (btn_continue.getTag().equals("1")) {
-                    if (cityDataList.get(spCity.getSelectedItemPosition()).getWorkingCity().equals("1")) {
-                        MainActivity.city = Integer.parseInt(cityDataList.get(spCity.getSelectedItemPosition()).getId());
+                    if (cityData.getWorkingCity().equals("1")) {
+                        MainActivity.city = Integer.parseInt(cityData.getId());
                         Request1Fragment request1Fragment = new Request1Fragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -334,11 +390,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                         CommonFunctions.shakeAnimation(tv_available_message, 1000);
                 } else if (btn_continue.getTag().equals("0")) {
                     Log.d("btn_continue", "notify");
-                    homeViewModel.sendNotifySlotAvailableRequest(sessionManager.getClientId(), getSelectedDate(cView.getDate()),String.valueOf(slot_time_id));
+                    homeViewModel.sendNotifySlotAvailableRequest(sessionManager.getClientId(), getSelectedDate(cView.getDate()), String.valueOf(slot_time_id));
                 }
                 break;
             case R.id.btn_book_documentation:
-                ns_home.fullScroll(View.FOCUS_UP);
+                //ns_home1.fullScroll(View.FOCUS_UP);
+                home2.setVisibility(View.GONE);
+                home1.setVisibility(View.VISIBLE);
                 break;
             case R.id.iv_2d:
                 setTriangle("2d");
@@ -400,23 +458,127 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     }
 
 
-
     private void setTriangle(String prod) {
-        if(prod.equals("2d")){
+        if (prod.equals("2d")) {
             iv_tri_2d.setVisibility(View.VISIBLE);
             iv_tri_360.setVisibility(View.INVISIBLE);
             iv_tri_3d.setVisibility(View.INVISIBLE);
         }
-        if(prod.equals("360")){
+        if (prod.equals("360")) {
             iv_tri_2d.setVisibility(View.INVISIBLE);
             iv_tri_360.setVisibility(View.VISIBLE);
             iv_tri_3d.setVisibility(View.INVISIBLE);
         }
-        if(prod.equals("3d")){
+        if (prod.equals("3d")) {
             iv_tri_2d.setVisibility(View.INVISIBLE);
             iv_tri_360.setVisibility(View.INVISIBLE);
             iv_tri_3d.setVisibility(View.VISIBLE);
         }
     }
 
+    int scrollEnd = 0;
+
+    @Override
+    public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+        Log.d("ScrollView", "scrollX_" + scrollX + "_scrollY_" + scrollY + "_oldScrollX_" + oldScrollX + "_oldScrollY_" + oldScrollY);
+        switch (v.getId()) {
+            case R.id.ns_home1:
+                //Log.d("ScrollView", "scroll_" + ns_home1.getChildAt(0).getTop() + "<=" + (ns_home1.getHeight() + ns_home1.getScrollY()));
+                if (ns_home1.getChildAt(0).getBottom()
+                        <= (ns_home1.getHeight() + ns_home1.getScrollY())) {
+                    // end of scroll
+                    home1.setVisibility(View.GONE);
+                    home2.setVisibility(View.VISIBLE);
+                    ns_home2.fullScroll(View.FOCUS_UP);
+                }
+                break;
+            case R.id.ns_home2:
+                if (ns_home2.getChildAt(0).getBottom()
+                        <= (ns_home2.getHeight() + ns_home2.getScrollY())) {
+                    // end of scroll
+                    home2.setVisibility(View.GONE);
+                    home3.setVisibility(View.VISIBLE);
+                    ns_home3.fullScroll(View.FOCUS_UP);
+                }
+                break;
+            case R.id.ns_home3:
+                if (ns_home3.getChildAt(0).getBottom()
+                        <= (ns_home3.getHeight() + ns_home3.getScrollY())) {
+                    // end of scroll
+                    home3.setVisibility(View.GONE);
+                    home4.setVisibility(View.VISIBLE);
+                    ns_home4.fullScroll(View.FOCUS_UP);
+                }
+                break;
+            case R.id.ns_home4:
+                if (ns_home4.getChildAt(0).getBottom()
+                        <= (ns_home4.getHeight() + ns_home4.getScrollY())) {
+                    // end of scroll
+                    home4.setVisibility(View.GONE);
+                    home5.setVisibility(View.VISIBLE);
+                    ns_home5.fullScroll(View.FOCUS_UP);
+                }
+                break;
+            case R.id.ns_home5:
+                if (ns_home5.getChildAt(0).getBottom()
+                        <= (ns_home5.getHeight() + ns_home5.getScrollY())) {
+                    // end of scroll
+                    /*home5.setVisibility(View.GONE);
+                    home1.setVisibility(View.VISIBLE);
+                    ns_home1.fullScroll(View.FOCUS_UP);*/
+                }
+                break;
+
+        }
+       /* if (ns_home.getChildAt(0).getBottom()
+                <= (ns_home.getHeight() + ns_home.getScrollY())) {
+            // end of scroll
+            if (scrollEnd == 0) {
+                home1.setVisibility(View.GONE);
+                home2.setVisibility(View.VISIBLE);
+                scrollEnd = 1;
+            }
+
+           else if (scrollEnd == 1) {
+                home2.setVisibility(View.GONE);
+                home3.setVisibility(View.VISIBLE);
+                scrollEnd = 2;
+            }
+            else if (scrollEnd == 2) {
+                home3.setVisibility(View.GONE);
+                home4.setVisibility(View.VISIBLE);
+                scrollEnd = 3;
+            }
+            else if (scrollEnd == 3) {
+                home4.setVisibility(View.GONE);
+                home5.setVisibility(View.VISIBLE);
+                scrollEnd = 4;
+            }
+            else if (scrollEnd == 4) {
+                home5.setVisibility(View.GONE);
+                home1.setVisibility(View.VISIBLE);
+                scrollEnd = 0;
+            }
+            Log.d("ScrollView", "end");
+        } else {
+            // not end
+        }*/
+    }
+
+    @Override
+    public void cityData(CityData cityData) {
+        Log.d("selected city", cityData.getWorkingCity());
+        this.cityData = cityData;
+        tv_city_search.setText(cityData.getCityName());
+        if (cityData.getWorkingCity().equals("0")) {
+            tv_available_message.setVisibility(View.VISIBLE);
+        } else {
+            tv_available_message.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
 }

@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.dbot.client.login.city.CityData;
-import com.dbot.client.login.city.CityResponse;
+import com.dbot.client.common.city.CityData;
+import com.dbot.client.common.city.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
@@ -27,7 +27,7 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<List<CityData>> cityMutableLiveData = new MutableLiveData<>();
 
 
-    public void loginGetOtp(String mobileNumber) {
+    public void  loginGetOtp(String mobileNumber) {
         System.out.println("mobileNumber " + mobileNumber);
         //loginMutableLiveData = new MutableLiveData<>();
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -35,7 +35,7 @@ public class LoginViewModel extends ViewModel {
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-               // Log.d("getOtpResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
+               Log.d("getOtpResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                 loginMutableLiveData.setValue(response.body());
             }
 

@@ -191,19 +191,23 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
             }
         });
         mViewModel.getProject(projectData);
-        mViewModel.getProjectResult().observe(this, new Observer<ClientProjectData>() {
+        mViewModel.getProjectResult().observe(getViewLifecycleOwner(), new Observer<ClientProjectData>() {
             @Override
             public void onChanged(ClientProjectData clientProjectData) {
                 Log.d("clientProjectData", new GsonBuilder().setPrettyPrinting().create().toJson(clientProjectData));
                 //Snackbar.make(getView(),clientProjectData.getProjectName(),Snackbar.LENGTH_SHORT).show();
                 if (clientProjectData.getClientId() != null) {
                     booking_id = clientProjectData.getBookingId();
-                    tv_project_details_project_name.setText(clientProjectData.getProjectName());
+                      tv_project_details_project_name.setText(clientProjectData.getProjectName());
                     tv_project_details_project_status.setText(clientProjectData.getProjectStatus().getStatusValue());
                     tv_project_details_project_booking_id.setText(clientProjectData.getBookingId());
                     tv_project_details_project_service.setText(clientProjectData.getPackage().getPackageName());
                     tv_project_details_project_site_address.setText(clientProjectData.getDoorNumber() + "\n" + clientProjectData.getBuildingName());
-                    tv_project_details_cp_name.setText(clientProjectData.getContactPersonName());
+                    if (clientProjectData.getContactPersonName().length() > 10)
+                        tv_project_details_cp_name.setText(clientProjectData.getContactPersonName().substring(0, 10) + "..");
+                    else
+                        tv_project_details_cp_name.setText(clientProjectData.getContactPersonName());
+                    //tv_project_details_cp_name.setText(clientProjectData.getContactPersonName());
                     tv_project_details_cp_phone.setText(clientProjectData.getContactPersonPhone());
                     if (clientProjectData.getProjectType().equals("1"))
                         tv_project_details_project_type.setText("New");
@@ -227,6 +231,17 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                                 cb_project_details_flooring.setChecked(true);
 
                         }
+                    }
+                    if(clientProjectData.getProjectStatus().getStatusValue().equals("Active"))
+                        tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_active));
+                    else if(clientProjectData.getProjectStatus().getStatusValue().equals("Completed"))
+                        tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_completed));
+                    else if(clientProjectData.getProjectStatus().getStatusValue().equals("Cancelled"))
+                        tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_cancelled));
+                    if(clientProjectData.getProjectStatus().getId().equals("3")) {
+                        tv_project_details_cancel.setVisibility(View.INVISIBLE);
+                        tv_project_details_reshedule.setVisibility(View.INVISIBLE);
+                        iv_project_details_edit.setVisibility(View.INVISIBLE);
                     }
 
                 }
@@ -265,6 +280,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                 }
             }
         });
+
     }
 
     @SuppressLint("NonConstantResourceId")

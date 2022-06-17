@@ -6,12 +6,19 @@ import static com.dbot.client.main.MainActivity.sessionManager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.CheckBox;
@@ -19,6 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +42,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.dbot.client.R;
+import com.dbot.client.common.city.CityAdapter;
+import com.dbot.client.common.city.CityData;
+import com.dbot.client.common.city.SaveCity;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.HomeViewModel;
 import com.dbot.client.main.home.model.AvailableSlotsData;
@@ -638,5 +649,46 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
         });
 
     }
+    public static void SearchCity(Activity activity, List<CityData> cityDataList, SaveCity saveCity) {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.dialog_city_search);
+        dialog.getWindow().setLayout(650, 800);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                Log.d("dialog", "dismissed");
+            }
+        });
+        dialog.show();
+        EditText editText = dialog.findViewById(R.id.edit_text);
+        ListView listView = dialog.findViewById(R.id.list_view);
+        CityAdapter cityAdapter = new CityAdapter(activity, activity.getApplicationContext(), cityDataList);
+        listView.setAdapter(cityAdapter);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("searchText", s.toString());
+                cityAdapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CityData cityData = (CityData) parent.getItemAtPosition(position);
+                saveCity.cityData(cityData);
+                dialog.dismiss();
+            }
+        });
+    }
 }

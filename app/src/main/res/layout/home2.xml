@@ -1,155 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     tools:context=".main.home.HomeFragment">
-
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:id="@+id/swipeRefreshLayout2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            style="@style/bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="center"
-            android:text="Our Products"
-            android:textColor="@color/purple_profile"
-            android:textSize="@dimen/_13ssp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_2d"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/ic_2d_drawing_light" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="2D Drawing"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_360"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/ic_360_photos_light" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="360 Photos"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_3d"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/ic_3d_drawing_light" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="3D Drawing"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-
-        </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ns_home2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="-6dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_tri_2d"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_weight="1"
-                    android:src="@drawable/bg_product_msg_triangle" />
-                <ImageView
-                    android:id="@+id/iv_tri_360"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_weight="1"
-                    android:src="@drawable/bg_product_msg_triangle" />
-                <ImageView
-                    android:id="@+id/iv_tri_3d"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_weight="1"
-                    android:src="@drawable/bg_product_msg_triangle" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_product_msg"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_product_msg"
-                android:padding="@dimen/_16sdp"
-                android:gravity="center"
-                android:text="@string/three_d_model_product_msg"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13ssp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
+            android:paddingBottom="@dimen/_50sdp"
             android:orientation="vertical">
 
             <TextView
@@ -158,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
-                android:text="Packages &amp; Pricing"
+                android:text="Our Products"
                 android:textColor="@color/purple_profile"
                 android:textSize="@dimen/_13ssp" />
 
@@ -166,204 +41,156 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/_99sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/bg_package"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/iv_2d"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/ic_2d_drawing_light" />
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Products"
-                            android:textColor="@color/purple_profile"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-
+                        android:text="2D Drawing"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="@dimen/_99sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/bg_package_title_essential"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/iv_360"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/ic_360_photos_light" />
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Essentials"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="\u20B9 2500"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-
+                        android:text="360&#xb0; Photos"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="@dimen/_99sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:background="@drawable/bg_package_title_plus"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/iv_3d"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/ic_3d_drawing_light" />
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Plus"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="\u20B9 3500"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
-                    </LinearLayout>
-
+                        android:text="3D Drawing"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
                 </LinearLayout>
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:background="@drawable/bg_package_table"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="top|center"
+                    android:layout_marginBottom="-6dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv_tri_2d"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_weight="1"
+                        android:src="@drawable/bg_product_msg_triangle" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/iv_tri_360"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_weight="1"
+                        android:src="@drawable/bg_product_msg_triangle" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="2D Drawing"
-                                android:textColor="@color/purple_profile"
-                                android:textSize="@dimen/_12ssp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/iv_check_pp_es_2d"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/iv_check_pp_pls_2d"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark" />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iv_tri_3d"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_weight="1"
+                        android:src="@drawable/bg_product_msg_triangle" />
                 </LinearLayout>
 
-                <ImageView
+                <TextView
+                    android:id="@+id/tv_product_msg"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:src="@drawable/bg_package_table_row" />
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_product_msg"
+                    android:gravity="center"
+                    android:padding="@dimen/_16sdp"
+                    android:text="@string/three_d_model_product_msg"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Packages &amp; Pricing"
+                    android:textColor="@color/purple_profile"
+                    android:textSize="@dimen/_13ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="top|center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_99sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/bg_package"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -374,10 +201,11 @@
                             android:orientation="vertical">
 
                             <TextView
+                                style="@style/bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="360 Photos"
+                                android:text="Products"
                                 android:textColor="@color/purple_profile"
                                 android:textSize="@dimen/_12ssp" />
                         </LinearLayout>
@@ -385,8 +213,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_99sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/bg_package_title_essential"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -396,20 +225,30 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/iv_check_pp_es_360"
+                            <TextView
+                                style="@style/bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark" />
+                                android:text="Essentials"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="\u20B9 2500"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="@dimen/_99sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:background="@drawable/bg_package_title_plus"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -419,125 +258,305 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/iv_check_pp_pls_360"
+                            <TextView
+                                style="@style/bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark" />
+                                android:text="Plus"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="\u20B9 3500"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp" />
                         </LinearLayout>
 
                     </LinearLayout>
-                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:src="@drawable/bg_package_table_row" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="top|center"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/bg_package_table"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="top|center"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="3D Model"
-                                android:textColor="@color/purple_profile"
-                                android:textSize="@dimen/_12ssp" />
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="2D Drawing"
+                                    android:textColor="@color/purple_profile"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_es_2d"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_pls_2d"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark" />
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:src="@drawable/bg_package_table_row" />
+
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="top|center"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:id="@+id/iv_check_pp_es_3d"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark"
-                                android:visibility="invisible" />
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="360&#xb0; Photos"
+                                    android:textColor="@color/purple_profile"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_es_360"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_pls_360"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark" />
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:src="@drawable/bg_package_table_row" />
+
                     <LinearLayout
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_40sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="top|center"
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:id="@+id/iv_check_pp_pls_3d"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
                                 android:gravity="center"
-                                android:padding="@dimen/_5sdp"
-                                android:src="@drawable/ic_tick_mark" />
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="3D Model"
+                                    android:textColor="@color/purple_profile"
+                                    android:textSize="@dimen/_12ssp" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_es_3d"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark"
+                                    android:visibility="invisible" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/iv_check_pp_pls_3d"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_5sdp"
+                                    android:src="@drawable/ic_tick_mark" />
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_book_documentation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:backgroundTint="@color/primary_varient"
+                android:gravity="center"
+                android:text="Book your documentation"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="keep scrolling to know more"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_13ssp" />
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <Button
-            android:id="@+id/btn_book_documentation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:backgroundTint="@color/primary_varient"
-            android:gravity="center"
-            android:text="Book your documentation"
-            android:textSize="@dimen/_12ssp" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:gravity="center"
-        android:text="keep scrolling to know more"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/_13ssp" />
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>
