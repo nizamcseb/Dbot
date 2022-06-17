@@ -1,7 +1,7 @@
 package com.dbot.client.retrofit;
 
 
-import com.dbot.client.login.city.CityResponse;
+import com.dbot.client.common.city.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
