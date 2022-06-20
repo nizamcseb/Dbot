@@ -1,12 +1,19 @@
 package com.dbot.client.main.newrequest;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +27,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,6 +42,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -218,7 +227,7 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
                         Marker marker = googleMap.addMarker(new MarkerOptions()
                                 .position(latLng)
                                 .title("marker")
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                         // Enable GPS marker in Map
                         googleMap.setMyLocationEnabled(true);
                         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -247,7 +256,27 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
             }
         }
     }
+    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
+        // below line is use to generate a drawable.
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
 
+        // below line is use to set bounds to our vector drawable.
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+
+        // below line is use to create a bitmap for our
+        // drawable which we have added.
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+
+        // below line is use to add bitmap in our canvas.
+        Canvas canvas = new Canvas(bitmap);
+
+        // below line is use to draw our
+        // vector drawable in canvas.
+        vectorDrawable.draw(canvas);
+
+        // after generating our bitmap we are returning our bitmap.
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -306,9 +335,29 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
                 sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.tv_location_address:
-                getActivity().startActivity(new Intent(getActivity(), PlacesSearchActivity.class));
+                Intent placeIntent = new Intent(getActivity(),PlacesSearchActivity.class);
+                //assert getParentFragment() != null;
+                startActivityForResult(placeIntent,111);
+                //getActivity().startActivity(new Intent(getActivity(), PlacesSearchActivity.class));
                 break;
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("onActivityResult resultCode",String.valueOf(resultCode));
+        Log.d("onActivityResult requestCode",String.valueOf(requestCode));
+        if (requestCode == 111) {
+            if (resultCode == RESULT_OK) {
+                String returnedResult = data.getData().toString();
+                Log.d("returnedResult",returnedResult);
+                //getAddressText(new LatLng())
+                tv_location_address.setText(returnedResult);
+                // OR
+                // String returnedResult = data.getDataString();
+            }
         }
     }
 }

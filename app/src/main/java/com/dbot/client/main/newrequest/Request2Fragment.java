@@ -2,6 +2,8 @@ package com.dbot.client.main.newrequest;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +58,7 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
         return root;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -110,6 +113,24 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
         btn_req2_next = root.findViewById(R.id.btn_req2_next);
         btn_req2_prev.setOnClickListener(this::onClick);
         btn_req2_next.setOnClickListener(this::onClick);
+        et_contact_person_phone_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().equals(MainActivity.sessionManager.getClientPhone()))
+                    cb_same_as_mine.setChecked(true);
+                else cb_same_as_mine.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void setData() {
@@ -117,14 +138,32 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
             et_project_name.setText(MainActivity.project_name);
         if (MainActivity.contact_person_name != null)
             et_contact_person_name.setText(MainActivity.contact_person_name);
-        if (MainActivity.contact_person_phone != null)
+        if (MainActivity.contact_person_phone != null) {
             et_contact_person_phone_number.setText(MainActivity.contact_person_phone);
+            if (et_contact_person_phone_number.getText().toString().equals(MainActivity.sessionManager.getClientPhone()))
+                cb_same_as_mine.setChecked(true);
+            else cb_same_as_mine.setChecked(false);
+        }
         if (MainActivity.property_size != 9)
             sb_size_of_property.setProgress(MainActivity.property_size);
         if (MainActivity.project_type == 1)
             rg_type_of_property.check(rb_type_of_property_new.getId());
         else if (MainActivity.project_type == 2)
             rg_type_of_property.check(rb_type_of_property_renovation.getId());
+
+        if (MainActivity.scope != null) {
+            for (int i = 0; i < MainActivity.scope.size(); i++) {
+                if (MainActivity.scope.get(i) == 1)
+                    cb_electrical.setChecked(true);
+                if (MainActivity.scope.get(i) == 2)
+                    cb_plumbing.setChecked(true);
+                if (MainActivity.scope.get(i) == 3)
+                    cb_plastering.setChecked(true);
+                if (MainActivity.scope.get(i) == 4)
+                    cb_flooring.setChecked(true);
+
+            }
+        }
     }
 
     @Override
@@ -147,6 +186,11 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
         }
         if (et_contact_person_phone_number.getText().toString().equals("")) {
             et_contact_person_phone_number.setError("Required");
+
+            return false;
+        }
+        if (et_contact_person_phone_number.getText().length() < 10) {
+            et_contact_person_phone_number.setError("Enter 10 digit phone number");
             return false;
         }
         if (MainActivity.scope.size() == 0) {
@@ -193,8 +237,8 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
                     et_contact_person_name.setText(MainActivity.sessionManager.getClientFullName());
                     et_contact_person_phone_number.setText(MainActivity.sessionManager.getClientPhone());
                 } else {
-                    et_contact_person_name.setText("");
-                    et_contact_person_phone_number.setText("");
+                    //et_contact_person_name.setText("");
+                    //et_contact_person_phone_number.setText("");
                 }
                 break;
             case R.id.cb_electrical:

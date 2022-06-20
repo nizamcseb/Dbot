@@ -53,7 +53,7 @@ public class RefundStatusFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(RefundStatusViewModel.class);
         mViewModel.getRefundDataList(MainActivity.sessionManager.getClientId());
-        mViewModel.getRefundResponseResult().observe(this, new Observer<RefundResponse>() {
+        mViewModel.getRefundResponseResult().observe(getViewLifecycleOwner(), new Observer<RefundResponse>() {
             @Override
             public void onChanged(RefundResponse refundResponse) {
                 if (refundResponse != null) {
