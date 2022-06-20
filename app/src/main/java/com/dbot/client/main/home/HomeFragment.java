@@ -57,8 +57,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     private HomeViewModel homeViewModel;
     private LoginViewModel loginViewModel;
     SaveCity saveCity;
-    NestedScrollView ns_home1, ns_home2, ns_home3, ns_home4, ns_home5;
-    SwipeRefreshLayout swipeRefreshLayout2,swipeRefreshLayout3,swipeRefreshLayout4,swipeRefreshLayout5;
+    NestedScrollView ns_home1;
+    //NestedScrollView ns_home1, ns_home2, ns_home3, ns_home4, ns_home5;
+    //SwipeRefreshLayout swipeRefreshLayout2,swipeRefreshLayout3,swipeRefreshLayout4,swipeRefreshLayout5;
     CityData cityData;
     CalendarView cView;
     LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
@@ -80,14 +81,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         sessionManager = new SessionManager(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ns_home1 = root.findViewById(R.id.ns_home1);
-        ns_home2 = root.findViewById(R.id.ns_home2);
+       /* ns_home2 = root.findViewById(R.id.ns_home2);
         ns_home3 = root.findViewById(R.id.ns_home3);
         ns_home4 = root.findViewById(R.id.ns_home4);
         ns_home5 = root.findViewById(R.id.ns_home5);
         swipeRefreshLayout2 = root.findViewById(R.id.swipeRefreshLayout2);
         swipeRefreshLayout3 = root.findViewById(R.id.swipeRefreshLayout3);
         swipeRefreshLayout4 = root.findViewById(R.id.swipeRefreshLayout4);
-        swipeRefreshLayout5 = root.findViewById(R.id.swipeRefreshLayout5);
+        swipeRefreshLayout5 = root.findViewById(R.id.swipeRefreshLayout5);*/
 
         tv_city_search = root.findViewById(R.id.tv_city_search);
         tv_available_message = root.findViewById(R.id.tv_available_message);
@@ -124,7 +125,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         home5 = root.findViewById(R.id.home5);
         cView.setOnDateChangeListener(this::onSelectedDayChange);
         ns_home1.setOnScrollChangeListener(this::onScrollChange);
-        ns_home2.setOnScrollChangeListener(this::onScrollChange);
+       /* ns_home2.setOnScrollChangeListener(this::onScrollChange);
         ns_home3.setOnScrollChangeListener(this::onScrollChange);
         ns_home4.setOnScrollChangeListener(this::onScrollChange);
         ns_home5.setOnScrollChangeListener(this::onScrollChange);
@@ -167,7 +168,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 home5.setVisibility(View.GONE);
                 home4.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
@@ -394,9 +395,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 }
                 break;
             case R.id.btn_book_documentation:
-                //ns_home1.fullScroll(View.FOCUS_UP);
-                home2.setVisibility(View.GONE);
-                home1.setVisibility(View.VISIBLE);
+                ns_home1.fullScroll(View.FOCUS_UP);
+               /* home2.setVisibility(View.GONE);
+                home1.setVisibility(View.VISIBLE);*/
                 break;
             case R.id.iv_2d:
                 setTriangle("2d");
@@ -481,7 +482,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     @Override
     public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
         Log.d("ScrollView", "scrollX_" + scrollX + "_scrollY_" + scrollY + "_oldScrollX_" + oldScrollX + "_oldScrollY_" + oldScrollY);
-        switch (v.getId()) {
+       /* switch (v.getId()) {
             case R.id.ns_home1:
                 //Log.d("ScrollView", "scroll_" + ns_home1.getChildAt(0).getTop() + "<=" + (ns_home1.getHeight() + ns_home1.getScrollY()));
                 if (ns_home1.getChildAt(0).getBottom()
@@ -523,13 +524,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 if (ns_home5.getChildAt(0).getBottom()
                         <= (ns_home5.getHeight() + ns_home5.getScrollY())) {
                     // end of scroll
-                    /*home5.setVisibility(View.GONE);
+                    *//*home5.setVisibility(View.GONE);
                     home1.setVisibility(View.VISIBLE);
-                    ns_home1.fullScroll(View.FOCUS_UP);*/
+                    ns_home1.fullScroll(View.FOCUS_UP);*//*
                 }
                 break;
 
-        }
+        }*/
        /* if (ns_home.getChildAt(0).getBottom()
                 <= (ns_home.getHeight() + ns_home.getScrollY())) {
             // end of scroll

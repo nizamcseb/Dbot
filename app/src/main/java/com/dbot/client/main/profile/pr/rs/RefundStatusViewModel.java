@@ -26,13 +26,17 @@ public class RefundStatusViewModel extends ViewModel {
             public void onResponse(Call<RefundResponse> call, Response<RefundResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d("getRefundResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
-                    refundResponseMutableLiveData.setValue(response.body());
+                    if (response.body().getRefundData() != null)
+                        refundResponseMutableLiveData.setValue(response.body());
+                    else
+                        refundResponseMutableLiveData.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<RefundResponse> call, Throwable t) {
-
+                Log.e("getRefundResponse error", t.getMessage());
+                refundResponseMutableLiveData.setValue(null);
             }
         });
     }
