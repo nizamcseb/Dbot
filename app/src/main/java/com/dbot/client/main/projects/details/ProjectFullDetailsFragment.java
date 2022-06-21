@@ -26,10 +26,10 @@ import com.dbot.client.R;
 import com.dbot.client.common.Popup;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.projects.ProjectsFragment;
-import com.dbot.client.main.projects.model.ClientProjectData;
 import com.dbot.client.main.projects.details.model.FileRequestResponse;
 import com.dbot.client.main.projects.details.model.ProjectTrackingResponse;
 import com.dbot.client.main.projects.details.model.RefundAmountResponse;
+import com.dbot.client.main.projects.model.ClientProjectData;
 import com.dbot.client.retrofit.ApiClient;
 import com.dbot.client.retrofit.ApiInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -65,7 +65,7 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
     CheckBox cb_project_details_electrical, cb_project_details_plumbing, cb_project_details_plastering, cb_project_details_flooring;
     View v_pt_cp_confirmation, v_pt_site_access_confirmation, v_pt_site_documentation, v_pt_file_sharing;
     NestedScrollView nsv_my_projects;
-    String booking_id;
+    String booking_id, cp_phone_number="";
     Button btn_pt_send_file;
     boolean isFinalProcessCompleted = false;
 
@@ -198,17 +198,17 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                 //Snackbar.make(getView(),clientProjectData.getProjectName(),Snackbar.LENGTH_SHORT).show();
                 if (clientProjectData.getClientId() != null) {
                     booking_id = clientProjectData.getBookingId();
-                      tv_project_details_project_name.setText(clientProjectData.getProjectName());
+                    cp_phone_number = clientProjectData.getContactPersonPhone();
+                    tv_project_details_project_name.setText(clientProjectData.getProjectName());
                     tv_project_details_project_status.setText(clientProjectData.getProjectStatus().getStatusValue());
                     tv_project_details_project_booking_id.setText(clientProjectData.getBookingId());
                     tv_project_details_project_service.setText(clientProjectData.getPackage().getPackageName());
                     tv_project_details_project_site_address.setText(clientProjectData.getDoorNumber() + "\n" + clientProjectData.getBuildingName());
-                    if (clientProjectData.getContactPersonName().length() > 10)
-                        tv_project_details_cp_name.setText(clientProjectData.getContactPersonName().substring(0, 10) + "..");
+                    if (clientProjectData.getContactPersonName().length() > 15)
+                        tv_project_details_cp_name.setText(clientProjectData.getContactPersonName().substring(0, 15) + "..");
                     else
                         tv_project_details_cp_name.setText(clientProjectData.getContactPersonName());
-                    //tv_project_details_cp_name.setText(clientProjectData.getContactPersonName());
-                    tv_project_details_cp_phone.setText(clientProjectData.getContactPersonPhone());
+                    //tv_project_details_cp_phone.setText(clientProjectData.getContactPersonPhone());
                     if (clientProjectData.getProjectType().equals("1"))
                         tv_project_details_project_type.setText("New");
                     else if (clientProjectData.getProjectType().equals("2"))
@@ -232,13 +232,13 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
 
                         }
                     }
-                    if(clientProjectData.getProjectStatus().getStatusValue().equals("Active"))
+                    if (clientProjectData.getProjectStatus().getStatusValue().equals("Active"))
                         tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_active));
-                    else if(clientProjectData.getProjectStatus().getStatusValue().equals("Completed"))
+                    else if (clientProjectData.getProjectStatus().getStatusValue().equals("Completed"))
                         tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_completed));
-                    else if(clientProjectData.getProjectStatus().getStatusValue().equals("Cancelled"))
+                    else if (clientProjectData.getProjectStatus().getStatusValue().equals("Cancelled"))
                         tv_project_details_project_status.setTextColor(getActivity().getColor(R.color.status_cancelled));
-                    if(clientProjectData.getProjectStatus().getId().equals("3")) {
+                    if (clientProjectData.getProjectStatus().getId().equals("3")) {
                         tv_project_details_cancel.setVisibility(View.INVISIBLE);
                         tv_project_details_reshedule.setVisibility(View.INVISIBLE);
                         iv_project_details_edit.setVisibility(View.INVISIBLE);
@@ -275,8 +275,8 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
         mViewModel.getFileRequestResult().observe(getViewLifecycleOwner(), new Observer<FileRequestResponse>() {
             @Override
             public void onChanged(FileRequestResponse fileRequestResponse) {
-                if(fileRequestResponse!=null) {
-                    Snackbar.make(getView(),fileRequestResponse.getStatus().getMessage(),Snackbar.LENGTH_SHORT).show();
+                if (fileRequestResponse != null) {
+                    Snackbar.make(getView(), fileRequestResponse.getStatus().getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -302,20 +302,22 @@ public class ProjectFullDetailsFragment extends Fragment implements View.OnClick
                 getRefundAmound(booking_id);
                 break;
             case R.id.tv_project_details_cp_phone:
-                String number=tv_project_details_cp_phone.getText().toString();
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:"+number));
-                startActivity(callIntent);
+                //String number=tv_project_details_cp_phone.getText().toString();
+                if (!cp_phone_number.equals("")) {
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.parse("tel:" + cp_phone_number));
+                    startActivity(callIntent);
+                }
                 break;
-             case R.id.tv_project_details_reshedule:
-                 popup.showReshedulePopupWindow(getContext(),this,getViewLifecycleOwner(),booking_id,getView(),mViewModel, MainActivity.sessionManager.getClientId());
+            case R.id.tv_project_details_reshedule:
+                popup.showReshedulePopupWindow(getContext(), this, getViewLifecycleOwner(), booking_id, getView(), mViewModel, MainActivity.sessionManager.getClientId());
                 break;
 
             case R.id.iv_project_details_edit:
                 popup.showEditProjectPopupWindow(getActivity(), getView(), projectData, mViewModel);
                 break;
             case R.id.btn_pt_send_file:
-                if(isFinalProcessCompleted)
+                if (isFinalProcessCompleted)
                     mViewModel.sendFileRequest(booking_id);
 
                 break;
