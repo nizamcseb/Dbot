@@ -133,7 +133,7 @@ class PayUActivity : AppCompatActivity() {
 
     fun preparePayUBizParams(): PayUPaymentParams {
 
-        return PayUPaymentParams.Builder().setAmount(pdPrice)
+        return PayUPaymentParams.Builder().setAmount(pdPrice.toDouble().toString())
                 //.setAmount(pdPrice.toDouble().toString())
                 //.setIsProduction(binding.radioBtnProduction.isChecked)
                 .setIsProduction(true)

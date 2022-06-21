@@ -83,12 +83,18 @@ public class ProjectAdapter extends BaseAdapter implements Filterable {
 
         tv_project_item_project_name.setText(clientProjectDataList.get(position).getProjectName());
         tv_project_item_booking_id.setText(clientProjectDataList.get(position).getBookingId());
-        if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Active"))
+        if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Active")){
+            convertView.setBackground(activity.getDrawable(R.drawable.bg_package_active_item));
             tv_project_item_project_status.setTextColor(activity.getColor(R.color.status_active));
-        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Completed"))
+        }
+        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Completed")) {
+            convertView.setBackground(activity.getDrawable(R.drawable.bg_package_item));
             tv_project_item_project_status.setTextColor(activity.getColor(R.color.status_completed));
-        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Cancelled"))
+        }
+        else if(clientProjectDataList.get(position).getProjectStatus().getStatusValue().equals("Cancelled")){
+            convertView.setBackground(activity.getDrawable(R.drawable.bg_package_item));
             tv_project_item_project_status.setTextColor(activity.getColor(R.color.status_cancelled));
+        }
         tv_project_item_project_status.setText(clientProjectDataList.get(position).getProjectStatus().getStatusValue());
         tv_project_item_project_service.setText(clientProjectDataList.get(position).getPackage().getPackageName());
         tv_project_item_project_booked_date.setText(clientProjectDataList.get(position).getBookDate());
