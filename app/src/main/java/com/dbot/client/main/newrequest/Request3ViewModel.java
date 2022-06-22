@@ -48,9 +48,9 @@ public class Request3ViewModel extends ViewModel {
             }
         });
     }
-    public void getAvailableCoupons(String client_id){
+    public void getAvailableCoupons(String client_id, int package_id){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<AvailableCouponResponse> call = apiInterface.getAvailableCoupons(client_id);
+        Call<AvailableCouponResponse> call = apiInterface.getAvailableCoupons(client_id,package_id);
         call.enqueue(new Callback<AvailableCouponResponse>() {
             @Override
             public void onResponse(Call<AvailableCouponResponse> call, Response<AvailableCouponResponse> response) {
@@ -89,9 +89,9 @@ public class Request3ViewModel extends ViewModel {
             }
         });
     }
-    public void applyCoupon(String client_id,String coupon_code){
+    public void applyCoupon(String client_id,String coupon_code,Integer package_id){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<ApplyCouponResponse> call = apiInterface.getApplyCoupon(client_id,coupon_code);
+        Call<ApplyCouponResponse> call = apiInterface.getApplyCoupon(client_id,coupon_code,package_id);
         call.enqueue(new Callback<ApplyCouponResponse>() {
             @Override
             public void onResponse(Call<ApplyCouponResponse> call, Response<ApplyCouponResponse> response) {
