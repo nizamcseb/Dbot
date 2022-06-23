@@ -50,6 +50,10 @@ public class BookSlot implements Serializable {
     @SerializedName("payment_status")
     private Integer payment_status;
 
+    @SerializedName("transaction_id")
+    private String transaction_id;
+
+
     public String getClientId() {
         return client_id;
     }
@@ -208,6 +212,14 @@ public class BookSlot implements Serializable {
 
     public void setPaymentStatus(Integer paymentStatus) {
         this.payment_status = paymentStatus;
+    }
+
+    public String getTransactionId() {
+        return transaction_id;
+    }
+
+    public void setTransactionId(String transaction_id) {
+        this.transaction_id = transaction_id;
     }
 
 }

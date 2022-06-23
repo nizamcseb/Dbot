@@ -115,8 +115,8 @@ public interface ApiInterface {
     Call<NotifySlotRequestResponse> sendNotifySlotAvailableRequest(@Query("client_id") String client_id, @Query("book_date") String book_date, @Query("slot_time_id") String slot_time_id);
 
     //Apply Coupon
-    @GET("client/applycouponcode/{client_id}/{coupon_code}")
-    Call<ApplyCouponResponse> getApplyCoupon(@Path("client_id") String client_id, @Path("coupon_code") String coupon_code);
+    @GET("client/applycouponcode/{client_id}/{coupon_code}/{package_id}")
+    Call<ApplyCouponResponse> getApplyCoupon(@Path("client_id") String client_id, @Path("coupon_code") String coupon_code, @Path("package_id") Integer package_id);
 
     //Get Refund List
     @GET("report/refundstatus/{client_id}")
@@ -128,7 +128,7 @@ public interface ApiInterface {
 
 
     //Get Available Coupons
-    @GET("client/getavailablecoupons/{client_id}")
-    Call<AvailableCouponResponse> getAvailableCoupons(@Path("client_id") String client_id);
+    @GET("client/getavailablecoupons/{client_id}/{package_id}")
+    Call<AvailableCouponResponse> getAvailableCoupons(@Path("client_id") String client_id,@Path("package_id") int package_id);
 
 }

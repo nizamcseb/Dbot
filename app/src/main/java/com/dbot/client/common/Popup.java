@@ -327,6 +327,26 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
         //et_edit_popup_project_name.setText(projectData.getProjectName());
         et_edit_popup_contact_person_name.setText(projectData.getContactPersonName());
         et_edit_popup_contact_person_phone_number.setText(projectData.getContactPersonPhone());
+        if(sessionManager.getClientPhone().equals(et_edit_popup_contact_person_phone_number.getText().toString()))
+            cb_edit_popup_same_as_mine.setChecked(true);
+        et_edit_popup_contact_person_phone_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().equals(MainActivity.sessionManager.getClientPhone()))
+                    cb_edit_popup_same_as_mine.setChecked(true);
+                else cb_edit_popup_same_as_mine.setChecked(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         sb_edit_popup_size_of_property.setProgress(Integer.parseInt(projectData.getPropertySize().getId()) - 1);
         tv_edit_popup_size_of_property.setText(projectData.getPropertySize().getSizeValue());
@@ -397,8 +417,8 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
                     et_edit_popup_contact_person_name.setText(sessionManager.getClientFullName());
                     et_edit_popup_contact_person_phone_number.setText(sessionManager.getClientPhone());
                 } else {
-                    et_edit_popup_contact_person_name.setText("");
-                    et_edit_popup_contact_person_phone_number.setText("");
+                    //et_edit_popup_contact_person_name.setText("");
+                    //et_edit_popup_contact_person_phone_number.setText("");
                 }
                 break;
             case R.id.cb_edit_popup_electrical:
@@ -447,6 +467,10 @@ public class Popup implements CompoundButton.OnCheckedChangeListener {
         }
         if (et_edit_popup_contact_person_phone_number.getText().toString().equals("")) {
             et_edit_popup_contact_person_phone_number.setError("Required");
+            return false;
+        }
+        if (et_edit_popup_contact_person_phone_number.getText().length() < 10 || et_edit_popup_contact_person_phone_number.getText().length() > 10) {
+            et_edit_popup_contact_person_phone_number.setError("Enter 10 digit phone number");
             return false;
         }
         if (scope.size() == 0) {

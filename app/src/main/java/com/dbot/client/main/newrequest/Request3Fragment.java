@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -160,49 +162,27 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
             case R.id.btn_req3_pay:
                 if (MainActivity.package_id != 9) {
                     bookSlot();
-
                 }
                 break;
             case R.id.tv_available_coupon:
-                mViewModel.getAvailableCoupons(MainActivity.sessionManager.getClientId());
-
+                mViewModel.getAvailableCoupons(MainActivity.sessionManager.getClientId(), MainActivity.package_id);
                 break;
-
             case R.id.ll_essential:
-                rb_essentials.setChecked(true);
-                rb_plus.setChecked(false);
-                tv_bill_service.setText(packageDataList.get(0).getPackageName() + " " + "Service");
-                tv_bill_service_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(0).getPrice());
-                tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(0).getPrice());
-                MainActivity.package_id = Integer.parseInt(packageDataList.get(0).getPackageId());
-                MainActivity.package_amount = Integer.parseInt(packageDataList.get(0).getPrice());
-                MainActivity.amount_paid = Integer.parseInt(packageDataList.get(0).getPrice());
-                service_amount = Integer.parseInt(packageDataList.get(0).getPrice());
-                calculateTotal();
+                selectService(0);
                 break;
             case R.id.ll_plus:
-                rb_essentials.setChecked(false);
-                rb_plus.setChecked(true);
-                tv_bill_service.setText(packageDataList.get(1).getPackageName() + " " + "Service");
-                tv_bill_service_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(1).getPrice());
-                tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(1).getPrice());
-                MainActivity.package_id = Integer.parseInt(packageDataList.get(1).getPackageId());
-                MainActivity.package_amount = Integer.parseInt(packageDataList.get(1).getPrice());
-                MainActivity.amount_paid = Integer.parseInt(packageDataList.get(1).getPrice());
-                service_amount = Integer.parseInt(packageDataList.get(1).getPrice());
-                calculateTotal();
+                selectService(1);
                 break;
             case R.id.tv_coupon_apply:
                 if (!et_coupon_code.getText().toString().equals("")) {
-                    mViewModel.applyCoupon(MainActivity.sessionManager.getClientId(), et_coupon_code.getText().toString());
+                    mViewModel.applyCoupon(MainActivity.sessionManager.getClientId(), et_coupon_code.getText().toString(), MainActivity.package_id);
                     mViewModel.getApplyCouponResult().observe(this, new Observer<ApplyCouponResponse>() {
                         @Override
                         public void onChanged(ApplyCouponResponse applyCouponResponse) {
                             if (applyCouponResponse != null) {
                                 if (applyCouponResponse.getStatus().getCode() == 1062) {
-                                    discount_amount = applyCouponResponse.getCoupon().getDiscountAmount();
-                                    tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
-                                    calculateTotal();
+                                   applyCoupon(applyCouponResponse.getCoupon().getDiscountAmount());
+
                                 } else if (applyCouponResponse.getStatus().getCode() == 1061) {
 
                                 }
@@ -218,6 +198,39 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
+    private void applyCoupon(Integer discountAmount) {
+        discount_amount = discountAmount;
+        tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
+        calculateTotal();
+    }
+
+
+    private void selectService(int i) {
+        if (i == 0) {
+            rb_essentials.setChecked(true);
+            rb_plus.setChecked(false);
+        } else if (i == 1) {
+            rb_essentials.setChecked(false);
+            rb_plus.setChecked(true);
+        }
+        tv_bill_service.setText(packageDataList.get(i).getPackageName() + " " + "Service");
+        tv_bill_service_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(i).getPrice());
+        //tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(i).getPrice());
+        MainActivity.package_id = Integer.parseInt(packageDataList.get(i).getPackageId());
+        MainActivity.package_amount = Integer.parseInt(packageDataList.get(i).getPrice());
+        MainActivity.amount_paid = Integer.parseInt(packageDataList.get(i).getPrice());
+        service_amount = Integer.parseInt(packageDataList.get(i).getPrice());
+        et_coupon_code.setText("");
+        tv_available_coupon.setText(getString(R.string.select_available_coupon));
+        tv_available_coupon.setTextColor(getActivity().getColor(R.color.cool_grey));
+        et_coupon_code.setEnabled(true);
+        tv_available_coupon.setEnabled(true);
+        discount_amount = 0;
+        applyCoupon(0);
+        calculateTotal();
+    }
+
 
     private void calculateTotal() {
         total_amount = service_amount - discount_amount;
@@ -246,7 +259,6 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setScope(MainActivity.scope);
         bookSlot.setPackage(MainActivity.package_id);
         bookSlot.setCoupenCode(MainActivity.coupen_code);
-
         bookSlot.setPackageAmount(MainActivity.package_amount);
         bookSlot.setDiscount(MainActivity.discount);
 
@@ -268,24 +280,12 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.rb_essentials:
                 if (checked) {
-                    rb_plus.setChecked(false);
-                    tv_bill_service.setText(packageDataList.get(0).getPackageName() + " " + "Service");
-                    tv_bill_service_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(0).getPrice());
-                    tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(0).getPrice());
-                    MainActivity.package_id = Integer.parseInt(packageDataList.get(0).getPackageId());
-                    MainActivity.package_amount = Integer.parseInt(packageDataList.get(0).getPrice());
-                    MainActivity.amount_paid = Integer.parseInt(packageDataList.get(0).getPrice());
+                    selectService(0);
                 }
                 break;
             case R.id.rb_plus:
                 if (checked) {
-                    rb_essentials.setChecked(false);
-                    tv_bill_service.setText(packageDataList.get(1).getPackageName() + " " + "Service");
-                    tv_bill_service_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(1).getPrice());
-                    tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + packageDataList.get(1).getPrice());
-                    MainActivity.package_id = Integer.parseInt(packageDataList.get(1).getPackageId());
-                    MainActivity.package_amount = Integer.parseInt(packageDataList.get(1).getPrice());
-                    MainActivity.amount_paid = Integer.parseInt(packageDataList.get(1).getPrice());
+                   selectService(1);
                 }
                 break;
         }
@@ -322,9 +322,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 tv_available_coupon.setText("1 Coupon Applied");
                 tv_available_coupon.setTextColor(getActivity().getColor(R.color.green));
-                discount_amount =availableCouponList.get(position).getDiscountAmount();
-                tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
-                calculateTotal();
+                applyCoupon(availableCouponList.get(position).getDiscountAmount());
                 // Dismiss dialog
                 dialog.dismiss();
             }

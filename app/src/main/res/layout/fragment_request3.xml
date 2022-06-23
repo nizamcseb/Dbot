@@ -185,6 +185,7 @@
                         android:hint="Enter Coupon Code"
                         android:imeOptions="actionNext"
                         android:inputType="text"
+                        android:enabled="false"
                         android:singleLine="true"/>
 
                     <TextView
@@ -219,9 +220,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:enabled="true"
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:background="@drawable/bg_edit_text"
-                    android:text="Select Available Coupon"
+                    android:text="@string/select_available_coupon"
                     android:textSize="@dimen/_13ssp"
                      />
 

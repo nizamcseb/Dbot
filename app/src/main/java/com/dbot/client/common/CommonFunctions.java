@@ -60,7 +60,10 @@ public class CommonFunctions {
                         Log.d("BookSlotResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                         paymentAlert(context, activity, title, message + "\n Transation Id - " + transaction_id);
                     } else {
-                        Snackbar.make(activity.getCurrentFocus(), response.body().getStatus().getCode(), Snackbar.LENGTH_SHORT).show();
+                        activity.finish();
+                        //activity.startActivityForResult(new Intent(context,HomeActivity.class),2);
+
+                        activity.startActivity(new Intent(context, MainActivity.class));
                     }
                    /* activity.finish();
                     Intent intent = new Intent(context,MainActivity.class);
@@ -92,7 +95,7 @@ public class CommonFunctions {
                         activity.finish();
                         //activity.startActivityForResult(new Intent(context,HomeActivity.class),2);
 
-                        activity.startActivityForResult(new Intent(context, MainActivity.class), 111);
+                        activity.startActivity(new Intent(context, MainActivity.class));
                         dialog.cancel();
                     }
                 });

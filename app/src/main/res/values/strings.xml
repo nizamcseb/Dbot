@@ -74,5 +74,6 @@
     <string name="invite_msg_refer_earn">Invite your friends to try Dbot services and win a <b>FREE</b> documentaion service when they avail their first service.</string>
     <string name="txt_our_vision">To supercharge the interior design process - Increase speed of project delivery by 10X</string>
     <string name="txt_our_mission">\u2022 Use technology to optimise site documentation for interior design projects.\n\u2022 Decrease documentation and site validation time by 90%.\n\u2022 Produce detailed, accurate and consistent documentation - 2D drawings, 360&#xb0; photos and 3D models - with zero error.</string>
+    <string name="select_available_coupon">Select Available Coupon</string>
 
 </resources>

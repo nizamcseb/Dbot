@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import com.beust.klaxon.Json
 import com.dbot.client.R
 import com.dbot.client.common.CommonFunctions
 import com.dbot.client.common.Key
@@ -22,6 +23,7 @@ import com.dbot.client.main.MainActivity
 import com.dbot.client.main.newrequest.model.BookSlot
 import com.dbot.client.retrofit.ApiClient
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.payu.base.models.BaseApiLayerConstants
 import com.payu.base.models.ErrorResponse
 import com.payu.base.models.PayUPaymentParams
@@ -92,6 +94,7 @@ class PayUActivity : AppCompatActivity() {
             //binding.pdCardViewEnv.isVisible = true
         }
         startPayment()
+
     }
 
 
@@ -231,6 +234,11 @@ class PayUActivity : AppCompatActivity() {
                 "payuResponse ; > " + response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
                         + ", merchantResponse : > " + response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
         )
+
+        val payuRes = Gson().fromJson(response[PayUCheckoutProConstants.CP_PAYU_RESPONSE] as String, PayuResponse::class.java)
+        println("payuRes object: $payuRes")
+        bookSlot?.setTransactionId(payuRes.getId().toString())
+        bookSlot?.setPaymentStatus(1)
         CommonFunctions.postPaymentPurchaseDetails(bookSlot, this, this,
                 "Payment Successfull",
                 "",
@@ -248,6 +256,10 @@ class PayUActivity : AppCompatActivity() {
                 "payuResponse ; > " + response[PayUCheckoutProConstants.CP_PAYU_RESPONSE]
                         + ", merchantResponse : > " + response[PayUCheckoutProConstants.CP_MERCHANT_RESPONSE]
         )
+        val payuRes = Gson().fromJson(response[PayUCheckoutProConstants.CP_PAYU_RESPONSE] as String, PayuResponse::class.java)
+        println("payuRes object: $payuRes")
+        bookSlot?.setTransactionId(payuRes.getId().toString())
+        bookSlot?.setPaymentStatus(0)
         CommonFunctions.postPaymentPurchaseDetails(bookSlot, this, this,
                 "Payment Failure",
                 "Try after sometime",
