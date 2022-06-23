@@ -189,7 +189,7 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
 
             return false;
         }
-        if (et_contact_person_phone_number.getText().length() < 10) {
+        if (et_contact_person_phone_number.getText().length() < 10 || et_contact_person_phone_number.getText().length() > 10) {
             et_contact_person_phone_number.setError("Enter 10 digit phone number");
             return false;
         }
