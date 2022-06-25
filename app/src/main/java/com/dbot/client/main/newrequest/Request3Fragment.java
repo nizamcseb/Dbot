@@ -29,6 +29,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dbot.client.R;
+import com.dbot.client.common.CommonFunctions;
 import com.dbot.client.common.Tags;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.newrequest.model.ApplyCouponResponse;
@@ -265,10 +266,20 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setAmountPaid(MainActivity.amount_paid);
         bookSlot.setPaymentStatus(MainActivity.payment_status);
 
-        Log.d("bookslotdata", new GsonBuilder().setPrettyPrinting().create().toJson(bookSlot));
-        Intent paymentIntent = new Intent(getActivity(), PayUActivity.class);
-        paymentIntent.putExtra(Tags.TAG_BOOK_SLOT_DATA, bookSlot);
-        getActivity().startActivity(paymentIntent);
+        if(MainActivity.amount_paid == 0)
+        {
+            bookSlot.setTransactionId("");
+            bookSlot.setPaymentStatus(1);
+            CommonFunctions.postPaymentPurchaseDetails(bookSlot, getContext(), getActivity(),
+                    "Success",
+                    "Your Slot booked successfully",
+                    "success","");
+        }else {
+            Log.d("bookslotdata", new GsonBuilder().setPrettyPrinting().create().toJson(bookSlot));
+            Intent paymentIntent = new Intent(getActivity(), PayUActivity.class);
+            paymentIntent.putExtra(Tags.TAG_BOOK_SLOT_DATA, bookSlot);
+            getActivity().startActivity(paymentIntent);
+        }
         //mViewModel.bookSlot(bookSlot);
     }
 

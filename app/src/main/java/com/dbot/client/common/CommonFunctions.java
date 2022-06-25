@@ -58,7 +58,10 @@ public class CommonFunctions {
                 public void onResponse(Call<BookSlotResponse> call, Response<BookSlotResponse> response) {
                     if (response.body().getStatus().getCode().equals(1031)) {
                         Log.d("BookSlotResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
-                        paymentAlert(context, activity, title, message + "\n Transation Id - " + transaction_id);
+                        if (transaction_id.equals(""))
+                            paymentAlert(context, activity, title, message);
+                        else
+                            paymentAlert(context, activity, title, message + "\n Transation Id - " + transaction_id);
                     } else {
                         activity.finish();
                         //activity.startActivityForResult(new Intent(context,HomeActivity.class),2);
@@ -107,10 +110,12 @@ public class CommonFunctions {
     public static void netWorkErrorAlert(Activity activity) {
         Snackbar.make(activity.getCurrentFocus().getRootView(), activity.getString(R.string.msg_network_failed), Snackbar.LENGTH_SHORT).show();
     }
+
     public static String getSelectedDate(long date) {
         String dateString = DateFormat.format("dd-MM-yyyy", new Date(date)).toString();
         return dateString;
     }
+
     public static boolean checkEmptyValidatation(EditText editText) {
         if (editText.getText().toString().equals("") || editText.getText().toString().equals(null))
             return false;
