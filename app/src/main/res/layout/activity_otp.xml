@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_otp"
+    android:background="@drawable/bg_login"
+    android:fitsSystemWindows="true"
     tools:context=".login.OtpActivity">
     <ImageView
         android:layout_width="@dimen/_150sdp"
@@ -16,21 +17,51 @@
         app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_20sdp"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/bg_req_bottom_sheet"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <View
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/login_top_not_highlighted"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center" />
+            <View
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/primary_varient"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center" />
+            <View
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/login_top_not_highlighted"
+                android:gravity="center" />
+
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
             android:text="@string/msg_tv_enter_otp" />
 
         <com.dbot.client.login.OtpEditText
@@ -55,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_gravity="center"
             android:background="@drawable/button_bg"
             android:text="@string/txt_btn_verify_amp_continue"
             app:backgroundTint="@null" />
@@ -64,6 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -71,14 +105,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:text="@string/msg_tv_not_recived_otp_yet" />
+                android:text="@string/msg_tv_not_recived_otp_yet"
+                android:textSize="@dimen/_9ssp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:gravity="start"
-                android:text="@string/msg_tv_click_here_to_resend_otp"/>
+                android:text="@string/msg_tv_click_here_to_resend_otp"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="bold"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

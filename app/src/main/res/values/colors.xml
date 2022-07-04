@@ -68,4 +68,5 @@
     <color name="rv_staus_bg">#E4E4E4</color>
     <color name="rh_status_awaiting_bg">#F6CF93</color>
     <color name="refund_status_filled_color">#34183A</color>
+    <color name="login_top_not_highlighted">#4DFE9900</color>
 </resources>

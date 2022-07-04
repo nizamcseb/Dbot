@@ -32,13 +32,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center">
 
             <View
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_7sdp"
                 android:background="@color/primary_varient"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:gravity="center" />
+            <View
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/login_top_not_highlighted"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:gravity="center" />
+            <View
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_7sdp"
+                android:background="@color/login_top_not_highlighted"
+                android:gravity="center" />
+
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"

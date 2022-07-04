@@ -262,13 +262,10 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setCoupenCode(MainActivity.coupen_code);
         bookSlot.setPackageAmount(MainActivity.package_amount);
         bookSlot.setDiscount(MainActivity.discount);
-
         bookSlot.setAmountPaid(MainActivity.amount_paid);
         bookSlot.setPaymentStatus(MainActivity.payment_status);
-
         if(MainActivity.amount_paid == 0)
-        {
-            bookSlot.setTransactionId("");
+        { bookSlot.setTransactionId("");
             bookSlot.setPaymentStatus(1);
             CommonFunctions.postPaymentPurchaseDetails(bookSlot, getContext(), getActivity(),
                     "Success",

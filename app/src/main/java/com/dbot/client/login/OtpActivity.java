@@ -36,10 +36,12 @@ public class OtpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (binding.etOtp.getText().toString().equals(String.valueOf(Otp))) {
-
+                    Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
+                    signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
+                    signupIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginStatus);
                     if (loginStatus) {
                         LoginData loginData = (LoginData) getIntent().getSerializableExtra(getString(R.string.TAG_CLIENT_DATA));
-                        sessionManager.setLogedInClient(loginData.getClientId(),
+                        sessionManager.setLogedInClient(signupIntent,loginData.getClientId(),
                                 loginData.getFullname(),
                                 loginData.getClientPhone(),
                                 loginData.getClientEmail(),
@@ -51,9 +53,7 @@ public class OtpActivity extends AppCompatActivity {
                         //startActivity(new Intent(OtpActivity.this, MainActivity.class));
 
                     } else {
-                        Intent signupIntent = new Intent(OtpActivity.this, SignupActivity.class);
-                        signupIntent.putExtra(getString(R.string.TAG_CLIENT_PHONE), strClientPhone);
-                        signupIntent.putExtra(getString(R.string.TAG_LOGIN_STATUS), loginStatus);
+
                         startActivity(signupIntent);
                     }
 

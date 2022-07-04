@@ -12,7 +12,7 @@
     <string name="msg_tv_enter_otp">Please enter 6 digit OTP that has been send to \n your mobile number</string>
     <string name="msg_tv_not_recived_otp_yet">Not recived OTP yet?</string>
     <string name="msg_tv_click_here_to_resend_otp"><u>Click here to resend OTP</u></string>
-    <string name="txt_btn_verify_amp_continue"><![CDATA[Verify & Continue]]></string>
+    <string name="txt_btn_verify_amp_continue">Verify OTP</string>
     <string name="txt_btn_send_otp">Send Otp</string>
     <string name="thank_you_for_signing_up_with_us">Thank you for signing up with us!</string>
     <string name="please_enter_the_following_details_nto_complete_the_sign_up">Please enter the following details \nto complete the sign up:</string>

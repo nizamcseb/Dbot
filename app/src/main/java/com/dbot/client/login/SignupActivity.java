@@ -3,6 +3,7 @@ package com.dbot.client.login;
 import static com.dbot.client.common.CommonFunctions.findCityPosition;
 import static com.dbot.client.common.Popup.SearchCity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -24,6 +25,7 @@ import com.dbot.client.common.city.CityAdapter;
 import com.dbot.client.common.city.CityData;
 import com.dbot.client.login.model.SignUpResponse;
 import com.dbot.client.login.model.User;
+import com.dbot.client.main.MainActivity;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
@@ -82,7 +84,7 @@ public class SignupActivity extends AppCompatActivity implements SaveCity {
                 if (signUpResponse != null) {
                     Toast.makeText(SignupActivity.this, signUpResponse.getStatus().getMessage(), Toast.LENGTH_LONG).show();
                     if (signUpResponse.getStatus().getCode() == 1012 || signUpResponse.getStatus().getCode() == 1027)
-                        sessionManager.setLogedInClient(signUpResponse.getClientData().getClientId(),
+                        sessionManager.setLogedInClient(new Intent(SignupActivity.this, MainActivity.class),signUpResponse.getClientData().getClientId(),
                                 signUpResponse.getClientData().getFullname(),
                                 signUpResponse.getClientData().getClientPhone(),
                                 signUpResponse.getClientData().getClientEmail(),
@@ -107,7 +109,7 @@ public class SignupActivity extends AppCompatActivity implements SaveCity {
                 RadioButton radioButton = (RadioButton) findViewById(selectedId);
                 User user;
                 if (loginStatus) {
-                    user = new User(sessionManager.getClientId(), name, phoneNumber, email, companyName, "99999", "test@test.com", city, Integer.parseInt(radioButton.getTag().toString()), null, null, 0, null);
+                    user = new User(sessionManager.getClientId(), name, phoneNumber, email, companyName, "", "", city, Integer.parseInt(radioButton.getTag().toString()), null, null, 0, null);
                     loginViewModel.updateClientProfile(user);
                 } else {
                     user = new User(null, name, phoneNumber, email, companyName, "", "", city, Integer.parseInt(radioButton.getTag().toString()), deiveId, "ssss", 1, Build.MODEL);

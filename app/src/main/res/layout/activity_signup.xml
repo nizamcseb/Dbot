@@ -4,26 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_otp"
+    android:background="@drawable/bg_login"
     tools:context=".login.SignupActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/ic_dbot_word_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_100sdp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="61dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_150sdp"
             android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/bg_req_bottom_sheet"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/_160sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@color/login_top_not_highlighted"
+                    android:gravity="center" />
+
+                <View
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@color/login_top_not_highlighted"
+                    android:gravity="center" />
+
+                <View
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_7sdp"
+                    android:background="@color/primary_varient"
+                    android:gravity="center" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,7 +110,7 @@
                         android:gravity="start"
                         android:text="Full Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -87,9 +128,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edit_text"
                     android:hint="Enter your Full Name"
-                    android:inputType="textPersonName"
                     android:imeOptions="actionNext"
-                    android:textSize="@dimen/_12ssp" />
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/_10ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -112,7 +153,7 @@
                         android:gravity="start"
                         android:text="Email Address"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -130,9 +171,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edit_text"
                     android:hint="Enter your Email Address"
-                    android:inputType="textEmailAddress"
                     android:imeOptions="actionNext"
-                    android:textSize="@dimen/_12ssp" />
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/_10ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -155,7 +196,7 @@
                         android:gravity="start"
                         android:text="Are you a Freelancer?"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,7 +225,8 @@
                         android:buttonTint="@color/primary_varient"
                         android:paddingStart="@dimen/_10sdp"
                         android:tag="1"
-                        android:text="YES" />
+                        android:text="YES"
+                        android:textSize="@dimen/_10ssp" />
 
                     <RadioButton
                         android:id="@+id/rb_freelancer_no"
@@ -195,7 +237,8 @@
                         android:buttonTint="@color/primary_varient"
                         android:paddingStart="@dimen/_10sdp"
                         android:tag="0"
-                        android:text="NO" />
+                        android:text="NO"
+                        android:textSize="@dimen/_10ssp" />
 
 
                 </RadioGroup>
@@ -205,7 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="vertical">
 
@@ -221,7 +264,7 @@
                         android:gravity="start"
                         android:text="Firm / Company Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -240,7 +283,7 @@
                     android:background="@drawable/bg_edit_text"
                     android:hint="Enter your Firm / Company Name"
                     android:imeOptions="actionNext"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_10ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -262,7 +305,7 @@
                         android:gravity="start"
                         android:text="City"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         style="@style/bold"
@@ -285,13 +328,13 @@
                     android:drawableEnd="@drawable/ic_arrow_down"
                     android:drawablePadding="10dp"
                     android:gravity="start"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_10ssp" />
 
-               <!-- <Spinner
-                    android:id="@+id/sp_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="" />-->
+                <!-- <Spinner
+                 android:id="@+id/sp_city"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 tools:listitem="" />-->
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -314,7 +357,7 @@
                         android:gravity="start"
                         android:text="Referral Code :"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_15ssp" />
+                        android:textSize="@dimen/_13ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -334,7 +377,7 @@
                     android:background="@drawable/bg_edit_text"
                     android:hint="Enter refferal code"
                     android:imeOptions="actionDone"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_10ssp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.button.MaterialButton
@@ -347,5 +390,5 @@
                 app:backgroundTint="@null" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

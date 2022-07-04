@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.dbot.client.LandingActivity;
 import com.dbot.client.R;
 import com.dbot.client.login.LoginActivity;
+import com.dbot.client.login.SignupActivity;
 import com.dbot.client.main.MainActivity;
 
 
@@ -38,7 +39,7 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void setLogedInClient(String clientId,String fullName,String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
+    public void setLogedInClient(Intent intent, String clientId, String fullName, String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
@@ -49,9 +50,12 @@ public class SessionManager {
         setClientCompanyEmail(companyEmail);
         setCity(city);
         setFreeLancer(freelancer);
-        _context.startActivity(new Intent(_context,MainActivity.class));
+
+        _context.startActivity(intent);
+
     }
- public void updateClient(String clientId,String fullName,String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
+
+    public void updateClient(String clientId, String fullName, String phone, String emailId, String companyName, String companyPhone, String companyEmail, String city, String freelancer) {
         createLoginSession(true);
         setClientId(clientId);
         setClientFullName(fullName);
@@ -67,6 +71,7 @@ public class SessionManager {
 
     /**
      * Create login session
+     *
      * @param b
      */
     public void createLoginSession(boolean b) {
@@ -75,6 +80,7 @@ public class SessionManager {
 
         editor.commit();
     }
+
     public void setClientId(String clientId) {
 
         editor.putString(_context.getString(R.string.TAG_CLIENT_ID), clientId);
@@ -134,6 +140,7 @@ public class SessionManager {
 
         return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_NAME), null);
     }
+
     public void setClientCompanyPhone(String companyPhone) {
 
         editor.putString(_context.getString(R.string.TAG_CLIENT_COMPANY_PHONE), companyPhone);
@@ -145,6 +152,7 @@ public class SessionManager {
 
         return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_PHONE), null);
     }
+
     public void setClientCompanyEmail(String companyEmail) {
 
         editor.putString(_context.getString(R.string.TAG_CLIENT_COMPANY_EMAIL), companyEmail);
@@ -156,7 +164,8 @@ public class SessionManager {
 
         return pref.getString(_context.getString(R.string.TAG_CLIENT_COMPANY_EMAIL), null);
     }
- public void setCity(String city) {
+
+    public void setCity(String city) {
 
         editor.putString(_context.getString(R.string.TAG_CLIENT_CITY), city);
 
@@ -173,10 +182,12 @@ public class SessionManager {
 
         editor.commit();
     }
+
     public int getFreeLancer() {
 
-        return Integer.parseInt(pref.getString(_context.getString(R.string.TAG_FREELANCER),"0"));
+        return Integer.parseInt(pref.getString(_context.getString(R.string.TAG_FREELANCER), "0"));
     }
+
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page
