@@ -74,6 +74,7 @@ public class SignupActivity extends AppCompatActivity implements SaveCity {
                 }*/
                 int position = findCityPosition(cityDataList, sessionManager.getCity());
                 binding.tvCitySearch.setText(cityDataList.get(position).getCityName());
+                city = cityDataList.get(position).getId();
                 //binding.spCity.setSelection(position);
                 // binding.spCity.setOnItemSelectedListener(SignupActivity.this);
             }

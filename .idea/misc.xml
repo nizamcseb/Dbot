@@ -152,13 +152,29 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14868421052631578" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14868421052631578" />
+        <entry key="..\:/Users/nizam/.gradle/caches/transforms-3/6956bef5c80bd45148d2ca80b07aac1c/transformed/jetified-payu-checkout-pro-1.8.1/res/drawable/payu_left_arrow.xml" value="0.1" />
+        <entry key="..\:/Users/nizam/.gradle/caches/transforms-3/d0e7c8b9bedfee572d23b33dc9f6ff6e/transformed/jetified-payu-checkout-pro-ui-1.8.1/res/drawable/payu_arrow_right.xml" value="0.1" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/bg_package_table_row.xml" value="0.1125" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/calendar_left_arrow.xml" value="0.1" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/calendar_right_arrow.xml" value="0.1" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/hexagon.xml" value="0.1565" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/hexagon_selected.xml" value="0.1705" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_main.xml" value="0.18227848101265823" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_otp.xml" value="0.2" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_signup.xml" value="0.22" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_test.xml" value="0.17051282051282052" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/calendar_layout.xml" value="0.1576923076923077" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_absent_view.xml" value="0.15897435897435896" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_current_view.xml" value="0.15897435897435896" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_default_view.xml" value="0.15897435897435896" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_present_view.xml" value="0.17051282051282052" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/content_test.xml" value="0.25" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/control_calendar.xml" value="0.1763157894736842" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/control_calendar_day.xml" value="0.18461538461538463" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/dialog_city_search.xml" value="0.1718683197947841" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_account_info.xml" value="0.1717948717948718" />
+        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_first.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_home.xml" value="0.1969622733953944" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_request3.xml" value="0.33" />
         <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_request_completed.xml" value="0.1717948717948718" />
