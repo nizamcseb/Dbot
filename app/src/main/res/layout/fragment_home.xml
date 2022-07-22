@@ -18,8 +18,8 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/_50sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_50sdp">
 
             <LinearLayout
                 android:id="@+id/home1"
@@ -47,6 +47,7 @@
                         android:gravity="center"
                         android:text="Book your preferred slot:"
                         android:textSize="@dimen/_15ssp" />
+
                     <TextView
                         android:id="@+id/tv_city_search"
                         android:layout_width="match_parent"
@@ -82,11 +83,19 @@
                         android:textSize="@dimen/_10ssp"
                         android:visibility="visible" />
 
+                    <LinearLayout
+                        android:id="@+id/ll_calendarView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_230sdp"
+                        android:orientation="vertical">
+                        <include layout="@layout/control_calendar" />
+                    </LinearLayout>
+
                     <CalendarView
                         android:id="@+id/calendarView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        />
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:id="@+id/ll_available_slots"
@@ -160,12 +169,14 @@ services for residential interior projects."
                         android:textColor="@color/white"
                         android:textSize="@dimen/_15ssp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:visibility="gone">
+
                     <TextView
                         style="@style/bold"
                         android:layout_width="match_parent"
@@ -250,6 +261,7 @@ services for residential interior projects."
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <include
                 android:id="@+id/home2"
                 layout="@layout/home2"

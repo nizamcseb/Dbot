@@ -13,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -36,10 +38,11 @@ import com.dbot.client.R;
 import com.dbot.client.common.CommonFunctions;
 import com.dbot.client.common.Popup;
 import com.dbot.client.common.SessionManager;
+import com.dbot.client.common.calendar.AvailableDate;
+import com.dbot.client.common.calendar.CalendarAdapter;
 import com.dbot.client.common.city.CityData;
 import com.dbot.client.common.city.SaveCity;
 import com.dbot.client.login.LoginViewModel;
-import com.dbot.client.login.SignupActivity;
 import com.dbot.client.main.MainActivity;
 import com.dbot.client.main.home.adapter.TCAdapter;
 import com.dbot.client.main.home.model.AvailableSlotsData;
@@ -50,6 +53,11 @@ import com.dbot.client.retrofit.Status;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.GsonBuilder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener, NestedScrollView.OnScrollChangeListener, SaveCity, SwipeRefreshLayout.OnRefreshListener {
@@ -62,7 +70,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     //SwipeRefreshLayout swipeRefreshLayout2,swipeRefreshLayout3,swipeRefreshLayout4,swipeRefreshLayout5;
     CityData cityData;
     CalendarView cView;
-    LinearLayout llAvailableSlots, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
+
+    // date format
+    private String dateFormat = "MMM yyyy";
+    // current displayed month
+    private Calendar currentDate = Calendar.getInstance();
+    CalendarAdapter calendarAdapter;
+    // internal components for calendar
+    private LinearLayout header;
+    private ImageView btnPrev;
+    private ImageView btnNext;
+    private TextView txtDate;
+    private GridView grid;
+
+    LinearLayout llAvailableSlots, ll_calendarView, ll_vision_mission, ll_send_quick_msg, ll_terms_and_conditions;
     Button btn_continue, btn_book_documentation, btn_slot_1, btn_slot_2, btn_quick_msg_send;
     TextView tv_city_search, tv_product_msg, tv_available_message, tv_support_mail, tv_tc;
     ImageView iv_2d, iv_360, iv_3d, iv_close_quick_msg, iv_close_terms_condition, iv_tri_2d, iv_tri_360, iv_tri_3d;
@@ -93,6 +114,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         tv_city_search = root.findViewById(R.id.tv_city_search);
         tv_available_message = root.findViewById(R.id.tv_available_message);
         tv_available_message.setVisibility(View.INVISIBLE);
+        ll_calendarView = root.findViewById(R.id.ll_calendarView);
         cView = root.findViewById(R.id.calendarView);
         llAvailableSlots = root.findViewById(R.id.ll_available_slots);
         iv_2d = root.findViewById(R.id.iv_2d);
@@ -169,9 +191,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
                 home4.setVisibility(View.VISIBLE);
             }
         });*/
+//Custom Calendar
+        assignUiElements(root);
+        //updateCalendar(null);
+        assignClickHandlers();
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
+
+        homeViewModel.getAvailableDates(7, 2022);
+        homeViewModel.getAvailableDatesResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableDate>>() {
+            @Override
+            public void onChanged(List<AvailableDate> availableDates) {
+                Log.d("getAvailableDatesResponse", new GsonBuilder().setPrettyPrinting().create().toJson(availableDates));
+                updateCalendar(availableDates);
+            }
+        });
+        homeViewModel.getAvailableSlots(getSelectedDate(currentDate.getTimeInMillis()));
+        //homeViewModel.getAvailableSlots(getSelectedDate(cView.getDate()));
         homeViewModel.getAvailableSlotsResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableSlotsData>>() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @SuppressLint("LongLogTag")
@@ -187,17 +223,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         loginViewModel.getCityResult().observe(getViewLifecycleOwner(), new Observer<List<CityData>>() {
             @Override
             public void onChanged(List<CityData> cityDataList) {
-               // cityDataList = cityData;
+                // cityDataList = cityData;
                 //CityAdapter cityAdapter = new CityAdapter(getActivity(), getContext(), cityDataList);
                 //spCity.setAdapter(cityAdapter);
                 int position = findCityPosition(cityDataList, sessionManager.getCity());
-                cityData =  cityDataList.get(position);
+                cityData = cityDataList.get(position);
                 tv_city_search.setText(cityData.getCityName());
                 tv_city_search.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //saveCity = (SaveCity) getContext();
-                        SearchCity(getActivity(),cityDataList,saveCity);
+                        SearchCity(getActivity(), cityDataList, saveCity);
                     }
                 });
 
@@ -581,5 +617,105 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     @Override
     public void onRefresh() {
 
+    }
+
+    private void assignUiElements(View view) {
+        // layout is inflated, assign local variables to components
+        header = view.findViewById(R.id.calendar_header);
+        btnPrev = view.findViewById(R.id.calendar_prev_button);
+        btnNext = view.findViewById(R.id.calendar_next_button);
+        txtDate = view.findViewById(R.id.calendar_date_display);
+        grid = view.findViewById(R.id.calendar_grid);
+    }
+
+    private void assignClickHandlers() {
+        // add one month and refresh UI
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentDate.add(Calendar.MONTH, 1);
+                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+                homeViewModel.getAvailableDates(currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
+            }
+        });
+
+        // subtract one month and refresh UI
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentDate.add(Calendar.MONTH, -1);
+                homeViewModel.getAvailableDates(currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
+            }
+        });
+        grid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                //((TextView) view).setTextColor(getContext().getColor(R.color.primary_varient));
+                Log.d("onItemClick", new GsonBuilder().setPrettyPrinting().create().toJson(adapterView.getItemAtPosition(position)));
+                Date date = (Date) adapterView.getItemAtPosition(position);
+                homeViewModel.getAvailableSlots(getSelectedDate(date.getTime()));
+            }
+        });
+    }
+
+
+    public void updateCalendar(List<AvailableDate> availableDates) {
+        ArrayList<Date> cells = new ArrayList<>();
+        List<Date> dateList = new ArrayList<>();
+        Calendar calendar = (Calendar) currentDate.clone();
+
+        // determine the cell for current month's beginning
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        int monthBeginningCell = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+
+        // move calendar backwards to the beginning of the week
+        calendar.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
+
+        // fill cells
+        while (cells.size() < 42) {
+            cells.add(calendar.getTime());
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        if (availableDates != null) {
+
+            for (AvailableDate availableDate : availableDates) {
+                if (availableDate.getAvailableStatus()) {
+                    //Log.d("active dates",availableDate.getDate());
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Date date = format.parse(availableDate.getDate());
+                        System.out.println(date);
+                        dateList.add(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+        calendarAdapter = new CalendarAdapter(getContext(), cells, dateList);
+        // update grid
+        grid.setAdapter(calendarAdapter);
+
+
+        // update title
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        txtDate.setText(sdf.format(currentDate.getTime()));
+
+        // set header color according to current season
+        int month = currentDate.get(Calendar.MONTH);
+
+        header.setBackgroundColor(getResources().getColor(R.color.grey_rh_list_divider));
     }
 }

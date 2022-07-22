@@ -52,6 +52,7 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_tc_contact.xml" value="0.3177083333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/bg_tv_coupon_apply.xml" value="0.3880208333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/button_bg.xml" value="0.25493421052631576" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/calendar_selector.xml" value="0.1795" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/cb_bg.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_2d_drawing_light.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/drawable/ic_360_photos_dark.xml" value="0.3223958333333333" />
@@ -92,7 +93,10 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_payu.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_places_search.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_signup.xml" value="0.33" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/activity_test.xml" value="0.31794871794871793" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/bg_radio_button.xml" value="0.3734375" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/control_calendar.xml" value="0.25290697674418605" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/control_calendar_day.xml" value="0.31794871794871793" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/dialog_available_coupons.xml" value="0.31794871794871793" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/dialog_city_search.xml" value="0.371875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_account_info.xml" value="0.3015625" />
@@ -100,7 +104,7 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_faq.xml" value="0.2" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_faqs.xml" value="0.27905982905982907" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_full_details.xml" value="0.34427083333333336" />
-        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_home_old.xml" value="0.290625" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_logout.xml" value="0.3875" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/layout/fragment_new_request.xml" value="0.24473684210526317" />
@@ -152,37 +156,6 @@
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14868421052631578" />
         <entry key="..\:/Users/BM_GD/Desktop/Nizam/DBot/android app/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14868421052631578" />
-        <entry key="..\:/Users/nizam/.gradle/caches/transforms-3/6956bef5c80bd45148d2ca80b07aac1c/transformed/jetified-payu-checkout-pro-1.8.1/res/drawable/payu_left_arrow.xml" value="0.1" />
-        <entry key="..\:/Users/nizam/.gradle/caches/transforms-3/d0e7c8b9bedfee572d23b33dc9f6ff6e/transformed/jetified-payu-checkout-pro-ui-1.8.1/res/drawable/payu_arrow_right.xml" value="0.1" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/bg_package_table_row.xml" value="0.1125" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/calendar_left_arrow.xml" value="0.1" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/calendar_right_arrow.xml" value="0.1" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/hexagon.xml" value="0.1565" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/drawable/hexagon_selected.xml" value="0.1705" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_main.xml" value="0.18227848101265823" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_otp.xml" value="0.2" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_signup.xml" value="0.22" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/activity_test.xml" value="0.17051282051282052" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/calendar_layout.xml" value="0.1576923076923077" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_absent_view.xml" value="0.15897435897435896" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_current_view.xml" value="0.15897435897435896" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_default_view.xml" value="0.15897435897435896" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/cl_present_view.xml" value="0.17051282051282052" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/content_test.xml" value="0.25" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/control_calendar.xml" value="0.1763157894736842" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/control_calendar_day.xml" value="0.18461538461538463" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/dialog_city_search.xml" value="0.1718683197947841" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_account_info.xml" value="0.1717948717948718" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_first.xml" value="0.17051282051282052" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_home.xml" value="0.1969622733953944" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_request3.xml" value="0.33" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_request_completed.xml" value="0.1717948717948718" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/fragment_services.xml" value="0.1717948717948718" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/home2.xml" value="0.1717948717948718" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/home3.xml" value="0.209375" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/home4.xml" value="0.209375" />
-        <entry key="..\:/Users/nizam/OneDrive/Desktop/Dbot/app/src/main/res/layout/home5.xml" value="0.209375" />
       </map>
     </option>
   </component>

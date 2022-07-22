@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.dbot.client.common.calendar.AvailableDate;
+import com.dbot.client.common.calendar.AvailableDatesResponse;
 import com.dbot.client.main.home.model.AvailableSlotsData;
 import com.dbot.client.main.home.model.AvailableSlotsResponse;
 import com.dbot.client.main.home.model.NotifySlotRequestResponse;
@@ -26,9 +28,31 @@ import retrofit2.Response;
 public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<List<AvailableSlotsData>> availableSlotsData = new MutableLiveData<>();
+    private MutableLiveData<List<AvailableDate>> availablDates = new MutableLiveData<>();
     private MutableLiveData<Status> statusMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<TermsAndConditionsResponse> termsAndConditionsResponseMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<NotifySlotRequestResponse> notifySlotRequestResponseMutableLiveData = new MutableLiveData<>();
+
+    public void getAvailableDates(int month, int year) {
+        System.out.println("month_year " + String.valueOf(month) + " " + String.valueOf(year));
+        //loginMutableLiveData = new MutableLiveData<>();
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<AvailableDatesResponse> call = apiInterface.getAvailableDates(month, year);
+        call.enqueue(new Callback<AvailableDatesResponse>() {
+            @Override
+            public void onResponse(Call<AvailableDatesResponse> call, Response<AvailableDatesResponse> response) {
+                availablDates.setValue(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<AvailableDatesResponse> call, Throwable t) {
+                call.cancel();
+                t.printStackTrace();
+                Log.e("availablDates response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+            }
+        });
+
+    }
 
     public void getAvailableSlots(String book_date) {
         System.out.println("book_date " + book_date);
@@ -49,7 +73,7 @@ public class HomeViewModel extends ViewModel {
             public void onFailure(Call<AvailableSlotsResponse> call, Throwable t) {
                 call.cancel();
                 t.printStackTrace();
-                Log.e("response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
+                Log.e("availableSlotsData response ERROR= ", "" + t.getMessage() + " " + t.getLocalizedMessage());
             }
         });
     }
@@ -76,14 +100,15 @@ public class HomeViewModel extends ViewModel {
             }
         });
     }
-    public void getTCData(){
+
+    public void getTCData() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<TermsAndConditionsResponse> call = apiInterface.getTC();
         call.enqueue(new Callback<TermsAndConditionsResponse>() {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<TermsAndConditionsResponse> call, Response<TermsAndConditionsResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     Log.d("getTermsAndConditionsResponse", new GsonBuilder().setPrettyPrinting().create().toJson(response.body()));
                     termsAndConditionsResponseMutableLiveData.setValue(response.body());
                 }
@@ -97,6 +122,7 @@ public class HomeViewModel extends ViewModel {
             }
         });
     }
+
     public void sendNotifySlotAvailableRequest(String client_id, String book_date, String slot_time_id) {
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -120,6 +146,11 @@ public class HomeViewModel extends ViewModel {
             }
         });
     }
+
+    public LiveData<List<AvailableDate>> getAvailableDatesResult() {
+        return availablDates;
+    }
+
     public LiveData<List<AvailableSlotsData>> getAvailableSlotsResult() {
         return availableSlotsData;
     }
@@ -127,9 +158,11 @@ public class HomeViewModel extends ViewModel {
     public LiveData<Status> getQuickMessageResult() {
         return statusMutableLiveData;
     }
+
     public LiveData<TermsAndConditionsResponse> getTCResult() {
         return termsAndConditionsResponseMutableLiveData;
     }
+
     public LiveData<NotifySlotRequestResponse> getNotifySlotAvailableRequestResult() {
         return notifySlotRequestResponseMutableLiveData;
     }

@@ -1,6 +1,7 @@
 package com.dbot.client.retrofit;
 
 
+import com.dbot.client.common.calendar.AvailableDatesResponse;
 import com.dbot.client.common.city.CityResponse;
 import com.dbot.client.login.model.LoginResponse;
 import com.dbot.client.login.model.SignUpResponse;
@@ -57,6 +58,11 @@ public interface ApiInterface {
     //Package List
     @GET("package/getpackages")
     Call<PackageResponse> getPackages();
+
+
+    //Get Available Dates
+    @GET("slotbooking/availabledates/{month}/{year}")
+    Call<AvailableDatesResponse> getAvailableDates(@Path("month") int month, @Path("year") int year);
 
     //Get Available Slots
     @GET("slotbooking/availableslots/{book_date}")
