@@ -198,12 +198,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
-        homeViewModel.getAvailableDates(7, 2022);
+        homeViewModel.getAvailableDates(currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
         homeViewModel.getAvailableDatesResult().observe(getViewLifecycleOwner(), new Observer<List<AvailableDate>>() {
             @Override
             public void onChanged(List<AvailableDate> availableDates) {
                 Log.d("getAvailableDatesResponse", new GsonBuilder().setPrettyPrinting().create().toJson(availableDates));
-                updateCalendar(availableDates);
+                updateCalendar(availableDates,currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
             }
         });
         homeViewModel.getAvailableSlots(getSelectedDate(currentDate.getTimeInMillis()));
@@ -670,7 +670,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
     }
 
 
-    public void updateCalendar(List<AvailableDate> availableDates) {
+    public void updateCalendar(List<AvailableDate> availableDates, int month, int year) {
         ArrayList<Date> cells = new ArrayList<>();
         List<Date> dateList = new ArrayList<>();
         Calendar calendar = (Calendar) currentDate.clone();
@@ -704,7 +704,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
 
             }
         }
-        calendarAdapter = new CalendarAdapter(getContext(), cells, dateList);
+        calendarAdapter = new CalendarAdapter(getContext(), cells, dateList,month,year);
         // update grid
         grid.setAdapter(calendarAdapter);
 
@@ -714,8 +714,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Cale
         txtDate.setText(sdf.format(currentDate.getTime()));
 
         // set header color according to current season
-        int month = currentDate.get(Calendar.MONTH);
+        //int month = currentDate.get(Calendar.MONTH);
 
-        header.setBackgroundColor(getResources().getColor(R.color.grey_rh_list_divider));
+        //header.setBackgroundColor(getResources().getColor(R.color.grey_rh_list_divider));
     }
 }

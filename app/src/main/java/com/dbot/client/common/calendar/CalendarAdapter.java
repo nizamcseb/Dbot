@@ -1,8 +1,11 @@
 package com.dbot.client.common.calendar;
 
+import static android.view.View.GONE;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +27,16 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
 
     // for view inflation
     private LayoutInflater inflater;
+private int calendarMonth,calendarYear;
 
-
-    public CalendarAdapter(Context context, ArrayList<Date> days, List<Date> availableDates) {
+    public CalendarAdapter(Context context, ArrayList<Date> days, List<Date> availableDates, int calendarMonth, int calendarYear) {
         super(context, R.layout.control_calendar_day, days);
         this.availableDates = availableDates;
+        this.calendarMonth = calendarMonth;
+        this.calendarYear = calendarYear;
         inflater = LayoutInflater.from(context);
+        Log.d("calendarMonth",String.valueOf(calendarMonth));
+        Log.d("calendarYear",String.valueOf(calendarYear));
     }
 
     @Nullable
@@ -66,7 +73,8 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
                         eventDate.getMonth() == month &&
                         eventDate.getYear() == year) {
                     // mark this day for event
-                    view.setBackgroundResource(R.drawable.hexagon);
+                    //view.setBackgroundResource(R.drawable.hexagon);
+                    ((TextView) view).setTextColor(Color.BLACK);
                     ((TextView) view).setTypeface(null, Typeface.BOLD);
                     break;
                 }
@@ -75,12 +83,13 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
 
         // clear styling
         //((TextView) view).setTypeface(null, Typeface.NORMAL);
-        ((TextView) view).setTextColor(Color.BLACK);
-
-        if (month != today.getMonth() || year != today.getYear()) {
+        //((TextView) view).setTextColor(Color.BLACK);
+        ((TextView) view).setText(String.valueOf(date.getDate()));
+        if (month == calendarMonth && year == calendarYear) {
             // if this day is outside current month, grey it out
-            ((TextView) view).setTextColor(getContext().getResources().getColor(R.color.greyed_out));
+            //((TextView) view).setTextColor(Color.GREEN);
             //((TextView) view).setVisibility(GONE);
+
         } else if (day == today.getDate()) {
             // if it is today, set it to blue/bold
             //((TextView) view).setTypeface(null, Typeface.BOLD);
@@ -89,7 +98,7 @@ public class CalendarAdapter extends ArrayAdapter<Date> {
         }
 
         // set text
-        ((TextView) view).setText(String.valueOf(date.getDate()));
+
        /* ((TextView) view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

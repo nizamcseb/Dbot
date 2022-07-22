@@ -87,6 +87,10 @@
                         android:id="@+id/ll_calendarView"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_230sdp"
+                        android:background="@drawable/bg_popup"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:orientation="vertical">
                         <include layout="@layout/control_calendar" />
                     </LinearLayout>

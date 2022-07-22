@@ -5,4 +5,5 @@
 	android:layout_height="@dimen/_22sdp"
 	android:gravity="center"
 	android:textAlignment="center"
-	android:text="00"/>
+	android:text="00"
+	android:textSize="@dimen/_10ssp"/>
