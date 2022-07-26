@@ -265,6 +265,27 @@
                             android:text="@string/sample_rupee"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
+<LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Additional rooms charges"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:id="@+id/tv_bill_additional_charges"
+                            style="@style/bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="@string/sample_rupee"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

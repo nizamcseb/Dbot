@@ -219,8 +219,8 @@ public class Request2Fragment extends Fragment implements View.OnClickListener, 
                     MainActivity.project_type = Integer.parseInt(radioButton.getTag().toString());
                     Log.d("property_size", String.valueOf(MainActivity.property_size));
                     Log.d("project_type", String.valueOf(MainActivity.project_type));
-                    Request3Fragment request3Fragment = new Request3Fragment();
-                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request3Fragment);
+                    Request2aFragment request2aFragment = new Request2aFragment();
+                    fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2aFragment);
                     fragmentTransaction.commit();
                 }
                 break;

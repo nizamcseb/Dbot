@@ -27,7 +27,10 @@ import com.dbot.client.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     public static SessionManager sessionManager;
     public static String book_date, map_location, door_number, building_name, landmark, project_name, contact_person_name, contact_person_phone, coupen_code = "";
     public static List<Integer> scope = null;
+    public static Map<String, Integer> mapRoomType = null;
+    public static int totalrooms = 7;
     public static int city = 0;
     public static int slot_time_id = 0;
     public static int property_size = 9;
@@ -56,7 +61,28 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         sessionManager = new SessionManager(this);
         scope = new ArrayList<Integer>();
+        mapRoomType = new HashMap<>();
+        mapRoomType.put("1", 1);
+        mapRoomType.put("2", 1);
+        mapRoomType.put("3", 1);
+        mapRoomType.put("4", 1);
+        mapRoomType.put("5", 1);
+        mapRoomType.put("6", 1);
+        mapRoomType.put("7", 1);
 
+       /* System.out.println(mapRoomType.size());
+
+        Set<Map.Entry<String, Integer> > set
+                = mapRoomType.entrySet();
+
+        List<Map.Entry<String, Integer> > list
+                = new ArrayList<>(set);
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            System.out.println(list.get(i).getKey() + ": "
+                    + list.get(i).getValue());
+        }*/
         Log.d("session user", sessionManager.getClientId());
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

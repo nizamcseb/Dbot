@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class BookSlot implements Serializable {
     @SerializedName("client_id")
@@ -36,6 +37,9 @@ public class BookSlot implements Serializable {
     @SerializedName("scope")
     @Expose
     private List<Integer> scope = null;
+    @SerializedName("roomtypes")
+    @Expose
+    private Map<String,Integer> roomType = null;
 
     @SerializedName("package")
     private Integer package_id;
@@ -164,6 +168,14 @@ public class BookSlot implements Serializable {
 
     public void setScope(List<Integer> scope) {
         this.scope = scope;
+    }
+
+    public Map<String,Integer> getRoomTypes() {
+        return roomType;
+    }
+
+    public void setRoomTypes(Map<String,Integer> roomType) {
+        this.roomType = roomType;
     }
 
     public Integer getPackage() {

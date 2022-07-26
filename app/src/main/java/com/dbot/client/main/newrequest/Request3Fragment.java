@@ -1,11 +1,12 @@
 package com.dbot.client.main.newrequest;
 
+import static com.dbot.client.main.MainActivity.totalrooms;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -49,13 +49,13 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
     View root;
     LinearLayout ll_essential, ll_plus;
     RadioButton rb_essentials, rb_plus;
-    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price, tv_coupon_apply, tv_available_coupon;
+    TextView tv_service_title_1, tv_service_title_2, tv_es_package_desc, tv_pl_package_desc, tv_es_price, tv_pl_price, tv_bill_service, tv_bill_service_price, tv_coupon_discount_price, tv_bill_total_price, tv_coupon_apply, tv_available_coupon, tv_bill_additional_charges;
     Button btn_req3_prev, btn_req3_pay;
     EditText et_coupon_code;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     List<PackageData> packageDataList;
-    int discount_amount = 0, service_amount = 0, total_amount = 0;
+    int additional_room_charges = 0, discount_amount = 0, service_amount = 0, total_amount = 0;
 
     public static Request3Fragment newInstance() {
         return new Request3Fragment();
@@ -88,10 +88,14 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         tv_bill_service = root.findViewById(R.id.tv_bill_service);
         tv_bill_service_price = root.findViewById(R.id.tv_bill_service_price);
         tv_coupon_discount_price = root.findViewById(R.id.tv_coupon_discount_price);
+        tv_bill_additional_charges = root.findViewById(R.id.tv_bill_additional_charges);
         tv_bill_total_price = root.findViewById(R.id.tv_bill_total_price);
 
         tv_bill_service.setText("");
         tv_bill_service_price.setText("");
+        additional_room_charges = (totalrooms * 200) - 1400;
+        total_amount = additional_room_charges;
+        tv_bill_additional_charges.setText(getString(R.string.symbol_rupee) + " " + additional_room_charges);
         tv_coupon_discount_price.setText(getString(R.string.symbol_rupee) + " " + discount_amount);
         tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + total_amount);
 
@@ -156,8 +160,8 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btn_req3_prev:
-                Request2Fragment request2Fragment = new Request2Fragment();
-                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2Fragment);
+                Request2aFragment request2aFragment = new Request2aFragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, request2aFragment);
                 fragmentTransaction.commit();
                 break;
             case R.id.btn_req3_pay:
@@ -182,7 +186,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                         public void onChanged(ApplyCouponResponse applyCouponResponse) {
                             if (applyCouponResponse != null) {
                                 if (applyCouponResponse.getStatus().getCode() == 1062) {
-                                   applyCoupon(applyCouponResponse.getCoupon().getDiscountAmount());
+                                    applyCoupon(applyCouponResponse.getCoupon().getDiscountAmount());
 
                                 } else if (applyCouponResponse.getStatus().getCode() == 1061) {
 
@@ -234,7 +238,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
 
 
     private void calculateTotal() {
-        total_amount = service_amount - discount_amount;
+        total_amount = additional_room_charges+(service_amount - discount_amount);
         tv_bill_total_price.setText(getString(R.string.symbol_rupee) + " " + total_amount);
     }
 
@@ -258,20 +262,21 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
         bookSlot.setPropertySize(MainActivity.property_size + 1);
         bookSlot.setProjectType(MainActivity.project_type);
         bookSlot.setScope(MainActivity.scope);
+        bookSlot.setRoomTypes(MainActivity.mapRoomType);
         bookSlot.setPackage(MainActivity.package_id);
         bookSlot.setCoupenCode(MainActivity.coupen_code);
         bookSlot.setPackageAmount(MainActivity.package_amount);
         bookSlot.setDiscount(MainActivity.discount);
         bookSlot.setAmountPaid(MainActivity.amount_paid);
         bookSlot.setPaymentStatus(MainActivity.payment_status);
-        if(MainActivity.amount_paid == 0)
-        { bookSlot.setTransactionId("");
+        if (MainActivity.amount_paid == 0) {
+            bookSlot.setTransactionId("");
             bookSlot.setPaymentStatus(1);
             CommonFunctions.postPaymentPurchaseDetails(bookSlot, getContext(), getActivity(),
                     "Success",
                     "Your Slot booked successfully",
-                    "success","");
-        }else {
+                    "success", "");
+        } else {
             Log.d("bookslotdata", new GsonBuilder().setPrettyPrinting().create().toJson(bookSlot));
             Intent paymentIntent = new Intent(getActivity(), PayUActivity.class);
             paymentIntent.putExtra(Tags.TAG_BOOK_SLOT_DATA, bookSlot);
@@ -293,7 +298,7 @@ public class Request3Fragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.rb_plus:
                 if (checked) {
-                   selectService(1);
+                    selectService(1);
                 }
                 break;
         }

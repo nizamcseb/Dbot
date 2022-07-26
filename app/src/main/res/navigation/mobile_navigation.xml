@@ -35,6 +35,11 @@
         android:label="@string/title_create_new_request"
         tools:layout="@layout/fragment_request2" />
     <fragment
+        android:id="@+id/navigation_new_request2a"
+        android:name="com.dbot.client.main.newrequest.Request2aFragment"
+        android:label="@string/title_create_new_request"
+        tools:layout="@layout/fragment_request2a" />
+    <fragment
         android:id="@+id/navigation_new_request3"
         android:name="com.dbot.client.main.newrequest.Request3Fragment"
         android:label="@string/title_create_new_request"

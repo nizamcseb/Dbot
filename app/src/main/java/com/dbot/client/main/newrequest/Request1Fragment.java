@@ -48,6 +48,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
@@ -166,6 +167,10 @@ public class Request1Fragment extends Fragment implements OnMapReadyCallback, Vi
             et_building_name.setError("Required");
             return false;
         }
+        /*if(MainActivity.map_location == null) {
+            Snackbar.make(btn_req1_next,"Location needed",Snackbar.LENGTH_SHORT).show();
+            return false;
+        }*/
         return true;
     }
 
